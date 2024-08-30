@@ -6,5 +6,5 @@ import { Component } from '@angular/core';
   styleUrl: './app.component.scss'
 })
 export class AppComponent {
-  title = 'gravadora-campista';
+  title = 'Bem vindo ao curso de Frontend com Angular';
 }
