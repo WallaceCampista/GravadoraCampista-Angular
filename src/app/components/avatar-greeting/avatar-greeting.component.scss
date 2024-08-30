@@ -1,0 +1,58 @@
+.avatar-greeting {
+  display: flex;
+  align-items: center;
+  .avatar {
+    width: 50px;
+    height: 50px;
+    background-color: #ccc;
+    border-radius: 50%;
+    margin-right: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    i {
+      font-size: 40px; /* Adjust the size of the icon */
+      color: #fff; /* Change the color of the icon if needed */
+    }
+  }
+  .greeting {
+    position: relative;
+    p {
+      color: #7f7f7f;
+      margin: 0;
+      .highlight {
+        color: #3f996f;
+        cursor: pointer;
+      }
+      .highlight:hover {
+        color: #4fc68c;
+        text-decoration: underline;
+      }
+    }
+    .user-options {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      background-color: rgba(255, 255, 255, 0.7);
+      border: 1px solid #ccc;
+      padding: 5px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      z-index: 1000;
+      width: 150px;
+      text-align: center; /* Center the text */
+      border-radius: 10%;
+      p {
+        margin: 0;
+        color: #5e5e5e;
+        padding: 5px;
+      }
+      p:hover {
+        background-color: #5ca884;
+        color: white;
+        border-radius: 10%;
+        transition: 0.3s;
+        cursor: pointer;
+      }
+    }
+  }
+}

@@ -1,1 +1,13 @@
-<p>avatar-greeting works!</p>
+<div *ngIf="showAvatarGreeting" class="avatar-greeting">
+  <div class="avatar">
+    <i class="bi bi-person"></i>
+  </div>
+  <div class="greeting">
+    <p>Olá, <span class="highlight" (click)="toggleLabel()">{{ nomeUser }}</span>.</p>
+    <p>Bem vindo de volta!</p>
+    <div *ngIf="showLabel" class="user-options">
+      <p routerLink="/usuario">Editar</p>
+      <p routerLink="/login">Sair</p>
+    </div>
+  </div>
+</div>
