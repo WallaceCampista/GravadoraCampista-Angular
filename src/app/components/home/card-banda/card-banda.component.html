@@ -1,0 +1,10 @@
+<div id="board">
+  <div class="card" [ngClass]="{'no-shadow': isPageBanda}" style="width: 18rem;">
+    <div class="card-body">
+      <h5 class="card-title">{{nomeBanda}}</h5>
+      <h6 class="card-subtitle mb-2 text-body-secondary">Avaliação: {{avaliacaoBanda}} estrelas</h6>
+      <p class="card-text">{{resumoBanda}}</p>
+      <a *ngIf="!isPageBanda" class="btn btn-primary" routerLink="/pagebanda">Conheça!</a>
+    </div>
+  </div>
+</div>

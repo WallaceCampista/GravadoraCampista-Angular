@@ -1,0 +1,22 @@
+#tituloCardBanda{
+  color: #404040;
+  font-size: 2.5rem;
+  text-shadow: 2px 2px 4px #ffffff;
+  font-weight: bold;
+  text-align: center;
+  margin: 10px;
+  padding-top: 50px;
+}
+
+.flex-container{
+  display: flex;
+  flex-direction: row; /* Altera a direção do flex para coluna */
+  justify-content: center;
+  align-items: center;
+  background-color: #d3d3d3;
+  width: 65%;
+  max-height: 60vh; /* Set a maximum height */
+  padding: 20px; /* Ajuste conforme necessário */
+  border-radius: 15px; /* Ajuste conforme necessário */
+  margin: auto; /* Centraliza horizontalmente */
+}

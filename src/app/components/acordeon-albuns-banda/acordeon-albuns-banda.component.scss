@@ -1,0 +1,44 @@
+.limited-width-accordion {
+  max-width: 100%;
+}
+.accordion-body {
+  max-height: 200px; /* Adjust as needed */
+  overflow-y: auto;
+}
+.accordion-button {
+  background-color: rgba(25, 133, 82, 0.7); /* Green with 80% opacity */
+  color: white; /* Optional: to ensure text is readable */
+}
+.accordion-button:focus {
+  border-color: green; /* Define a cor da borda como verde */
+  box-shadow: 0 0 0 0.2rem rgba(0, 128, 0, 0.25); /* Ajuste conforme necessário */
+}
+
+.center-text {
+  text-align: center;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.table thead {
+  position: sticky;
+  top: 0;
+  background-color: #fff; /* Ensure the header has a background */
+  z-index: 1; /* Ensure the header is above the table body */
+  box-shadow: 0 2px 2px -1px rgba(0, 0, 0, 0.4); /* Add shadow to distinguish header */
+}
+
+.accordion-collapse {
+  transition: max-height 0.5s ease-in-out;
+  overflow: hidden;
+  max-height: 0; /* Altura inicial */
+}
+
+.accordion-collapse.show {
+  max-height: 500px; /* Ajuste conforme necessário */
+}
+
+

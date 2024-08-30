@@ -1,0 +1,45 @@
+.edit-button {
+  background-color: white;
+  border: 1px solid blue;
+  color: blue;
+  padding: 5px 10px;
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+  display: inline-block;
+  position: relative;
+  border-radius: 5px; /* Adjust the value as needed for rounding */
+
+  i {
+    color: blue;
+  }
+
+  .editar-label {
+    display: none;
+    position: absolute;
+    top: -15px; /* Adjust as needed */
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #616161;
+    color: white;
+    padding: 2px 5px;
+    border-radius: 3px;
+    white-space: nowrap;
+    z-index: 10; /* Ensure it appears above other elements */
+  }
+
+  &:hover {
+    background-color: blue;
+    color: white;
+    border-color: white;
+
+    i {
+      color: white;
+    }
+
+    .editar-label {
+      display: block;
+    }
+  }
+}
+
+

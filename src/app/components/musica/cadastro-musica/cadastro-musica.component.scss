@@ -1,0 +1,15 @@
+.horizontal-spacing {
+  display: flex;
+  gap: 10px; /* Ajuste conforme necessário */
+}
+.form-control:focus {
+  border-color: green; /* Cor da borda ao focar */
+  box-shadow: 0 0 0 0.2rem rgba(0, 128, 0, 0.25); /* Ajuste conforme necessário */
+}
+.btn-loading {
+  background-color: #198653;
+}
+.form-row {
+  display: flex;
+  gap: 10px; /* Adjust as needed */
+}

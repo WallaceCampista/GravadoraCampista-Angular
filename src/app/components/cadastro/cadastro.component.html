@@ -1,0 +1,74 @@
+<!-- Add the new class to the input elements in `src/app/components/cadastro/cadastro.component.html` -->
+<div class="cardLogin p-0 m-0 col-10 col-md-8 col-lg-4 d-flex flex-column mx-auto">
+  <div class="col-md-6 mx-auto">
+    <div class="column">
+      <h1 id="login">Cadastro</h1>
+      <br>
+      <div class="align-self-center"></div>
+      <form [formGroup]="form">
+        <div class="d-flex justify-content-between">
+          <div class="form-floating mx-auto col-6">
+            <input
+              class="form-control input-large"
+              formControlName="nome"
+              id="nome"
+              placeholder="Nome"
+              type="text"
+            />
+            <label for="nome">Nome: </label>
+          </div>
+          <div class="form-floating mx-auto col-6">
+            <input
+              class="form-control input-large"
+              formControlName="sobrenome"
+              id="sobrenome"
+              placeholder="Sobrenome"
+              type="text"
+            />
+            <label for="sobrenome">Sobrenome: </label>
+          </div>
+        </div>
+
+        <div class="d-flex justify-content-between mt-3">
+          <div class="form-floating mx-auto col-6">
+            <input
+              class="form-control input-large"
+              formControlName="username"
+              id="usuario"
+              placeholder="Usuário"
+              type="text"
+            />
+            <label for="usuario">Usuário: </label>
+          </div>
+          <div class="form-floating mx-auto col-6">
+            <input
+              class="form-control input-large"
+              formControlName="password"
+              id="password"
+              placeholder="Senha"
+              type="password"
+            />
+            <label for="password">Senha: </label>
+          </div>
+        </div>
+
+        <div class="form-floating mx-auto mt-3">
+          <input
+            class="form-control input-large"
+            formControlName="email"
+            id="email"
+            placeholder="Email"
+            type="email"
+          />
+          <label for="email">Email: </label>
+        </div>
+      </form>
+    </div>
+  </div>
+  <div class="form-floating mx-auto">
+    <button type="button" class="btn btn-success" (click)="onRegister()">Cadastrar</button>
+  </div>
+  <div class="form-floating mx-auto side-by-side">
+    <h6>Já possui tem cadastro? <a routerLink="/login" class="forgot">entre por aqui</a></h6>
+  </div>
+</div>

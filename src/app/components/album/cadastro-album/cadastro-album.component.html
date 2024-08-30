@@ -1,0 +1,47 @@
+<div class="horizontal-spacing">
+  <div class="align-self-center"></div>
+  <form [formGroup]="form">
+    <div class="form-row">
+      <div class="form-floating mx-auto">
+        <input
+          class="form-control"
+          formControlName="idBanda"
+          id="idBanda"
+          placeholder="ID da banda:"
+          type="text"
+        />
+        <label for="idBanda">ID da banda: </label>
+      </div>
+      <div class="form-floating mx-auto">
+        <input
+          class="form-control"
+          formControlName="nomeAlbum"
+          id="nAlbum"
+          placeholder="Nome do Album:"
+          type="text"
+        />
+        <label for="nAlbum">Nome do Album: </label>
+      </div>
+      <div class="form-floating mx-auto">
+        <input
+          class="form-control"
+          formControlName="resumoAlbum"
+          id="rAlbum"
+          placeholder="resumoAlbum:"
+          type="text"
+        />
+        <label for="rAlbum">Resumo do Album: </label>
+      </div>
+    </div>
+  </form>
+  <button type="button" class="btn btn-success" (click)="onRegister()" [disabled]="isLoading" [ngClass]="{'btn-enlarged': isLoading, 'btn-loading': isLoading}">
+    <ng-container *ngIf="!isLoading; else loading">
+      Cadastrar
+    </ng-container>
+    <ng-template #loading>
+      <div class="spinner-border text-light" role="status">
+        <span class="visually-hidden">Loading...</span>
+      </div>
+    </ng-template>
+  </button>
+</div>

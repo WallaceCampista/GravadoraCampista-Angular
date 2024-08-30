@@ -1,0 +1,147 @@
+<div class="modal" [ngClass]="{'show': showModal}" tabindex="-1" *ngIf="showModal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Editar {{ tipo }}</h5>
+        <button type="button" class="btn-close" (click)="toggleModal('')" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <p>Quais campos deseja editar ? </p>
+        <form [formGroup]="editForm">
+        <div  class="form-group">
+          <div class="row" *ngIf="isUsuarioRoute; else otherFields">
+            <!-- Fields for /usuario route -->
+            <div class="col-md-6">
+              <div class="form-floating mb-3">
+                <input class="form-control" formControlName="username" id="usernameUsuario" placeholder="Username" type="text"/>
+                <label for="usernameUsuario" class="label-large">Username: </label>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-floating mb-3">
+                <input class="form-control" formControlName="password" id="passwordUsuario" placeholder="Password" type="password"/>
+                <label for="passwordUsuario" class="label-large">Password: </label>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-floating mb-3">
+                <input class="form-control" formControlName="email" id="emailUsuario" placeholder="Email" type="email"/>
+                <label for="emailUsuario" class="label-large">Email: </label>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-floating mb-3">
+                <input class="form-control" formControlName="nome" id="nomeUsuario" placeholder="Nome" type="text"/>
+                <label for="nomeUsuario" class="label-large">Nome: </label>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-floating mb-3">
+                <input class="form-control" formControlName="sobrenome" id="sobrenomeUsuario" placeholder="Sobrenome" type="text"/>
+                <label for="sobrenomeUsuario" class="label-large">Sobrenome: </label>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-floating mb-3">
+                <select class="form-control" formControlName="isAdministrator" id="isAdministratorUsuario">
+                  <option [value]="true">Sim</option>
+                  <option [value]="false">Não</option>
+                </select>
+                <label for="isAdministratorUsuario" class="label-large">Administrador: </label>
+              </div>
+            </div>
+          </div>
+          <ng-template #otherFields>
+            <div class="row" *ngIf="isBandaRoute; else albumFields">
+              <!-- Fields for /banda route -->
+              <div class="col-md-6">
+                <div class="form-floating mb-3">
+                  <input class="form-control" formControlName="nomeBanda" id="nomeBanda" placeholder="Nome da Banda" type="text"/>
+                  <label for="nomeBanda" class="label-large">Nome da Banda: </label>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-floating mb-3">
+                  <input class="form-control" formControlName="resumoBanda" id="resumoBanda" placeholder="Resumo da Banda" type="text"/>
+                  <label for="resumoBanda" class="label-large">Resumo da Banda: </label>
+                </div>
+              </div>
+            </div>
+            <ng-template #albumFields>
+              <div class="row" *ngIf="isAlbumRoute; else musicaFields">
+                <!-- Fields for /album route -->
+                <div class="col-md-4">
+                  <div class="form-floating mb-3">
+                    <input class="form-control" formControlName="idBanda" id="idBanda" placeholder="ID da Banda" type="text"/>
+                    <label for="idBanda" class="label-large">ID da Banda: </label>
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="form-floating mb-3">
+                    <input class="form-control" formControlName="nomeAlbum" id="nomeAlbum" placeholder="Nome do Album" type="text"/>
+                    <label for="nomeAlbum" class="label-large">Nome do Album: </label>
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="form-floating mb-3">
+                    <input class="form-control" formControlName="resumoAlbum" id="resumoAlbum" placeholder="Resumo do Album" type="text"/>
+                    <label for="resumoAlbum" class="label-large">Resumo do Album: </label>
+                  </div>
+                </div>
+              </div>
+              <ng-template #musicaFields>
+                <div class="row" *ngIf="isMusicaRoute; else defaultFields">
+                  <!-- Fields for /musica route -->
+                  <div class="col-md-6">
+                    <div class="form-floating mb-3">
+                      <input class="form-control" formControlName="idAlbum" id="idAlbum" placeholder="ID do Album" type="text"/>
+                      <label for="idAlbum" class="label-large">ID do Album: </label>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-floating mb-3">
+                      <input class="form-control" formControlName="nomeMusica" id="nomeMusica" placeholder="Nome da Música" type="text"/>
+                      <label for="nomeMusica" class="label-large">Nome da Música: </label>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-floating mb-3">
+                      <input class="form-control" formControlName="resumoMusica" id="resumoMusica" placeholder="Resumo da Música" type="text"/>
+                      <label for="resumoMusica" class="label-large">Resumo da Música: </label>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-floating mb-3">
+                      <input class="form-control" formControlName="duracaoMusica" id="duracaoMusica" placeholder="Duração da Música (Seg)" type="text"/>
+                      <label for="duracaoMusica" class="label-large">Duração da Música (Seg): </label>
+                    </div>
+                  </div>
+                </div>
+                <ng-template #defaultFields>
+                  <!-- Default fields for other routes -->
+                  <div class="form-floating mb-3">
+                    <input class="form-control" formControlName="username" id="usernameDefault" placeholder="Username" type="text"/>
+                    <label for="usernameDefault" class="label-large">Username: </label>
+                  </div>
+                  <div class="form-floating mb-3">
+                    <input class="form-control" formControlName="password" id="passwordDefault" placeholder="Password" type="password"/>
+                    <label for="passwordDefault" class="label-large">Password: </label>
+                  </div>
+                  <div class="form-floating mb-3">
+                    <input class="form-control" formControlName="email" id="emailDefault" placeholder="Email" type="email"/>
+                    <label for="emailDefault" class="label-large">Email: </label>
+                  </div>
+                </ng-template>
+              </ng-template>
+            </ng-template>
+          </ng-template>
+        </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" (click)="toggleModal('')">Fechar</button>
+        <button type="button" class="btn btn-success" (click)="saveChanges()">Salvar</button>
+      </div>
+    </div>
+  </div>
+</div>

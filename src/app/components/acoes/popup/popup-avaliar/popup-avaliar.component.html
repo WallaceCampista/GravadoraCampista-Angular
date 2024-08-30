@@ -1,0 +1,23 @@
+<div class="modal" [ngClass]="{'show': showModal}" tabindex="-1" *ngIf="showModal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Avaliação</h5>
+        <button type="button" class="btn-close" (click)="toggleModal()" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <p>Que nota deseja atribuir ?</p>
+        <div class="align-self-center"></div>
+
+        <div class="form-floating mx-auto">
+          <input #notaInput class="form-control" formControlName="nota" id="nota" placeholder="Nota:" type="text"/>
+          <label for="nota" class="label-large">Nota: </label> <app-star></app-star>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" (click)="toggleModal()">Fechar</button>
+        <button type="button" class="btn btn-success">Avaliar</button>
+      </div>
+    </div>
+  </div>
+</div>

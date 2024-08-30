@@ -1,0 +1,39 @@
+<!-- src/app/components/login/loginbox/login.component.html -->
+<div class="container-fluid">
+  <div class="row p-0">
+    <form [formGroup]="form" action="" class="p-0">
+      <div class="cardLogin p-0 m-0 col-10 col-md-8 col-lg-4 d-flex flex-column mx-auto">
+        <div class="col-md-6 mx-auto">
+          <div class="column">
+            <h1 id="login">Login</h1>
+            <br>
+            <div class="align-self-center"></div>
+            <div class="form-floating mx-auto">
+              <input class="form-control" formControlName="username" id="usuario" placeholder="Usuário" type="text" />
+              <label for="usuario">Usuário: </label>
+            </div>
+            <div class="form-floating mx-auto">
+              <input class="form-control" formControlName="password" id="password" placeholder="Senha" type="password" />
+              <label for="password">Senha: </label>
+            </div>
+          </div>
+        </div>
+        <div class="form-floating mx-auto">
+          <button type="button" class="btn btn-success" (click)="onLogin()" [disabled]="isLoading" [ngClass]="{'btn-enlarged': isLoading}">
+            <ng-container *ngIf="!isLoading; else loading">
+              Entrar
+            </ng-container>
+            <ng-template #loading>
+              <div class="spinner-border text-light" role="status">
+                <span class="visually-hidden">Loading...</span>
+              </div>
+            </ng-template>
+          </button>
+        </div>
+        <div class="form-floating mx-auto side-by-side">
+          <h6>Não tem cadastro? <a routerLink="/cadastro" class="forgot"> cadastre-se</a></h6>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

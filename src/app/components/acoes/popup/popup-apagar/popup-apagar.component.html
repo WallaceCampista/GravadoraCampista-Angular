@@ -1,0 +1,21 @@
+<div class="modal" [ngClass]="{'show': showModal}" tabindex="-1" *ngIf="showModal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Deleção</h5>
+        <button type="button" class="btn-close" (click)="toggleModal()" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <p>Quer mesmo APAGAR ?</p>
+        <div class="align-self-center"></div>
+      </div>
+      <br>
+      <br>
+      <br>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" (click)="toggleModal()">NÃO</button>
+        <button type="button" class="btn btn-danger">SIM</button>
+      </div>
+    </div>
+  </div>
+</div>

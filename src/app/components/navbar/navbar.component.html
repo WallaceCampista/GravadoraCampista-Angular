@@ -1,0 +1,41 @@
+<nav *ngIf="showNavbar" class="navbar navbar-expand-lg bg-body-tertiary">
+  <div class="container-fluid">
+    <a class="navbar-brand">Menu Principal</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" routerLink="/home" (click)="setFocus($event)">Inicio</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/banda" (click)="setFocus($event)">Banda</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/album" (click)="setFocus($event)">Album</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/musica" (click)="setFocus($event)">Musica</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/usuario" (click)="setFocus($event); fetchAllUsers($event)">Usuariooooooo</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link disabled" aria-disabled="true">Usuários</a>
+        </li>
+      </ul>
+      <form class="d-flex" role="search">
+        <div class="social-icons">
+          <a href="https://www.youtube.com" target="_blank" class="icons"><i class="fab fa-youtube"></i></a>
+          <a href="https://www.google.com" target="_blank" class="icons"><i class="fab fa-google"></i></a>
+          <a href="https://www.instagram.com" target="_blank" class="icons"><i class="fab fa-instagram"></i></a>
+          <a href="https://www.facebook.com" target="_blank" class="icons"><i class="fab fa-facebook"></i></a>
+        </div>
+        <input class="form-control me-2" type="search" placeholder="Dúvidas??" aria-label="Search">
+        <button class="btn btn-outline-success" type="submit">Procurar</button>
+
+      </form>
+    </div>
+  </div>
+</nav>

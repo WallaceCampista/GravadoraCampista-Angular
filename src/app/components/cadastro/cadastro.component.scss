@@ -1,0 +1,48 @@
+.cardLogin {
+  padding: 3.75rem 0.625rem !important;
+  background: rgba( 255, 255, 255, 0.35 );
+  box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
+  backdrop-filter: blur( 13.5px );
+  -webkit-backdrop-filter: blur( 13.5px );
+  border-radius: 10px;
+  border: 1px solid rgba( 255, 255, 255, 0.18 );
+}
+
+.form-floating {
+  margin-bottom: 1rem; // Add spacing between input fields
+}
+
+.tituloBackground {
+  background: rgb(25, 134, 83);
+  gap: 10px;
+  border-radius: 10px;
+  text-align: center;
+  margin-bottom: 3rem !important;
+}
+
+.forgot{
+  color: #198653;
+  text-align: right;
+  margin-top: 1rem;
+}
+
+#login{ // Define o estilo do label de login
+  color: #198653;
+  text-shadow: 2px 2px 4px #ffffff;
+  text-align: center;
+  margin-top: 1rem;
+}
+
+#titulo {
+  color: #000000;
+  font-size: 36px;
+  font-style: revert;
+  font-weight: 100;
+  line-height: normal;
+}
+.form-control:focus {
+  border-color: green; /* Cor da borda ao focar */
+  box-shadow: 0 0 0 0.2rem rgba(0, 128, 0, 0.25); /* Ajuste conforme necessário */
+}
+
+

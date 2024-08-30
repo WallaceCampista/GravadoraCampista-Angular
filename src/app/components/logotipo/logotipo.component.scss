@@ -1,0 +1,18 @@
+.logo-container {
+  display: flex;
+  align-items: center;
+}
+
+#titulo{
+  margin-right: 10px; /* Ajuste conforme necessário */
+  color: #a3a3a3;
+  text-shadow: 2px 2px 4px #198653;
+  font-size: 2.0rem;
+  margin-left: 10px;
+}
+
+#icon {
+  width: 30px; /* Ajuste o tamanho conforme necessário */
+  height: 30px; /* Ajuste o tamanho conforme necessário */
+  filter: brightness(0) invert(0.5); /* Torna o ícone cinza */
+}

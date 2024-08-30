@@ -1,0 +1,9 @@
+.table {
+  overflow: auto; /* Add scroll if content exceeds max height */
+  text-align: center; /* Center align text in table cells */
+}
+
+.table th,
+.table td {
+  text-align: center; /* Center align text in table headers and cells */
+}

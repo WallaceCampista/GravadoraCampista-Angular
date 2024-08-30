@@ -1,0 +1,48 @@
+<table class="table">
+  <thead>
+  <tr>
+    <th scope="col">
+      ID
+      <span (click)="sortColumn('id')">{{ isAscending && currentSortColumn === 'id' ? '▲' : '▼' }}</span>
+    </th>
+    <th scope="col">
+      Nome
+      <span (click)="sortColumn('nome')">{{ isAscending && currentSortColumn === 'nome' ? '▲' : '▼' }}</span>
+    </th>
+    <th scope="col">Sobrenome</th>
+    <th scope="col">
+      Username
+      <span (click)="sortColumn('username')">{{ isAscending && currentSortColumn === 'username' ? '▲' : '▼' }}</span>
+    </th>
+    <th scope="col">Password</th>
+    <th scope="col">Email</th>
+    <th scope="col">Administrador</th>
+    <th scope="col">
+      Criado em
+      <span (click)="sortColumn('criadoEm')">{{ isAscending && currentSortColumn === 'criadoEm' ? '▲' : '▼' }}</span>
+    </th>
+    <th scope="col">
+      Ultimo login
+      <span (click)="sortColumn('ultimoLogin')">{{ isAscending && currentSortColumn === 'ultimoLogin' ? '▲' : '▼' }}</span>
+    </th>
+    <th scope="col">Ações</th>
+  </tr>
+  </thead>
+  <tbody class="table-group-divider">
+  <tr *ngFor="let usuario of usuarios">
+    <th scope="row">{{ usuario.id }}</th>
+    <td><strong>{{ usuario.nome }}</strong></td>
+    <td>{{ usuario.sobrenome }}</td>
+    <td><strong>{{ usuario.username }}</strong></td>
+    <td>{{ formatPassword(usuario.password) }}</td>
+    <td>{{ usuario.email }}</td>
+    <td><strong>{{ formatIsAdministrator(usuario.isAdmin) }}</strong></td>
+    <td>{{ formatDate(usuario.criadoEm) }}</td>
+    <td>{{ formatDate(usuario.ultimoLogin) }}</td>
+    <td>
+      <app-editar></app-editar>
+      <app-lixeira></app-lixeira>
+    </td>
+  </tr>
+  </tbody>
+</table>

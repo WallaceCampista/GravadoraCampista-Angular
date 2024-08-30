@@ -1,0 +1,26 @@
+.centered-div {
+  display: flex;
+  flex-direction: column; /* Altera a direção do flex para coluna */
+  justify-content: center;
+  align-items: center;
+  background-color: #d3d3d3;
+  width: 70%;
+  max-height: 50vh; /* Set a maximum height */
+  padding: 20px; /* Ajuste conforme necessário */
+  border-radius: 15px; /* Ajuste conforme necessário */
+  margin: auto; /* Centraliza horizontalmente */
+}
+
+#tituloPageAlbum{
+  color: #404040;
+  font-size: 2.5rem;
+  text-shadow: 2px 2px 4px #ffffff;
+  font-weight: bold;
+  text-align: center;
+  margin: 10px;
+  padding-top: 50px;
+}
+
+.table{
+  overflow: auto /* Add scroll if content exceeds max height */
+}

@@ -1,0 +1,45 @@
+.trash-button {
+  margin-top: 2px;
+  margin-left: 2px;
+  background-color: white;
+  border: 1px solid red;
+  color: red;
+  padding: 5px 10px;
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+  display: inline-block;
+  position: relative;
+  border-radius: 5px; /* Adjust the value as needed for rounding */
+
+  i {
+    color: red;
+  }
+
+  .apagar-label {
+    display: none;
+    position: absolute;
+    top: -15px; /* Adjust as needed */
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #616161;
+    color: white;
+    padding: 2px 5px;
+    border-radius: 3px;
+    white-space: nowrap;
+    z-index: 1000; /* Ensure it appears above other elements */
+  }
+
+  &:hover {
+    background-color: red;
+    color: white;
+    border-color: white;
+
+    i {
+      color: white;
+    }
+
+    .apagar-label {
+      display: block;
+    }
+  }
+}

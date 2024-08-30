@@ -1,0 +1,29 @@
+.headerEBody {
+  flex-grow: 1;
+  background-color: #b1b1b1;
+}
+
+.centered-div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #d3d3d3;
+  width: 50%;
+  height: 50vh; /* Ajuste conforme necessário */
+  border-radius: 15px; /* Ajuste conforme necessário */
+  margin: auto; /* Centraliza horizontalmente */
+}
+
+.card-spacing {
+  margin: 10px; /* Ajuste conforme necessário */
+}
+
+#titulo{
+  color: #404040;
+  text-shadow: 2px 2px 4px #ffffff;
+  font-size: 2.5rem;
+  font-weight: bold;
+  text-align: center;
+  margin: 10px;
+  padding-top: 50px;
+}

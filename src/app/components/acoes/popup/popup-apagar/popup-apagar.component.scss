@@ -1,0 +1,73 @@
+.modal {
+  display: none;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1050;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  outline: 0;
+  background-color: rgba(0, 0, 0, 0.5); /* Add opacity to the background */
+}
+
+.modal.show {
+  display: block;
+}
+
+.modal-dialog {
+  max-width: 500px;
+  margin: 1.75rem auto;
+}
+
+.modal-content{
+  background-color: rgba(255, 255, 255, 0.6); /* Add opacity to the background */
+}
+
+.modal-title{
+  color: #404040;
+  font-size: 2rem;
+  text-shadow: 2px 2px 4px #ffffff;
+  font-weight: bold;
+  text-align: center;
+}
+
+.modal-body{
+  color: #404040;
+  font-weight: bold;
+  text-align: center;
+}
+
+.form-control {
+  width: 15%;
+  margin: auto; /* Center the input field horizontally */
+  border: 2px solid #000; /* Add a border to the input field */
+}
+.form-control:focus {
+  box-shadow: 0 0 5px rgb(25, 134, 83); /* Change shadow color on focus */
+  outline: none; /* Remove default outline */
+}
+
+.btn-close:active {
+  box-shadow: 0 0 5px rgb(25, 134, 83); /* Change shadow color on click */
+  outline: none; /* Remove default outline */
+}
+
+.label-large {
+  font-size: 1.5rem; /* Ajuste o valor conforme necessário */
+}
+
+.modal-footer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+}
+.spinner-border {
+  width: 1rem;
+  height: 1rem;
+  border-width: 0.2em;
+}

@@ -1,0 +1,17 @@
+.card {
+  box-shadow: 5px 5px 10px #000000;
+}
+
+.no-shadow {
+  box-shadow: none;
+}
+
+.btn-primary {
+  background-color: #198653;
+  border-color: #000000;
+}
+
+.btn-primary:hover {
+  background-color: #1fa667;
+  box-shadow: 5px 5px 10px #000000;
+}

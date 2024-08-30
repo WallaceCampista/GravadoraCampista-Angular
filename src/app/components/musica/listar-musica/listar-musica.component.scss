@@ -1,0 +1,39 @@
+.table-container {
+  max-height: 400px; /* Defina a altura máxima do contêiner */
+  overflow-y: auto; /* Adicione rolagem vertical */
+  position: relative;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  border-radius: 15px; /* Adicionar borda arredondada */
+}
+
+.table th, .table td {
+  text-align: center; /* Center text horizontally */
+  vertical-align: middle; /* Center text vertically */
+  padding: 8px; /* Add padding for better spacing */
+  max-height: 100px; /* Set maximum height for table cells */
+  overflow: hidden; /* Hide overflow content */
+  text-overflow: ellipsis; /* Add ellipsis for overflow text */
+  white-space: nowrap; /* Prevent text from wrapping */
+}
+
+.table thead th {
+  position: sticky; /* Fix the header */
+  top: 0; /* Position it at the top */
+  background-color: white; /* Set background color */
+  z-index: 1; /* Ensure it is above other content */
+}
+
+.table tr {
+  max-height: 100px; /* Set maximum height for table rows */
+  position: relative;
+}
+
+.table th span {
+  cursor: pointer;
+  margin-left: 8px;
+  font-size: 12px;
+}

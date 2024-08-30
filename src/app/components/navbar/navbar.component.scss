@@ -1,0 +1,48 @@
+.navbar{
+    background-color: #333;
+    color: white;
+    padding: 0px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.nav-link:hover{
+  outline: none;
+  background-color: rgba(63, 153, 111, 0.09); /* Cor de fundo ao focar */
+  color: #000000; /* Cor do texto ao focar */
+  border-radius: 3px; /* Arredondamento dos cantos */
+}
+
+.nav-link:focus,
+.nav-link.focused {
+  outline: none;
+  background-color: rgba(63, 153, 111, 0.5); /* Cor de fundo ao focar */
+  color: #ffffff; /* Cor do texto ao focar */
+  border-radius: 4px; /* Arredondamento dos cantos */
+  transition: 0.4s;
+  transform: scale(1.1);
+}
+
+.form-control:focus {
+  border-color: green; /* Cor da borda ao focar */
+  box-shadow: 0 0 0 0.2rem rgba(0, 128, 0, 0.25); /* Ajuste conforme necessário */
+}
+
+.social-icons {
+  color: #000000;
+  display: flex;
+  align-items: center;
+  margin-left: 1rem;
+  margin-right: 1rem; /* Espaçamento entre os ícones */
+}
+.icons {
+  color: black;
+  margin-right: 1rem; /* Espaçamento entre os ícones */
+  font-size: 1rem;
+}
+
+.icons:hover {
+  color: rgba(0, 128, 0, 0.25);
+}
+

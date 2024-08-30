@@ -1,0 +1,38 @@
+<div class="horizontal-spacing">
+  <div class="align-self-center"></div>
+  <form [formGroup]="form">
+    <div class="form-row">
+      <div class="form-floating mx-auto">
+        <input
+          class="form-control"
+          formControlName="nomeBanda"
+          id="nBanda"
+          placeholder="Nome da Banda:"
+          type="text"
+        />
+        <label for="nBanda">Nome da Banda: </label>
+      </div>
+      <div class="form-floating mx-auto">
+        <input
+          class="form-control"
+          formControlName="resumoBanda"
+          id="rBanda"
+          placeholder="resumoBanda:"
+          type="text"
+        />
+        <label for="rBanda">Resumo da Banda: </label>
+      </div>
+    </div>
+  </form>
+  <button type="button" class="btn btn-success" (click)="onRegister()" [disabled]="isLoading"
+          [ngClass]="{'btn-enlarged': isLoading, 'btn-loading': isLoading}">
+    <ng-container *ngIf="!isLoading; else loading">
+      Cadastrar
+    </ng-container>
+    <ng-template #loading>
+      <div class="spinner-border text-light" role="status">
+        <span class="visually-hidden">Loading...</span>
+      </div>
+    </ng-template>
+  </button>
+</div>

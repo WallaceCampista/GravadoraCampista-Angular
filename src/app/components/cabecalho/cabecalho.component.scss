@@ -1,0 +1,10 @@
+section {
+  width: 100%;
+  background-color: #353535;
+  border-bottom: 2px solid #00f601;
+  display: flex;
+  align-items: center;
+  justify-content: space-between; /* Add this line */
+  flex-direction: row;
+  padding-right: 15px;
+}
