@@ -35,6 +35,7 @@ export class ListarMusicaComponent implements OnInit {
 
   fetchAllMusic(): void {
     this.musicaService.getAllMusic().subscribe(data => {
+      console.log('Músicas:', data);
       this.musicas = data.map((item: any) => ({
         id: item.idMusica,
         nome: item.nomeMusica,

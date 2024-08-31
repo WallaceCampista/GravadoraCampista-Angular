@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AlbumService } from 'src/app/service/servicos/album.service';
 import { AdminService } from 'src/app/service/servicos/usuario/admin.service';
 
 interface Album {
@@ -17,45 +18,33 @@ interface Album {
   styleUrls: ['./lista-album.component.scss']
 })
 export class ListaAlbumComponent implements OnInit {
-  albums: Album[] = [
-    {
-      id: 1,
-      nome: 'Imunidade Musical',
-      resumo: 'Imunidade Musical é o sétimo álbum de estúdio da banda brasileira Charlie Brown Jr., lançado em 2005. O álbum inaugura uma nova formação: Pinguim na bateria, Heitor Gomes no baixo, e Thiago Castanho, guitarrista da formação original, que retorna à banda',
-      duracao: 685,
-      avaliacao: 9.8,
-      banda: 'Charlie Brown Jr.',
-      musicas: 21
-    },
-    {
-      id: 2,
-      nome: '7 Vezes',
-      resumo: 'Traduzido do inglês-7 Vezes é o sétimo álbum da banda brasileira O Rappa. O título alude ao fato de este ser o sétimo álbum lançado por O Rappa. Foi produzido por Ricardo Vidal, Tom Sabóia e O Rappa. O álbum foi lançado em 2008 pela Warner Music.',
-      duracao: 648,
-      avaliacao: 9.3,
-      banda: 'O Rappa',
-      musicas: 14
-    },
-    {
-      id: 3,
-      nome: 'Nunca Tem Fim...',
-      resumo: 'Nunca Tem Fim... é o sexto e último álbum de estúdio do grupo O Rappa. Foi lançado em 15 de agosto de 2013 pelo selo Warner Music Brasil e gravado em LP duplo pela Polysom, depois de cinco anos sem gravar mais um álbum de estúdio.',
-      duracao: 1472,
-      avaliacao: 10,
-      banda: 'O Rappa',
-      musicas: 10
-    }
-  ];
-
+  albums: Album[] = [];
   isAscending = true;
   currentSortColumn = '';
   isAdmin: boolean = false;
 
-  constructor(private adminService: AdminService) {}
+  constructor(private albumService: AlbumService, private adminService: AdminService) {}
 
   ngOnInit(): void {
     this.adminService.isAdmin$.subscribe(isAdmin => {
       this.isAdmin = isAdmin;
+    });
+
+    this.fetchAllAlbums();
+  }
+
+  fetchAllAlbums(): void {
+    this.albumService.getAllAlbum().subscribe(data => {
+      console.log('Álbuns:', data);
+      this.albums = data.map((item: any) => ({
+        id: item.idAlbum,
+        nome: item.nomeAlbum,
+        resumo: item.resumoAlbum,
+        duracao: item.duracaoTotal,
+        avaliacao: item.avaliacaoMedia,
+        banda: item.banda.nomeBanda,
+        musicas: item.musicas.length
+      }));
     });
   }
 

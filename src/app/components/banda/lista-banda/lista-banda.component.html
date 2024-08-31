@@ -1,39 +1,38 @@
-<!-- src/app/components/banda/lista-banda/lista-banda.component.html -->
 <table class="table">
   <thead>
-  <tr>
-    <th scope="col">
-      ID
-      <span (click)="sortColumn('id')">{{ isAscending && currentSortColumn === 'id' ? '▲' : '▼' }}</span>
-    </th>
-    <th scope="col">
-      Nome
-      <span (click)="sortColumn('nome')">{{ isAscending && currentSortColumn === 'nome' ? '▲' : '▼' }}</span>
-    </th>
-    <th scope="col">Resumo</th>
-    <th scope="col">
-      Avaliação
-      <span (click)="sortColumn('avaliacao')">{{ isAscending && currentSortColumn === 'avaliacao' ? '▲' : '▼' }}</span>
-    </th>
-    <th scope="col">
-      Albuns
-      <span (click)="sortColumn('albuns')">{{ isAscending && currentSortColumn === 'albuns' ? '▲' : '▼' }}</span>
-    </th>
-    <th scope="col">Ações</th>
-  </tr>
+    <tr>
+      <th scope="col">
+        ID
+        <span (click)="sortColumn('id')">{{ isAscending && currentSortColumn === 'id' ? '▲' : '▼' }}</span>
+      </th>
+      <th scope="col">
+        Nome
+        <span (click)="sortColumn('nome')">{{ isAscending && currentSortColumn === 'nome' ? '▲' : '▼' }}</span>
+      </th>
+      <th scope="col">Resumo</th>
+      <th scope="col">
+        Avaliação
+        <span (click)="sortColumn('avaliacao')">{{ isAscending && currentSortColumn === 'avaliacao' ? '▲' : '▼' }}</span>
+      </th>
+      <th scope="col">
+        Albuns
+        <span (click)="sortColumn('albuns')">{{ isAscending && currentSortColumn === 'albuns' ? '▲' : '▼' }}</span>
+      </th>
+      <th scope="col">Ações</th>
+    </tr>
   </thead>
   <tbody class="table-group-divider">
-  <tr *ngFor="let banda of bandas">
-    <th scope="row">{{ banda.id }}</th>
-    <td class="linkbanda" routerLink="/pagebanda"><strong>{{ banda.nome }}</strong></td>
-    <td>{{ banda.resumo }}</td>
-    <td>{{ banda.avaliacao }} <app-star></app-star></td>
-    <td>{{ banda.albuns }}</td>
-    <td>
-      <app-editar *ngIf="isAdmin"></app-editar>
-      <app-lixeira *ngIf="isAdmin"></app-lixeira>
-      <app-avaliar></app-avaliar>
-    </td>
-  </tr>
+    <tr *ngFor="let banda of bandas">
+      <th scope="row">{{ banda.id }}</th>
+      <td class="linkbanda" routerLink="/pagebanda"><strong>{{ banda.nome }}</strong></td>
+      <td>{{ banda.resumo }}</td>
+      <td>{{ banda.avaliacao | number:'1.1-1' }} <app-star></app-star></td>
+      <td>{{ banda.albuns }}</td>
+      <td>
+        <app-editar *ngIf="isAdmin"></app-editar>
+        <app-lixeira *ngIf="isAdmin"></app-lixeira>
+        <app-avaliar></app-avaliar>
+      </td>
+    </tr>
   </tbody>
 </table>

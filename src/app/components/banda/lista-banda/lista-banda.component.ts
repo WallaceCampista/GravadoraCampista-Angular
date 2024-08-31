@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { BandaService } from 'src/app/service/servicos/banda.service';
 import { AdminService } from 'src/app/service/servicos/usuario/admin.service';
 
 interface Banda {
@@ -15,32 +16,31 @@ interface Banda {
   styleUrls: ['./lista-banda.component.scss']
 })
 export class ListaBandaComponent implements OnInit {
-  bandas: Banda[] = [
-    {
-      id: 1,
-      nome: 'Charlie Brown Jr.',
-      resumo: 'Charlie Brown Jr. foi uma banda brasileira de rock formada em Santos em 1992.',
-      avaliacao: 9.8,
-      albuns: 10
-    },
-    {
-      id: 2,
-      nome: 'O Rappa',
-      resumo: 'O Rappa foi uma banda de rock brasileira, formada em 1993 no Rio de Janeiro.',
-      avaliacao: 9.3,
-      albuns: 7
-    }
-  ];
-
+  bandas: Banda[] = [];
   isAscending = true;
-  currentSortColumn: keyof Banda = 'id'; // Inicializar com um valor válido
+  currentSortColumn = '';
   isAdmin: boolean = false;
 
-  constructor(private adminService: AdminService) {}
+  constructor(private bandaService: BandaService, private adminService: AdminService) {}
 
   ngOnInit(): void {
     this.adminService.isAdmin$.subscribe(isAdmin => {
       this.isAdmin = isAdmin;
+    });
+
+    this.fetchAllBands();
+  }
+
+  fetchAllBands(): void {
+    this.bandaService.getAllBand().subscribe(data => {
+      console.log('Bandas:', data);
+      this.bandas = data.map((item: any) => ({
+        id: item.idBanda,
+        nome: item.nomeBanda,
+        resumo: item.resumoBanda,
+        avaliacao: item.avaliacaoMedia,
+        albuns: item.albuns.length
+      }));
     });
   }
 

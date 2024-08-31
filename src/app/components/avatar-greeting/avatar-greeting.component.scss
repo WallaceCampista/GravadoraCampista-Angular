@@ -15,6 +15,16 @@
       color: #fff; /* Change the color of the icon if needed */
     }
   }
+  .avatar:hover {
+    cursor: pointer;
+    background-color: #000000;
+    transition: 0.5s;
+    i {
+      transition: 0.5s;
+      font-size: 48px; /* Adjust the size of the icon */
+      color: #3f996f; /* Change the color of the icon if needed */
+    }
+  }
 
   #statusAdmin{
     color: #3f996f;
