@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { AlbumService } from 'src/app/service/servicos/album.service';
 import { AdminService } from 'src/app/service/servicos/usuario/admin.service';
 
@@ -18,10 +18,10 @@ interface Album {
   styleUrls: ['./lista-album.component.scss']
 })
 export class ListaAlbumComponent implements OnInit {
-  albums: Album[] = [];
-  isAscending = true;
-  currentSortColumn = '';
-  isAdmin: boolean = false;
+  @Input() isAdmin: boolean = false;
+  albuns: Album[] = [];
+  currentSortColumn: string = '';
+  isAscending: boolean = true;
 
   constructor(private albumService: AlbumService, private adminService: AdminService) {}
 
@@ -36,7 +36,7 @@ export class ListaAlbumComponent implements OnInit {
   fetchAllAlbums(): void {
     this.albumService.getAllAlbum().subscribe(data => {
       console.log('Álbuns:', data);
-      this.albums = data.map((item: any) => ({
+      this.albuns = data.map((item: any) => ({
         id: item.idAlbum,
         nome: item.nomeAlbum,
         resumo: item.resumoAlbum,
@@ -48,6 +48,18 @@ export class ListaAlbumComponent implements OnInit {
     });
   }
 
+  deleteAlbum(id: number): void {
+    this.albumService.deleteAlbum(id).subscribe({
+      next: () => {
+        this.albuns = this.albuns.filter(album => album.id !== id);
+        console.log('Álbum deletado com sucesso!');
+      },
+      error: error => {
+        console.error('Erro ao deletar álbum:', error);
+      }
+    });
+  }
+
   sortColumn(column: keyof Album) {
     if (this.currentSortColumn === column) {
       this.isAscending = !this.isAscending;
@@ -56,7 +68,7 @@ export class ListaAlbumComponent implements OnInit {
       this.isAscending = true;
     }
 
-    this.albums.sort((a, b) => {
+    this.albuns.sort((a, b) => {
       if (a[column] < b[column]) {
         return this.isAscending ? -1 : 1;
       } else if (a[column] > b[column]) {

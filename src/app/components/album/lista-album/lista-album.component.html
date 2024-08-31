@@ -1,36 +1,36 @@
 <table class="table">
   <thead>
-    <tr>
-      <th scope="col">
-        ID
-        <span (click)="sortColumn('id')">{{ isAscending && currentSortColumn === 'id' ? '▲' : '▼' }}</span>
-      </th>
-      <th scope="col">
-        Nome
-        <span (click)="sortColumn('nome')">{{ isAscending && currentSortColumn === 'nome' ? '▲' : '▼' }}</span>
-      </th>
-      <th scope="col">Resumo</th>
-      <th scope="col">
-        Duração
-        <span (click)="sortColumn('duracao')">{{ isAscending && currentSortColumn === 'duracao' ? '▲' : '▼' }}</span>
-      </th>
-      <th scope="col">
-        Avaliação
-        <span (click)="sortColumn('avaliacao')">{{ isAscending && currentSortColumn === 'avaliacao' ? '▲' : '▼' }}</span>
-      </th>
-      <th scope="col">
-        Banda
-        <span (click)="sortColumn('banda')">{{ isAscending && currentSortColumn === 'banda' ? '▲' : '▼' }}</span>
-      </th>
-      <th scope="col">
-        Músicas
-        <span (click)="sortColumn('musicas')">{{ isAscending && currentSortColumn === 'musicas' ? '▲' : '▼' }}</span>
-      </th>
-      <th scope="col">Ações</th>
-    </tr>
+  <tr>
+    <th scope="col">
+      ID
+      <span (click)="sortColumn('id')">{{ isAscending && currentSortColumn === 'id' ? '▲' : '▼' }}</span>
+    </th>
+    <th scope="col">
+      Nome
+      <span (click)="sortColumn('nome')">{{ isAscending && currentSortColumn === 'nome' ? '▲' : '▼' }}</span>
+    </th>
+    <th scope="col">Resumo</th>
+    <th scope="col">
+      Duração
+      <span (click)="sortColumn('duracao')">{{ isAscending && currentSortColumn === 'duracao' ? '▲' : '▼' }}</span>
+    </th>
+    <th scope="col">
+      Avaliação
+      <span (click)="sortColumn('avaliacao')">{{ isAscending && currentSortColumn === 'avaliacao' ? '▲' : '▼' }}</span>
+    </th>
+    <th scope="col">
+      Banda
+      <span (click)="sortColumn('banda')">{{ isAscending && currentSortColumn === 'banda' ? '▲' : '▼' }}</span>
+    </th>
+    <th scope="col">
+      Músicas
+      <span (click)="sortColumn('musicas')">{{ isAscending && currentSortColumn === 'musicas' ? '▲' : '▼' }}</span>
+    </th>
+    <th scope="col">Ações</th>
+  </tr>
   </thead>
   <tbody class="table-group-divider">
-    <tr *ngFor="let album of albums">
+    <tr *ngFor="let album of albuns">
       <th scope="row">{{ album.id }}</th>
       <td>{{ album.nome }}</td>
       <td>{{ album.resumo }}</td>
@@ -40,7 +40,7 @@
       <td>{{ album.musicas }}</td>
       <td>
         <app-editar *ngIf="isAdmin"></app-editar>
-        <app-lixeira *ngIf="isAdmin"></app-lixeira>
+        <app-lixeira *ngIf="isAdmin" (delete)="deleteAlbum(album.id)"></app-lixeira>
         <app-avaliar></app-avaliar>
       </td>
     </tr>

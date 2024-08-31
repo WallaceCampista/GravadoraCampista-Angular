@@ -48,6 +48,18 @@ export class ListarMusicaComponent implements OnInit {
     });
   }
 
+  deleteMusic(id: number): void {
+    this.musicaService.deleteMusic(id).subscribe({
+      next: () => {
+        this.musicas = this.musicas.filter(musica => musica.id !== id);
+        console.log('Música deletada com sucesso!');
+      },
+      error: error => {
+        console.error('Erro ao deletar música:', error);
+      }
+    });
+  }
+
   sortColumn(column: keyof Musica) {
     if (this.currentSortColumn === column) {
       this.isAscending = !this.isAscending;

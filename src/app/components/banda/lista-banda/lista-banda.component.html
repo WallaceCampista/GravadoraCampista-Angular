@@ -30,7 +30,7 @@
       <td>{{ banda.albuns }}</td>
       <td>
         <app-editar *ngIf="isAdmin"></app-editar>
-        <app-lixeira *ngIf="isAdmin"></app-lixeira>
+        <app-lixeira *ngIf="isAdmin" (delete)="deleteBand(banda.id)"></app-lixeira>
         <app-avaliar></app-avaliar>
       </td>
     </tr>

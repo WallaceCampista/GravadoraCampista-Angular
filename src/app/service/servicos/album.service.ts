@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import {HttpClient, HttpHeaders, HttpResponse} from '@angular/common/http';
-import { Observable } from 'rxjs';
+import {HttpClient, HttpErrorResponse, HttpHeaders, HttpResponse} from '@angular/common/http';
+import {catchError, Observable, throwError} from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { AuthService } from 'src/app/service/servicos/usuario/auth.service';
 
@@ -22,5 +22,27 @@ export class AlbumService {
     let url: string = '/album/novo-registro/';
     const headers = this.authService.getAuthHeaders();
     return this.http.post<any>(this.apiUrl + url, album, { headers, observe: 'response', responseType: 'text' as 'json' });
+  }
+
+  deleteAlbum(id: number): Observable<any> {
+    const url = `/album/delete/${id}/`;
+    const headers = this.authService.getAuthHeaders();
+    return this.http.delete(this.apiUrl + url, { headers, responseType: 'text' }).pipe(
+      catchError(this.handleError)
+    );
+  }
+
+
+  private handleError(error: HttpErrorResponse): Observable<never> {
+    let errorMessage = 'Unknown error!';
+    if (error.error instanceof ErrorEvent) {
+      // Client-side errors
+      errorMessage = `Error: ${error.error.message}`;
+    } else {
+      // Server-side errors
+      errorMessage = `Error Code: ${error.status}\nMessage: ${error.message}`;
+    }
+    console.error(errorMessage);
+    return throwError(errorMessage);
   }
 }

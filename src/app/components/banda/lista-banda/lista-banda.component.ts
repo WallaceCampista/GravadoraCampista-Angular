@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { BandaService } from 'src/app/service/servicos/banda.service';
 import { AdminService } from 'src/app/service/servicos/usuario/admin.service';
 
@@ -16,10 +16,10 @@ interface Banda {
   styleUrls: ['./lista-banda.component.scss']
 })
 export class ListaBandaComponent implements OnInit {
+  @Input() isAdmin: boolean = false;
   bandas: Banda[] = [];
-  isAscending = true;
-  currentSortColumn = '';
-  isAdmin: boolean = false;
+  currentSortColumn: string = '';
+  isAscending: boolean = true;
 
   constructor(private bandaService: BandaService, private adminService: AdminService) {}
 
@@ -41,6 +41,18 @@ export class ListaBandaComponent implements OnInit {
         avaliacao: item.avaliacaoMedia,
         albuns: item.albuns.length
       }));
+    });
+  }
+
+  deleteBand(id: number): void {
+    this.bandaService.deleteBand(id).subscribe({
+      next: () => {
+        this.bandas = this.bandas.filter(banda => banda.id !== id);
+        console.log('Banda deletada com sucesso!');
+      },
+      error: error => {
+        console.error('Erro ao deletar banda:', error);
+      }
     });
   }
 
