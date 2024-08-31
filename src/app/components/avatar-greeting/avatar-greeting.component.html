@@ -11,7 +11,7 @@
       <br>
       <label id="statusAdmin"><strong>{{ isAdmin ? 'Sim' : 'Não' }}</strong></label>
       <p *ngIf="isAdmin" routerLink="/usuario">Editar</p>
-      <p routerLink="/login">Sair</p>
+      <p (click)="logout()" routerLink="/login">Sair</p>
     </div>
   </div>
 </div>

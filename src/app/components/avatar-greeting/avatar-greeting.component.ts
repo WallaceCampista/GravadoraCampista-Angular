@@ -3,6 +3,7 @@ import { Component, OnInit, HostListener } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
 import { UserService } from 'src/app/service/servicos/usuario/user.service';
 import { AdminService } from 'src/app/service/servicos/usuario/admin.service';
+import { AuthService } from 'src/app/service/servicos/usuario/auth.service';
 
 @Component({
   selector: 'app-avatar-greeting',
@@ -15,7 +16,7 @@ export class AvatarGreetingComponent implements OnInit {
   showAvatarGreeting: boolean = true;
   showLabel: boolean = false;
 
-  constructor(private router: Router, private userService: UserService, private adminService: AdminService) {}
+  constructor(private router: Router, private userService: UserService, private adminService: AdminService, private authService: AuthService) {}
 
   ngOnInit(): void {
     this.userService.nomeUser$.subscribe(nome => {
@@ -36,6 +37,10 @@ export class AvatarGreetingComponent implements OnInit {
 
   toggleLabel(): void {
     this.showLabel = !this.showLabel;
+  }
+
+  logout(): void {
+    this.authService.logout();
   }
 
   @HostListener('document:click', ['$event'])
