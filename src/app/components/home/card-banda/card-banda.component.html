@@ -1,9 +1,10 @@
+<!-- src/app/components/home/card-banda/card-banda.component.html -->
 <div id="board">
   <div class="card" [ngClass]="{'no-shadow': isPageBanda}" style="width: 18rem;">
     <div class="card-body">
       <h5 class="card-title">{{nomeBanda}}</h5>
-      <h6 class="card-subtitle mb-2 text-body-secondary">Avaliação: {{avaliacaoBanda}} estrelas</h6>
-      <p class="card-text">{{resumoBanda}}</p>
+      <h6 class="card-subtitle mb-2 text-body-secondary">Avaliação: {{avaliacaoMedia}} <app-star></app-star></h6> <!-- Alterado aqui -->
+      <p class="card-text">{{getResumoLimitado()}}</p>
       <a *ngIf="!isPageBanda" class="btn btn-primary" routerLink="/pagebanda">Conheça!</a>
     </div>
   </div>

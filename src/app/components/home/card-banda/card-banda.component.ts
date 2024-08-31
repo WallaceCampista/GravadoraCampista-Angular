@@ -1,20 +1,25 @@
-import { Component, OnInit } from '@angular/core';
+// src/app/components/home/card-banda/card-banda.component.ts
+import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-card-banda',
   templateUrl: './card-banda.component.html',
-  styleUrl: './card-banda.component.scss'
+  styleUrls: ['./card-banda.component.scss']
 })
 export class CardBandaComponent implements OnInit {
-  nomeBanda = "Charlie Brown Jr.";
-  avaliacaoBanda = 10;
-  resumoBanda = "Charlie Brown Jr. foi uma banda brasileira de rock formada em 1992 na cidade de Santos, por Chorão, Champignon, Marcão Britto, Thiago Castanho e Renato Pelado. Sua discografia contabiliza 13 álbuns de estúdio lançados, 4 álbuns ao vivo e 7 DVDs";
+  @Input() nomeBanda: string = "";
+  @Input() avaliacaoMedia: number = 0; // Alterado aqui
+  @Input() resumoBanda: string = "";
   isPageBanda = false;
 
   constructor(private router: Router) {}
 
   ngOnInit(): void {
     this.isPageBanda = this.router.url === '/pagebanda';
+  }
+
+  getResumoLimitado(): string {
+    return this.resumoBanda.length > 190 ? this.resumoBanda.substring(0, 190) + '...' : this.resumoBanda;
   }
 }

@@ -1,6 +1,8 @@
+// src/app/service/servicos/banda.service.ts
 import { Injectable } from '@angular/core';
-import {HttpClient, HttpErrorResponse, HttpHeaders, HttpResponse} from '@angular/common/http';
-import {catchError, Observable, throwError} from 'rxjs';
+import { HttpClient, HttpErrorResponse, HttpHeaders, HttpResponse } from '@angular/common/http';
+import { catchError, Observable, throwError } from 'rxjs';
+import { map } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 import { AuthService } from 'src/app/service/servicos/usuario/auth.service';
 
@@ -12,16 +14,22 @@ export class BandaService {
 
   constructor(private http: HttpClient, private authService: AuthService) {}
 
+  registerBand(band: { nomeBanda: string; resumoBanda: string }): Observable<HttpResponse<any>> {
+    let url: string = '/banda/novo-registro/';
+    const headers = this.authService.getAuthHeaders();
+    return this.http.post<any>(this.apiUrl + url, band, { headers, observe: 'response', responseType: 'text' as 'json' });
+  }
+
   getAllBand(): Observable<any> {
     let url: string = '/banda/listar-bandas-completos/';
     const headers = this.authService.getAuthHeaders();
     return this.http.get<any>(this.apiUrl + url, { headers });
   }
 
-  registerBand(band: { nomeBanda: string; resumoBanda: string }): Observable<HttpResponse<any>> {
-    let url: string = '/banda/novo-registro/';
-    const headers = this.authService.getAuthHeaders();
-    return this.http.post<any>(this.apiUrl + url, band, { headers, observe: 'response', responseType: 'text' as 'json' });
+  getTop3Bands(): Observable<any[]> {
+    return this.getAllBand().pipe(
+      map(bands => bands.sort((a: any, b: any) => b.avaliacaoMedia - a.avaliacaoMedia).slice(0, 3))
+    );
   }
 
   deleteBand(id: number): Observable<any> {
@@ -31,7 +39,6 @@ export class BandaService {
       catchError(this.handleError)
     );
   }
-
 
   private handleError(error: HttpErrorResponse): Observable<never> {
     let errorMessage = 'Unknown error!';

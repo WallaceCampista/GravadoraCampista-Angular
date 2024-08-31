@@ -1,11 +1,12 @@
+<!-- src/app/views/inicio-view/inicio-view.component.html -->
 <div>
   <div id="home">
-    <h1 id="titulo">Bem vindo a CAMPISTA! Bandas com melhores avaliações</h1>
+    <h1 id="titulo">Bem vindo a CAMPISTA! Bandas TOP 3</h1>
   </div>
   <br>
-  <div class="centered-div">
-    <app-card-banda class="card-spacing"></app-card-banda>
-    <app-card-banda class="card-spacing"></app-card-banda>
-    <app-card-banda class="card-spacing"></app-card-banda>
+  <div id="cardsContainer">
+    <div class="card-spacing" *ngFor="let banda of top3Bands">
+      <app-card-banda [nomeBanda]="banda.nomeBanda" [avaliacaoMedia]="banda.avaliacaoMedia" [resumoBanda]="banda.resumoBanda"></app-card-banda>
+    </div>
   </div>
 </div>
