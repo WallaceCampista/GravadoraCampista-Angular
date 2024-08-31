@@ -49,7 +49,6 @@ import { ListarUsuarioComponent } from './components/usuario/listar-usuario/list
   declarations: [
     AppComponent,
     LoginComponent,
-    LoginComponent,
     CabecalhoComponent,
     RodapeComponent,
     InicioViewComponent,

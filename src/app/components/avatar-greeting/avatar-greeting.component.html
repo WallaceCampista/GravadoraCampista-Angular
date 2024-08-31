@@ -6,6 +6,9 @@
     <p>Olá, <span class="highlight" (click)="toggleLabel()">{{ nomeUser }}</span>.</p>
     <p>Bem vindo de volta!</p>
     <div *ngIf="showLabel" class="user-options">
+      <label>Administrador:</label>
+      <br>
+      <label id="statusAdmin"><strong>{{ isAdmin ? 'Sim' : 'Não' }}</strong></label>
       <p routerLink="/usuario">Editar</p>
       <p routerLink="/login">Sair</p>
     </div>

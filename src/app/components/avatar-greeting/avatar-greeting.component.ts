@@ -1,5 +1,6 @@
 import { Component, OnInit, HostListener } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
+import { UserService } from 'src/app/service/servicos/usuario/user.service';
 
 @Component({
   selector: 'app-avatar-greeting',
@@ -7,16 +8,25 @@ import { Router, NavigationEnd } from '@angular/router';
   styleUrls: ['./avatar-greeting.component.scss']
 })
 export class AvatarGreetingComponent implements OnInit {
-  nomeUser: string = 'Wallace';
+  nomeUser: string = '';
+  isAdmin: boolean = false;
   showAvatarGreeting: boolean = true;
   showLabel: boolean = false;
 
-  constructor(private router: Router) {}
+  constructor(private router: Router, private userService: UserService) {}
 
   ngOnInit(): void {
+    this.userService.nomeUser$.subscribe(nome => {
+      this.nomeUser = nome;
+    });
+
+    this.userService.isAdmin$.subscribe(isAdmin => {
+      this.isAdmin = isAdmin;
+    });
+
     this.router.events.subscribe(event => {
       if (event instanceof NavigationEnd) {
-        this.showAvatarGreeting = event.url !== '/login' && event.url !== '/cadastro';
+        this.showAvatarGreeting = event.urlAfterRedirects !== '/login' && event.urlAfterRedirects !== '/cadastro';
       }
     });
   }

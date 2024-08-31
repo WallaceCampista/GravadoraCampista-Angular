@@ -10,7 +10,7 @@ import {CardBandaViewComponent} from "./views/card-banda-view/card-banda-view.co
 import { UsuarioViewComponent } from "./views/usuario-view/usuario-view.component";
 
 const routes: Routes = [
-  { path: '', redirectTo: '/home', pathMatch: 'full' },
+  { path: '', redirectTo: '/login', pathMatch: 'full' },
   { path: 'home', component: InicioViewComponent },
   { path: 'login', component: LoginViewComponent },
   { path: 'banda', component: BandaViewComponent },
