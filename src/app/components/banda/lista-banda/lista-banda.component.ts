@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { AdminService } from 'src/app/service/servicos/usuario/admin.service';
 
 interface Banda {
   id: number;
@@ -13,7 +14,7 @@ interface Banda {
   templateUrl: './lista-banda.component.html',
   styleUrls: ['./lista-banda.component.scss']
 })
-export class ListaBandaComponent {
+export class ListaBandaComponent implements OnInit {
   bandas: Banda[] = [
     {
       id: 1,
@@ -33,6 +34,15 @@ export class ListaBandaComponent {
 
   isAscending = true;
   currentSortColumn: keyof Banda = 'id'; // Inicializar com um valor válido
+  isAdmin: boolean = false;
+
+  constructor(private adminService: AdminService) {}
+
+  ngOnInit(): void {
+    this.adminService.isAdmin$.subscribe(isAdmin => {
+      this.isAdmin = isAdmin;
+    });
+  }
 
   sortColumn(column: keyof Banda) {
     if (this.currentSortColumn === column) {

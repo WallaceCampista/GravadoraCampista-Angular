@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+// src/app/components/musica/listar-musica/listar-musica.component.ts
+import { Component, OnInit } from '@angular/core';
+import { AdminService } from 'src/app/service/servicos/usuario/admin.service';
 
 interface Musica {
   id: number;
@@ -15,7 +17,7 @@ interface Musica {
   templateUrl: './listar-musica.component.html',
   styleUrls: ['./listar-musica.component.scss']
 })
-export class ListarMusicaComponent {
+export class ListarMusicaComponent implements OnInit {
   musicas: Musica[] = [
     { id: 2, nome: 'Dona do meu pensamento', resumo: 'Musica para sua amada', avaliacao: 8, duracao: 450, album: 'Camisa 10 Joga Bola Até na Chuva', banda: 'Charlie Brown Jr.' },
     { id: 3, nome: 'Só os loucos sabem', resumo: 'Loucura total', avaliacao: 9, duracao: 350, album: 'Camisa 10 Joga Bola Até na Chuva', banda: 'Charlie Brown Jr.' },
@@ -27,6 +29,15 @@ export class ListarMusicaComponent {
 
   currentSortColumn: string = '';
   isAscending: boolean = true;
+  isAdmin: boolean = false;
+
+  constructor(private adminService: AdminService) {}
+
+  ngOnInit(): void {
+    this.adminService.isAdmin$.subscribe(isAdmin => {
+      this.isAdmin = isAdmin;
+    });
+  }
 
   sortColumn(column: keyof Musica) {
     if (this.currentSortColumn === column) {

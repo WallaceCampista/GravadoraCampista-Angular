@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { AdminService } from 'src/app/service/servicos/usuario/admin.service';
 
 interface Album {
   id: number;
@@ -15,7 +16,7 @@ interface Album {
   templateUrl: './lista-album.component.html',
   styleUrls: ['./lista-album.component.scss']
 })
-export class ListaAlbumComponent {
+export class ListaAlbumComponent implements OnInit {
   albums: Album[] = [
     {
       id: 1,
@@ -48,6 +49,15 @@ export class ListaAlbumComponent {
 
   isAscending = true;
   currentSortColumn = '';
+  isAdmin: boolean = false;
+
+  constructor(private adminService: AdminService) {}
+
+  ngOnInit(): void {
+    this.adminService.isAdmin$.subscribe(isAdmin => {
+      this.isAdmin = isAdmin;
+    });
+  }
 
   sortColumn(column: keyof Album) {
     if (this.currentSortColumn === column) {

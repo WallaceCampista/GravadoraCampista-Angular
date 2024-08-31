@@ -1,3 +1,4 @@
+<!-- src/app/components/banda/lista-banda/lista-banda.component.html -->
 <table class="table">
   <thead>
   <tr>
@@ -29,8 +30,8 @@
     <td>{{ banda.avaliacao }} <app-star></app-star></td>
     <td>{{ banda.albuns }}</td>
     <td>
-      <app-editar></app-editar>
-      <app-lixeira></app-lixeira>
+      <app-editar *ngIf="isAdmin"></app-editar>
+      <app-lixeira *ngIf="isAdmin"></app-lixeira>
       <app-avaliar></app-avaliar>
     </td>
   </tr>
