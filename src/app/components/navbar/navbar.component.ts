@@ -1,4 +1,3 @@
-// src/app/components/navbar/navbar.component.ts
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/service/servicos/usuario/auth.service';

@@ -6,7 +6,6 @@ interface Usuario {
   nome: string;
   sobrenome: string;
   username: string;
-  password: string;
   email: string;
   isAdmin: boolean;
   criadoEm?: Date;
@@ -34,7 +33,6 @@ export class ListarUsuarioComponent implements OnInit {
           nome: user.nome,
           sobrenome: user.sobrenome,
           username: user.username,
-          password: user.password,
           email: user.email,
           isAdmin: user.isAdmin,
           criadoEm: new Date(user.criadoEm),
@@ -71,10 +69,6 @@ export class ListarUsuarioComponent implements OnInit {
         return 0;
       }
     });
-  }
-
-  formatPassword(password: string): string {
-    return password.length > 5 ? password.substring(0, 5) + '...' : password;
   }
 
   formatIsAdministrator(isAdmin: boolean): string {

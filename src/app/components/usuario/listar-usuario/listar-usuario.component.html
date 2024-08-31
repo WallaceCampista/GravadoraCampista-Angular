@@ -14,7 +14,6 @@
       Username
       <span (click)="sortColumn('username')">{{ isAscending && currentSortColumn === 'username' ? '▲' : '▼' }}</span>
     </th>
-    <th scope="col">Password</th>
     <th scope="col">Email</th>
     <th scope="col">Administrador</th>
     <th scope="col">
@@ -34,7 +33,6 @@
     <td><strong>{{ usuario.nome }}</strong></td>
     <td>{{ usuario.sobrenome }}</td>
     <td><strong>{{ usuario.username }}</strong></td>
-    <td>{{ formatPassword(usuario.password) }}</td>
     <td>{{ usuario.email }}</td>
     <td><strong>{{ formatIsAdministrator(usuario.isAdmin) }}</strong></td>
     <td>{{ formatDate(usuario.criadoEm) }}</td>

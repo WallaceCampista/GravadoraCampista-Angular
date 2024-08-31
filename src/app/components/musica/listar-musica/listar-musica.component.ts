@@ -1,5 +1,5 @@
-// src/app/components/musica/listar-musica/listar-musica.component.ts
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { MusicaService } from 'src/app/service/servicos/musica.service';
 import { AdminService } from 'src/app/service/servicos/usuario/admin.service';
 
 interface Musica {
@@ -18,24 +18,32 @@ interface Musica {
   styleUrls: ['./listar-musica.component.scss']
 })
 export class ListarMusicaComponent implements OnInit {
-  musicas: Musica[] = [
-    { id: 2, nome: 'Dona do meu pensamento', resumo: 'Musica para sua amada', avaliacao: 8, duracao: 450, album: 'Camisa 10 Joga Bola Até na Chuva', banda: 'Charlie Brown Jr.' },
-    { id: 3, nome: 'Só os loucos sabem', resumo: 'Loucura total', avaliacao: 9, duracao: 350, album: 'Camisa 10 Joga Bola Até na Chuva', banda: 'Charlie Brown Jr.' },
-    { id: 4, nome: 'Só existe o agora', resumo: 'Viva intensamente', avaliacao: 9.7, duracao: 487, album: 'Camisa 10 Joga Bola Até na Chuva', banda: 'Charlie Brown Jr.' },
-    { id: 5, nome: 'Puro sangue', resumo: 'Qualquer', avaliacao: 6, duracao: 247, album: 'Camisa 10 Joga Bola Até na Chuva', banda: 'Charlie Brown Jr.' },
-    { id: 6, nome: 'Hóstia', resumo: 'Musica doida', avaliacao: 9, duracao: 354, album: '7 Vezes', banda: 'O Rappa' },
-    { id: 7, nome: 'Meu mundo é o barro', resumo: 'João de barro', avaliacao: 10, duracao: 365, album: '7 Vezes', banda: 'O Rappa' },
-  ];
-
+  @Input() isAdmin: boolean = false;
+  musicas: Musica[] = [];
   currentSortColumn: string = '';
   isAscending: boolean = true;
-  isAdmin: boolean = false;
 
-  constructor(private adminService: AdminService) {}
+  constructor(private musicaService: MusicaService, private adminService: AdminService) {}
 
   ngOnInit(): void {
     this.adminService.isAdmin$.subscribe(isAdmin => {
       this.isAdmin = isAdmin;
+    });
+
+    this.fetchAllMusic();
+  }
+
+  fetchAllMusic(): void {
+    this.musicaService.getAllMusic().subscribe(data => {
+      this.musicas = data.map((item: any) => ({
+        id: item.idMusica,
+        nome: item.nomeMusica,
+        resumo: item.resumoMusica,
+        avaliacao: item.avaliacaoMedia,
+        duracao: item.duracao,
+        album: item.albumID.nomeAlbum,
+        banda: item.bandaID.nomeBanda
+      }));
     });
   }
 
