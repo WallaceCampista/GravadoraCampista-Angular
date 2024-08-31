@@ -1,4 +1,4 @@
-import { Component, ViewChild, ElementRef, AfterViewInit, AfterViewChecked } from '@angular/core';
+import { Component, ViewChild, ElementRef, AfterViewInit, AfterViewChecked, ChangeDetectorRef } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 
@@ -13,7 +13,7 @@ export class PopupAvaliarComponent implements AfterViewInit, AfterViewChecked {
   showModal: boolean = false;
   form: FormGroup;
 
-  constructor(private router: Router, private fb: FormBuilder) {
+  constructor(private router: Router, private fb: FormBuilder, private cdr: ChangeDetectorRef) {
     this.form = this.fb.group({
       nota: ['']
     });
@@ -24,8 +24,13 @@ export class PopupAvaliarComponent implements AfterViewInit, AfterViewChecked {
   }
 
   ngAfterViewChecked() {
-    if (this.showModal) {
-      setTimeout(() => this.notaInput.nativeElement.focus(), 0);
+    if (this.showModal && this.notaInput && this.notaInput.nativeElement) {
+      this.cdr.detectChanges(); // Ensure the view is updated
+      setTimeout(() => {
+        if (this.notaInput && this.notaInput.nativeElement) {
+          this.notaInput.nativeElement.focus();
+        }
+      }, 0);
     }
   }
 
