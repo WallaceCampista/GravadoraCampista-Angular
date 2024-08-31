@@ -1,6 +1,8 @@
+// src/app/components/avatar-greeting/avatar-greeting.component.ts
 import { Component, OnInit, HostListener } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
 import { UserService } from 'src/app/service/servicos/usuario/user.service';
+import { AdminService } from 'src/app/service/servicos/usuario/admin.service';
 
 @Component({
   selector: 'app-avatar-greeting',
@@ -13,7 +15,7 @@ export class AvatarGreetingComponent implements OnInit {
   showAvatarGreeting: boolean = true;
   showLabel: boolean = false;
 
-  constructor(private router: Router, private userService: UserService) {}
+  constructor(private router: Router, private userService: UserService, private adminService: AdminService) {}
 
   ngOnInit(): void {
     this.userService.nomeUser$.subscribe(nome => {
@@ -22,6 +24,7 @@ export class AvatarGreetingComponent implements OnInit {
 
     this.userService.isAdmin$.subscribe(isAdmin => {
       this.isAdmin = isAdmin;
+      this.adminService.setAdminStatus(isAdmin);
     });
 
     this.router.events.subscribe(event => {

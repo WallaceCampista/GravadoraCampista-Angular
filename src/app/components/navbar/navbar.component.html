@@ -1,3 +1,4 @@
+<!-- src/app/components/navbar/navbar.component.html -->
 <nav *ngIf="showNavbar" class="navbar navbar-expand-lg bg-body-tertiary">
   <div class="container-fluid">
     <a class="navbar-brand">Menu Principal</a>
@@ -18,11 +19,8 @@
         <li class="nav-item">
           <a class="nav-link" routerLink="/musica" (click)="setFocus($event)">Musica</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" routerLink="/usuario" (click)="setFocus($event); fetchAllUsers($event)">Usuariooooooo</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link disabled" aria-disabled="true">Usuários</a>
+        <li class="nav-item" [ngClass]="{'disabled': !isAdmin}">
+          <a class="nav-link" [ngClass]="{'disabled': !isAdmin}" [attr.aria-disabled]="!isAdmin" routerLink="/usuario" (click)="setFocus($event); fetchAllUsers($event)">Usuario</a>
         </li>
       </ul>
       <form class="d-flex" role="search">
@@ -34,7 +32,6 @@
         </div>
         <input class="form-control me-2" type="search" placeholder="Dúvidas??" aria-label="Search">
         <button class="btn btn-outline-success" type="submit">Procurar</button>
-
       </form>
     </div>
   </div>

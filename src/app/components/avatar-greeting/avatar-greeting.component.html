@@ -1,3 +1,4 @@
+<!-- src/app/components/avatar-greeting/avatar-greeting.component.html -->
 <div *ngIf="showAvatarGreeting" class="avatar-greeting">
   <div class="avatar">
     <i class="bi bi-person"></i>
@@ -9,7 +10,7 @@
       <label>Administrador:</label>
       <br>
       <label id="statusAdmin"><strong>{{ isAdmin ? 'Sim' : 'Não' }}</strong></label>
-      <p routerLink="/usuario">Editar</p>
+      <p *ngIf="isAdmin" routerLink="/usuario">Editar</p>
       <p routerLink="/login">Sair</p>
     </div>
   </div>
