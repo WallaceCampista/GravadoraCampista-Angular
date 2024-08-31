@@ -8,11 +8,12 @@
       <div class="modal-body">
         <p>Que nota deseja atribuir ?</p>
         <div class="align-self-center"></div>
-
-        <div class="form-floating mx-auto">
-          <input #notaInput class="form-control" formControlName="nota" id="nota" placeholder="Nota:" type="text"/>
-          <label for="nota" class="label-large">Nota: </label> <app-star></app-star>
-        </div>
+        <form [formGroup]="form">
+          <div class="form-floating mx-auto">
+            <input #notaInput class="form-control" formControlName="nota" id="nota" placeholder="Nota:" type="text"/>
+            <label for="nota" class="label-large">Nota: </label> <app-star></app-star>
+          </div>
+        </form>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" (click)="toggleModal()">Fechar</button>

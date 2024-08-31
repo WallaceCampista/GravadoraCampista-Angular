@@ -1,4 +1,6 @@
 import { Component, ViewChild, ElementRef, AfterViewInit, AfterViewChecked } from '@angular/core';
+import { FormBuilder, FormGroup } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-popup-avaliar',
@@ -9,6 +11,13 @@ export class PopupAvaliarComponent implements AfterViewInit, AfterViewChecked {
   @ViewChild('notaInput') notaInput!: ElementRef;
 
   showModal: boolean = false;
+  form: FormGroup;
+
+  constructor(private router: Router, private fb: FormBuilder) {
+    this.form = this.fb.group({
+      nota: ['']
+    });
+  }
 
   ngAfterViewInit() {
     // Remover o setTimeout daqui
