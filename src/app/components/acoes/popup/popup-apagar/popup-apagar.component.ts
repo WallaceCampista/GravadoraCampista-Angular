@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-popup-apagar',
@@ -7,18 +7,14 @@ import { Component } from '@angular/core';
 })
 export class PopupApagarComponent {
   showModal = false;
-  isDeleting = false;
+  @Output() confirm = new EventEmitter<void>();
 
   toggleModal() {
     this.showModal = !this.showModal;
   }
 
   onDelete() {
-    this.isDeleting = true;
-    setTimeout(() => {
-      this.isDeleting = false;
-      // Adicione aqui a lógica de deleção
-      this.toggleModal();
-    }, 2000);
+    this.confirm.emit();
+    this.toggleModal();
   }
 }

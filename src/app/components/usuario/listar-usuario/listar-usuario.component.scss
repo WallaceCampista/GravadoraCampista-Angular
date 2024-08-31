@@ -1,9 +1,27 @@
 .table {
-  overflow: auto; /* Add scroll if content exceeds max height */
-  text-align: center; /* Center align text in table cells */
-}
+  width: 100%;
+  border-collapse: collapse;
 
-.table th,
-.table td {
-  text-align: center; /* Center align text in table headers and cells */
+  thead {
+    position: sticky;
+    top: 0;
+    background-color: #fff; // Cor de fundo para o cabeçalho
+    z-index: 1; // Para garantir que o cabeçalho fique acima do conteúdo
+  }
+
+  th, td {
+    padding: 8px;
+    text-align: center; // Centraliza o texto nas células
+    vertical-align: middle; // Centraliza verticalmente o conteúdo das células
+    border-bottom: 1px solid #ddd;
+  }
+
+  tbody {
+    max-height: 350px; // Altura máxima da tabela com rolagem
+    overflow-y: auto;
+  }
+
+  tr {
+    table-layout: auto; // Permite que as colunas se ajustem ao conteúdo
+  }
 }

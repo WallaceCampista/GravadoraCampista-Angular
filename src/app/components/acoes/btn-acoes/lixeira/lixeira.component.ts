@@ -1,5 +1,4 @@
-// src/app/components/acoes/btn-acoes/lixeira/lixeira.component.ts
-import { Component, ViewChild } from '@angular/core';
+import { Component, ViewChild, Output, EventEmitter } from '@angular/core';
 import { PopupApagarComponent } from '../../popup/popup-apagar/popup-apagar.component';
 
 @Component({
@@ -9,8 +8,13 @@ import { PopupApagarComponent } from '../../popup/popup-apagar/popup-apagar.comp
 })
 export class LixeiraComponent {
   @ViewChild('popupApagar') popupApagar!: PopupApagarComponent;
+  @Output() delete = new EventEmitter<void>();
 
   toggleModal() {
     this.popupApagar.toggleModal();
+  }
+
+  confirmDelete() {
+    this.delete.emit();
   }
 }

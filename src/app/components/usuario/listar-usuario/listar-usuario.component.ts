@@ -45,6 +45,18 @@ export class ListarUsuarioComponent implements OnInit {
     });
   }
 
+deleteUser(id: number): void {
+  this.authService.deleteUser(id).subscribe({
+    next: () => {
+      this.usuarios = this.usuarios.filter(usuario => usuario.id !== id);
+      console.log('Usuario deletado com sucesso!');
+    },
+    error: error => {
+      console.error('Erro ao deletar usuário:', error);
+    }
+  });
+}
+
   sortColumn(column: keyof Usuario) {
     if (this.currentSortColumn === column) {
       this.isAscending = !this.isAscending;
