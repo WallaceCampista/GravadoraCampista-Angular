@@ -1,7 +1,7 @@
 <!-- src/app/components/login/loginbox/login.component.html -->
 <div class="container-fluid">
   <div class="row p-0">
-    <form [formGroup]="form" action="" class="p-0">
+    <form [formGroup]="form" (ngSubmit)="onSubmit($event)" class="p-0">
       <div class="cardLogin p-0 m-0 col-10 col-md-8 col-lg-4 d-flex flex-column mx-auto">
         <div class="col-md-6 mx-auto">
           <div class="column">
@@ -19,7 +19,7 @@
           </div>
         </div>
         <div class="form-floating mx-auto">
-          <button type="button" class="btn btn-success" (click)="onLogin()" [disabled]="isLoading" [ngClass]="{'btn-enlarged': isLoading}">
+          <button type="submit" class="btn btn-success" [disabled]="isLoading" [ngClass]="{'btn-enlarged': isLoading}">
             <ng-container *ngIf="!isLoading; else loading">
               Entrar
             </ng-container>

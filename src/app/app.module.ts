@@ -3,7 +3,7 @@ import { BrowserModule, provideClientHydration } from '@angular/platform-browser
 import { ReactiveFormsModule } from '@angular/forms';
 import { FormsModule } from '@angular/forms'; // Import FormsModule
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http'; // Atualizado para provideHttpClient
+import { provideHttpClient, withInterceptorsFromDi, withFetch } from '@angular/common/http'; // Atualizado para provideHttpClient
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -96,7 +96,7 @@ import { ListarUsuarioComponent } from './components/usuario/listar-usuario/list
   ],
   providers: [
     provideClientHydration(),
-    provideHttpClient(withInterceptorsFromDi()) // Atualizado para provideHttpClient
+    provideHttpClient(withInterceptorsFromDi(), withFetch()) // Atualizado para provideHttpClient
   ],
   exports: [
     CabecalhoComponent,

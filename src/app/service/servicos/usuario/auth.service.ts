@@ -1,3 +1,4 @@
+// src/app/service/servicos/usuario/auth.service.ts
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
@@ -20,11 +21,13 @@ export class AuthService {
     return this.http.post(this.apiUrl + url, user);
   }
 
-
   getAuthHeaders(): HttpHeaders {
-    const token = localStorage.getItem('token');
+    const token = typeof localStorage !== 'undefined' ? localStorage.getItem('token') : null;
+    if (!token) {
+      console.error('Token not found in localStorage');
+    }
     return new HttpHeaders({
-      'Authorization': `Bearer ${token}`
+      'Authorization': token ? `Bearer ${token}` : ''
     });
   }
 

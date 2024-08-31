@@ -1,4 +1,3 @@
-// In `listar-usuario.component.ts`
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/service/servicos/usuario/auth.service';
 
