@@ -24,6 +24,12 @@ export class AlbumService {
     return this.http.post<any>(this.apiUrl + url, album, { headers, observe: 'response', responseType: 'text' as 'json' });
   }
 
+  getAlbumData(albumName: string): Observable<any> {
+    const url = `/album/${albumName}/`;
+    const headers = this.authService.getAuthHeaders();
+    return this.http.get(this.apiUrl + url, { headers });
+  }
+
   deleteAlbum(id: number): Observable<any> {
     const url = `/album/delete/${id}/`;
     const headers = this.authService.getAuthHeaders();

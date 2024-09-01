@@ -9,7 +9,7 @@
         </h2>
         <div [id]="'collapse' + generateValidId(album.nomeAlbum)" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
           <div class="accordion-body">
-            <table class="table center-text">
+            <table class="table center-text" *ngIf="albumData[album.nomeAlbum]">
               <thead>
                 <tr>
                   <th scope="col">Faixa</th>
@@ -19,35 +19,11 @@
                 </tr>
               </thead>
               <tbody class="table-group-divider">
-                <tr>
-                  <td>1</td>
-                  <td>Dona do meu pensamento</td>
-                  <td>{{ (65 / 60) | number:'1.2-2' }} <strong>mim</strong></td>
-                  <td>8 <app-star></app-star></td>
-                </tr>
-                <tr>
-                  <td>2</td>
-                  <td>Só os loucos sabem</td>
-                  <td>{{ (350 / 60) | number:'1.2-2' }} <strong>mim</strong></td>
-                  <td>9 <app-star></app-star></td>
-                </tr>
-                <tr>
-                  <td>3</td>
-                  <td>Só existe o agora</td>
-                  <td>{{ (487 / 60) | number:'1.2-2' }} <strong>mim</strong></td>
-                  <td>9.7 <app-star></app-star></td>
-                </tr>
-                <tr>
-                  <td>4</td>
-                  <td>Puro sangue</td>
-                  <td>{{ (247 / 60) | number:'1.2-2' }} <strong>mim</strong></td>
-                  <td>6 <app-star></app-star></td>
-                </tr>
-                <tr>
-                  <td>5</td>
-                  <td>Blablabla</td>
-                  <td>{{ (247 / 60) | number:'1.2-2' }} <strong>mim</strong></td>
-                  <td>7 <app-star></app-star></td>
+                <tr *ngFor="let musica of albumData[album.nomeAlbum]">
+                  <td>{{ musica.musicaId }}</td>
+                  <td>{{ musica.nomeMusica }}</td>
+                  <td>{{ (musica.duracao / 60) | number:'1.2-2' }} <strong>mim</strong></td>
+                  <td>{{ musica.avaliacaoMedia }} <app-star></app-star></td>
                 </tr>
               </tbody>
             </table>

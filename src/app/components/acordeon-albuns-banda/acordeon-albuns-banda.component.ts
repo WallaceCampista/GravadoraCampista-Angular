@@ -1,4 +1,5 @@
 import { Component, AfterViewInit, Input, OnChanges, SimpleChanges } from '@angular/core';
+import { AlbumService } from 'src/app/service/servicos/album.service';
 
 @Component({
   selector: 'app-acordeon-albuns-banda',
@@ -7,6 +8,9 @@ import { Component, AfterViewInit, Input, OnChanges, SimpleChanges } from '@angu
 })
 export class AcordeonAlbunsBandaComponent implements AfterViewInit, OnChanges {
   @Input() albuns: any[] = [];
+  albumData: any = {};
+
+  constructor(private albumService: AlbumService) {}
 
   ngAfterViewInit(): void {
     if (typeof document !== 'undefined') {
@@ -56,6 +60,10 @@ export class AcordeonAlbunsBandaComponent implements AfterViewInit, OnChanges {
           targetElement.classList.remove('collapse');
           targetElement.classList.add('show');
           targetElement.style.maxHeight = targetElement.scrollHeight + 'px';
+          const albumName = button.querySelector('strong')?.textContent;
+          if (albumName) {
+            this.fetchAlbumData(albumName);
+          }
         } else {
           targetElement.style.maxHeight = targetElement.scrollHeight + 'px';
           setTimeout(() => {
@@ -66,6 +74,12 @@ export class AcordeonAlbunsBandaComponent implements AfterViewInit, OnChanges {
         }
       }
     }
+  }
+
+  fetchAlbumData(albumName: string) {
+    this.albumService.getAlbumData(albumName).subscribe(data => {
+      this.albumData[albumName] = data.content[0].musicas;
+    });
   }
 
   ngOnChanges(changes: SimpleChanges): void {
