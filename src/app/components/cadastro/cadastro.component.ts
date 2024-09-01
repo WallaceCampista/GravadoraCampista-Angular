@@ -1,8 +1,8 @@
-// In `src/app/components/cadastro/cadastro.component.ts`
+// cadastro.component.ts
 import { Component } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Router } from '@angular/router';
-import { AuthService } from 'src/app/service/servicos/usuario/auth.service';
 
 @Component({
   selector: 'app-cadastro',
@@ -12,32 +12,31 @@ import { AuthService } from 'src/app/service/servicos/usuario/auth.service';
 export class CadastroComponent {
   form: FormGroup;
 
-  constructor(private router: Router, private fb: FormBuilder, private authService: AuthService) {
+  constructor(private fb: FormBuilder, private http: HttpClient, private router: Router) {
     this.form = this.fb.group({
-      nome: [''],
-      sobrenome: [''],
-      username: [''],
-      password: [''],
-      email: ['']
+      primeiroNome: ['', Validators.required],
+      sobrenome: ['', Validators.required],
+      username: ['', Validators.required],
+      password: ['', Validators.required],
+      email: ['', [Validators.required, Validators.email]]
     });
   }
 
   onRegister() {
-    const user = {
-      username: this.form.value.username,
-      password: this.form.value.password,
-      email: this.form.value.email,
-      primeiroNome: this.form.value.nome,
-      sobrenome: this.form.value.sobrenome
-    };
-
-    this.authService.register(user).subscribe({
-      next: () => {
-        this.router.navigate(['/login']);
-      },
-      error: (error) => {
-        console.error('Erro ao registrar usuário:', error);
-      }
-    });
+    if (this.form.valid) {
+      this.http.post('http://localhost:8080/usuarios/post/registro/', this.form.value)
+        .subscribe({
+          next: (response) => {
+            this.router.navigate(['/login']);
+          },
+          error: (error: HttpErrorResponse) => {
+            if (error.status === 201) {
+              this.router.navigate(['/login']);
+            } else {
+              console.error('Erro ao registrar usuário:', error);
+            }
+          }
+        });
+    }
   }
 }
