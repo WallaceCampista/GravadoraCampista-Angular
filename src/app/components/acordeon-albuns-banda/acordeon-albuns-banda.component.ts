@@ -79,6 +79,12 @@ export class AcordeonAlbunsBandaComponent implements AfterViewInit, OnChanges {
   fetchAlbumData(albumName: string) {
     this.albumService.getAlbumData(albumName).subscribe(data => {
       this.albumData[albumName] = data.content[0].musicas;
+      setTimeout(() => {
+        const targetElement = document.querySelector(`#collapse${this.generateValidId(albumName)}`) as HTMLElement;
+        if (targetElement) {
+          targetElement.style.maxHeight = targetElement.scrollHeight + 'px';
+        }
+      }, 0);
     });
   }
 
