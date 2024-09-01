@@ -32,6 +32,14 @@ export class BandaService {
     );
   }
 
+  avaliarBanda(id: number, nota: number): Observable<any> {
+    const url = `/banda/avaliar-banda/${id}/`;
+    const headers = this.authService.getAuthHeaders();
+    return this.http.post(this.apiUrl + url, {nota}, {headers, responseType: 'text'}).pipe(
+      catchError(this.handleError)
+    );
+  }
+
   deleteBand(id: number): Observable<any> {
     const url = `/banda/delete/${id}/`;
     const headers = this.authService.getAuthHeaders();

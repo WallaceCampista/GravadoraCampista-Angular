@@ -3,7 +3,10 @@ import { Component } from '@angular/core';
 @Component({
   selector: 'app-avaliar',
   templateUrl: './avaliar.component.html',
-  styleUrl: './avaliar.component.scss'
+  styleUrls: ['./avaliar.component.scss']
 })
 export class AvaliarComponent {
+  bandId: number = 1; // Set a valid bandId
+
+  // Other component logic
 }
