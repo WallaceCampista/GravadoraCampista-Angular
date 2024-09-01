@@ -1,14 +1,13 @@
-<!-- src/app/components/acordeon-albuns-banda/acordeon-albuns-banda.component.html -->
 <div class="centered-div">
   <div>
     <div class="accordion limited-width-accordion" id="accordionExample">
       <div *ngFor="let album of albuns" class="accordion-item">
         <h2 class="accordion-header">
-          <button class="accordion-button" type="button" data-bs-toggle="collapse" [attr.data-bs-target]="'#collapse' + album.nomeAlbum" aria-expanded="true" [attr.aria-controls]="'collapse' + album.nomeAlbum">
+          <button class="accordion-button" type="button" data-bs-toggle="collapse" [attr.data-bs-target]="'#collapse' + generateValidId(album.nomeAlbum)" aria-expanded="true" [attr.aria-controls]="'collapse' + generateValidId(album.nomeAlbum)" (click)="toggleAccordion($event)">
             <strong>{{ album.nomeAlbum }}</strong>
           </button>
         </h2>
-        <div [id]="'collapse' + album.nomeAlbum" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+        <div [id]="'collapse' + generateValidId(album.nomeAlbum)" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
           <div class="accordion-body">
             <table class="table center-text">
               <thead>

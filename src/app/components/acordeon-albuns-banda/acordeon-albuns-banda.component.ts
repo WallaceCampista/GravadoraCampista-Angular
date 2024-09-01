@@ -1,4 +1,3 @@
-// src/app/components/acordeon-albuns-banda/acordeon-albuns-banda.component.ts
 import { Component, AfterViewInit, Input, OnChanges, SimpleChanges } from '@angular/core';
 
 @Component({
@@ -30,6 +29,10 @@ export class AcordeonAlbunsBandaComponent implements AfterViewInit, OnChanges {
     }
   }
 
+  generateValidId(albumName: string): string {
+    return albumName.replace(/[^a-zA-Z0-9-_]/g, '-').toLowerCase();
+  }
+
   toggleAccordion(event: Event) {
     const button = (event.target as HTMLElement).closest('.accordion-button') as HTMLElement;
     const targetId = button.getAttribute('data-bs-target');
@@ -54,12 +57,12 @@ export class AcordeonAlbunsBandaComponent implements AfterViewInit, OnChanges {
           targetElement.classList.add('show');
           targetElement.style.maxHeight = targetElement.scrollHeight + 'px';
         } else {
-          targetElement.style.maxHeight = targetElement.scrollHeight + 'px'; // Set maxHeight to scrollHeight before collapsing
+          targetElement.style.maxHeight = targetElement.scrollHeight + 'px';
           setTimeout(() => {
             targetElement.classList.remove('show');
             targetElement.classList.add('collapse');
             targetElement.style.maxHeight = '0';
-          }, 10); // Small delay to allow the maxHeight to be applied
+          }, 10);
         }
       }
     }
