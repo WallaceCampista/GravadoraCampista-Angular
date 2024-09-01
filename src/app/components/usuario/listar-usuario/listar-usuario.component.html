@@ -37,10 +37,12 @@
       <td><strong>{{ formatIsAdministrator(usuario.isAdmin) }}</strong></td>
       <td>{{ formatDate(usuario.criadoEm) }}</td>
       <td>{{ formatDate(usuario.ultimoLogin) }}</td>
-      <td>
-        <app-editar></app-editar>
-        <app-lixeira (delete)="deleteUser(usuario.id)"></app-lixeira>
-      </td>
+<td>
+  <div style="display: flex; justify-content: space-around;">
+    <app-editar></app-editar>
+    <app-lixeira (delete)="deleteUser(usuario.id)"></app-lixeira>
+  </div>
+</td>
     </tr>
   </tbody>
 </table>
