@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'app-avaliar',
@@ -6,7 +6,7 @@ import { Component } from '@angular/core';
   styleUrls: ['./avaliar.component.scss']
 })
 export class AvaliarComponent {
-  bandId: number = 1; // Set a valid bandId
+  @Input() bandId!: number;
 
   // Other component logic
 }

@@ -41,13 +41,12 @@ export class PopupAvaliarComponent implements AfterViewInit, AfterViewChecked {
     if (bandId !== undefined) {
       this.bandId = bandId;
     }
-    console.log('toggleModal called with bandId:', bandId);
-    console.log('Current bandId:', this.bandId);
+    console.log('id da banda selecionada:', this.bandId);
   }
 
   avaliar() {
     const nota = this.form.get('nota')?.value;
-    console.log('avaliar called with bandId:', this.bandId, 'and nota:', nota);
+    console.log('avaliar banda com id bandId:', this.bandId, 'com nota:', nota);
     if (this.bandId && nota) {
       this.bandaService.avaliarBanda(this.bandId, nota).subscribe(
         response => {

@@ -31,7 +31,7 @@
       <td>
         <app-editar *ngIf="isAdmin"></app-editar>
         <app-lixeira *ngIf="isAdmin" (delete)="deleteBand(banda.id)"></app-lixeira>
-        <app-avaliar></app-avaliar>
+        <app-avaliar [bandId]="banda.id"></app-avaliar>
       </td>
     </tr>
   </tbody>
