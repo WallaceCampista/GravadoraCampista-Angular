@@ -1,11 +1,13 @@
-import { Component, AfterViewInit } from '@angular/core';
+// src/app/components/acordeon-albuns-banda/acordeon-albuns-banda.component.ts
+import { Component, AfterViewInit, Input, OnChanges, SimpleChanges } from '@angular/core';
 
 @Component({
   selector: 'app-acordeon-albuns-banda',
   templateUrl: './acordeon-albuns-banda.component.html',
   styleUrls: ['./acordeon-albuns-banda.component.scss']
 })
-export class AcordeonAlbunsBandaComponent implements AfterViewInit {
+export class AcordeonAlbunsBandaComponent implements AfterViewInit, OnChanges {
+  @Input() albuns: any[] = [];
 
   ngAfterViewInit(): void {
     if (typeof document !== 'undefined') {
@@ -60,6 +62,12 @@ export class AcordeonAlbunsBandaComponent implements AfterViewInit {
           }, 10); // Small delay to allow the maxHeight to be applied
         }
       }
+    }
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes['albuns']) {
+      console.log('Álbuns recebidos no componente:', this.albuns);
     }
   }
 }

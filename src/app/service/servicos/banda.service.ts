@@ -40,6 +40,13 @@ export class BandaService {
     );
   }
 
+  getBandaData(nomeBanda: string): Observable<any> {
+    const url = `/banda/${nomeBanda}/`;
+    const headers = this.authService.getAuthHeaders();
+    return this.http.get(this.apiUrl + url, { headers });
+  }
+
+
   deleteBand(id: number): Observable<any> {
     const url = `/banda/delete/${id}/`;
     const headers = this.authService.getAuthHeaders();

@@ -1,3 +1,4 @@
+<!-- src/app/views/card-banda-view/card-banda-view.component.html -->
 <div>
   <div id="homeBanda">
     <h1 id="tituloCardBanda">Discografia Banda/Artista {{nomeBanda}}</h1>
@@ -9,7 +10,7 @@
         <app-card-banda [nomeBanda]="nomeBanda" [avaliacaoMedia]="avaliacaoMedia" [resumoBanda]="resumoBanda"></app-card-banda>
       </div>
       <div>
-        <app-acordeon-albuns-banda></app-acordeon-albuns-banda>
+        <app-acordeon-albuns-banda [albuns]="albuns"></app-acordeon-albuns-banda>
       </div>
     </div>
   </div>
