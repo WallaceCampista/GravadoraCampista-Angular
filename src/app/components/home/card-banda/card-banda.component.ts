@@ -1,4 +1,3 @@
-// src/app/components/home/card-banda/card-banda.component.ts
 import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
@@ -9,7 +8,7 @@ import { Router } from '@angular/router';
 })
 export class CardBandaComponent implements OnInit {
   @Input() nomeBanda: string = "";
-  @Input() avaliacaoMedia: number = 0; // Alterado aqui
+  @Input() avaliacaoMedia: number = 0;
   @Input() resumoBanda: string = "";
   isPageBanda = false;
 
@@ -21,5 +20,15 @@ export class CardBandaComponent implements OnInit {
 
   getResumoLimitado(): string {
     return this.resumoBanda.length > 190 ? this.resumoBanda.substring(0, 190) + '...' : this.resumoBanda;
+  }
+
+  navigateToPageBanda(): void {
+    this.router.navigate(['/pagebanda'], {
+      queryParams: {
+        nomeBanda: this.nomeBanda,
+        avaliacaoMedia: this.avaliacaoMedia,
+        resumoBanda: this.resumoBanda
+      }
+    });
   }
 }
