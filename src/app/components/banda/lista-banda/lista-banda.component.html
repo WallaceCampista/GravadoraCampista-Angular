@@ -24,7 +24,7 @@
   <tbody class="table-group-divider">
     <tr *ngFor="let banda of bandas">
       <th scope="row">{{ banda.id }}</th>
-      <td class="linkbanda" routerLink="/pagebanda"><strong>{{ banda.nome }}</strong></td>
+      <td class="linkbanda" (click)="navigateToPageBanda(banda)"><strong>{{ banda.nome }}</strong></td>
       <td>{{ banda.resumo }}</td>
       <td>{{ banda.avaliacao | number:'1.1-1' }} <app-star></app-star></td>
       <td>{{ banda.albuns }}</td>

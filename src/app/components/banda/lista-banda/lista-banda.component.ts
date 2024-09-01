@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { BandaService } from 'src/app/service/servicos/banda.service';
 import { AdminService } from 'src/app/service/servicos/usuario/admin.service';
+import { Router } from '@angular/router';
 
 interface Banda {
   id: number;
@@ -21,7 +22,8 @@ export class ListaBandaComponent implements OnInit {
   currentSortColumn: string = '';
   isAscending: boolean = true;
 
-  constructor(private bandaService: BandaService, private adminService: AdminService) {}
+
+  constructor(private bandaService: BandaService, private adminService: AdminService, private router: Router) {}
 
   ngOnInit(): void {
     this.adminService.isAdmin$.subscribe(isAdmin => {
@@ -74,4 +76,15 @@ export class ListaBandaComponent implements OnInit {
       }
     });
   }
+
+  navigateToPageBanda(banda: any): void {
+    this.router.navigate(['/pagebanda'], {
+      queryParams: {
+        nomeBanda: banda.nome,
+        avaliacaoMedia: banda.avaliacao,
+        resumoBanda: banda.resumo
+      }
+    });
+  }
+
 }

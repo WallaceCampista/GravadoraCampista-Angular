@@ -15,7 +15,7 @@ export class CardBandaComponent implements OnInit {
   constructor(private router: Router) {}
 
   ngOnInit(): void {
-    this.isPageBanda = this.router.url === '/pagebanda';
+    this.isPageBanda = this.router.url.startsWith('/pagebanda');
   }
 
   getResumoLimitado(): string {
