@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, Input} from '@angular/core';
 
 @Component({
   selector: 'app-sucesso',
@@ -6,5 +6,5 @@ import { Component } from '@angular/core';
   styleUrl: './sucesso.component.scss'
 })
 export class SucessoComponent {
-
+  @Input() message: string = '';
 }

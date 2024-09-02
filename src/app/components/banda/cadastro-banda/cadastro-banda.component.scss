@@ -14,4 +14,9 @@
   display: flex;
   gap: 10px; /* Adjust as needed */
 }
-
+.alert-top-right {
+  position: fixed;
+  top: 110px; /* Ajuste conforme necessário */
+  right: 10px;
+  z-index: 1000;
+}

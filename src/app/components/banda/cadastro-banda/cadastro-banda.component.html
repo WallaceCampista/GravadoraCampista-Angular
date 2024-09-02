@@ -36,3 +36,6 @@
     </ng-template>
   </button>
 </div>
+
+<app-sucesso *ngIf="showSuccessAlert" [message]="alertMessage" class="alert-top-right"></app-sucesso>
+<app-error *ngIf="showErrorAlert" [message]="alertMessage" class="alert-top-right"></app-error>

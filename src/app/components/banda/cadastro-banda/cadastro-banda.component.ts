@@ -13,6 +13,10 @@ export class CadastroBandaComponent implements OnInit {
   form: FormGroup;
   @Output() bandRegistered = new EventEmitter<void>();
 
+  showSuccessAlert = false;
+  showErrorAlert = false;
+  alertMessage = '';
+
   constructor(private router: Router, private fb: FormBuilder, private bandaService: BandaService) {
     this.form = this.fb.group({
       nomeBanda: [''],
@@ -31,19 +35,35 @@ export class CadastroBandaComponent implements OnInit {
       this.bandaService.registerBand(band).subscribe(response => {
         this.isLoading = false;
         if (response.status === 201) {
-          console.log('Banda cadastrada com sucesso!');
+          this.alertMessage = 'Cadastro realizado com sucesso!';
+          this.showSuccessAlert = true;
+          this.showErrorAlert = false;
+          this.hideAlertsAfterDelay();
           this.bandRegistered.emit();
           this.router.navigate(['/banda']).then(() => {
             this.resetForm();
           });
         } else {
-          console.error('Erro ao cadastrar a banda:', response);
+          this.alertMessage = 'Erro ao cadastrar!';
+          this.showErrorAlert = true;
+          this.showSuccessAlert = false;
+          this.hideAlertsAfterDelay();
         }
       }, error => {
         this.isLoading = false;
-        console.error('Erro ao cadastrar a banda:', error);
+        this.alertMessage = 'Erro ao cadastrar!';
+        this.showErrorAlert = true;
+        this.showSuccessAlert = false;
+        this.hideAlertsAfterDelay();
       });
     }, 1000);
+  }
+
+  hideAlertsAfterDelay() {
+    setTimeout(() => {
+      this.showSuccessAlert = false;
+      this.showErrorAlert = false;
+    }, 3000);
   }
 
   resetForm() {
