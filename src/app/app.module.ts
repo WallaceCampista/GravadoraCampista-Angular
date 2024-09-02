@@ -44,6 +44,8 @@ import { PopupEditarComponent } from './components/acoes/popup/popup-editar/popu
 import { AvatarGreetingComponent } from './components/avatar-greeting/avatar-greeting.component';
 import { UsuarioViewComponent } from './views/usuario-view/usuario-view.component';
 import { ListarUsuarioComponent } from './components/usuario/listar-usuario/listar-usuario.component';
+import { SucessoComponent } from './components/alertas/sucesso/sucesso.component';
+import { ErrorComponent } from './components/alertas/error/error.component';
 
 @NgModule({
   declarations: [
@@ -80,6 +82,8 @@ import { ListarUsuarioComponent } from './components/usuario/listar-usuario/list
     AvatarGreetingComponent,
     UsuarioViewComponent,
     ListarUsuarioComponent,
+    SucessoComponent,
+    ErrorComponent,
   ],
   imports: [
     BrowserModule,

@@ -1,4 +1,3 @@
-<!-- src/app/components/login/loginbox/login.component.html -->
 <div class="container-fluid">
   <div class="row p-0">
     <form [formGroup]="form" (ngSubmit)="onSubmit($event)" class="p-0">
@@ -35,5 +34,8 @@
         </div>
       </div>
     </form>
+  </div>
+  <div *ngIf="errorMessage" class="position-fixed top-0 end-0 p-3" style="z-index: 1050;">
+    <app-error [message]="errorMessage"></app-error>
   </div>
 </div>
