@@ -34,10 +34,8 @@ export class NavbarComponent implements OnInit {
     event.preventDefault();
     this.authService.getAllUsers().subscribe({
       next: response => {
-        console.log('Usuários:', response);
       },
       error: error => {
-        console.error('Erro ao buscar usuários:', error);
       }
     });
   }

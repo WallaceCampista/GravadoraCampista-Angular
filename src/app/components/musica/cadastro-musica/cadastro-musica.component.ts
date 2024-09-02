@@ -1,7 +1,7 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { MusicaService } from 'src/app/service/servicos/musica.service';
+import { MusicaService } from 'src/app/service/servicos/formularios/musica.service';
 
 @Component({
   selector: 'app-cadastro-musica',
@@ -33,17 +33,14 @@ export class CadastroMusicaComponent implements OnInit {
       this.musicaService.registerMusic(music).subscribe(response => {
         this.isLoading = false;
         if (response.status === 201) {
-          console.log('Música cadastrada com sucesso!');
           this.musicRegistered.emit();
           this.router.navigate(['/musica']).then(() => {
             this.resetForm();
           });
         } else {
-          console.error('Erro ao cadastrar a música:', response);
         }
       }, error => {
         this.isLoading = false;
-        console.error('Erro ao cadastrar a música:', error);
       });
     }, 1000);
   }

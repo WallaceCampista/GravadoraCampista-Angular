@@ -40,7 +40,6 @@ export class ListarUsuarioComponent implements OnInit {
         }));
       },
       error: error => {
-        console.error('Erro ao buscar usuários:', error);
       }
     });
   }
@@ -49,10 +48,8 @@ deleteUser(id: number): void {
   this.authService.deleteUser(id).subscribe({
     next: () => {
       this.usuarios = this.usuarios.filter(usuario => usuario.id !== id);
-      console.log('Usuario deletado com sucesso!');
     },
     error: error => {
-      console.error('Erro ao deletar usuário:', error);
     }
   });
 }

@@ -1,7 +1,7 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { BandaService } from 'src/app/service/servicos/banda.service';
+import { BandaService } from 'src/app/service/servicos/formularios/banda.service';
 
 @Component({
   selector: 'app-cadastro-banda',

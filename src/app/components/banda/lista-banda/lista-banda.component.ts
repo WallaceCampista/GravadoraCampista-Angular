@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { BandaService } from 'src/app/service/servicos/banda.service';
+import { BandaService } from 'src/app/service/servicos/formularios/banda.service';
 import { AdminService } from 'src/app/service/servicos/usuario/admin.service';
 import { Router } from '@angular/router';
 
@@ -35,7 +35,6 @@ export class ListaBandaComponent implements OnInit {
 
   fetchAllBands(): void {
     this.bandaService.getAllBand().subscribe(data => {
-      console.log('Bandas:', data);
       this.bandas = data.map((item: any) => ({
         id: item.idBanda,
         nome: item.nomeBanda,
@@ -50,10 +49,8 @@ export class ListaBandaComponent implements OnInit {
     this.bandaService.deleteBand(id).subscribe({
       next: () => {
         this.bandas = this.bandas.filter(banda => banda.id !== id);
-        console.log('Banda deletada com sucesso!');
       },
       error: error => {
-        console.error('Erro ao deletar banda:', error);
       }
     });
   }

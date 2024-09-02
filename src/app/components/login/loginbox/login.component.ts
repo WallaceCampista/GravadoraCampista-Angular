@@ -46,7 +46,6 @@ export class LoginComponent {
         },
         error: (error) => {
           this.isLoading = false;
-          console.log('Headers:', error.headers);
           // this.errorMessage = error.headers.get('message')
           this.errorMessage = 'Usuário ou senha inválidos';
           this.form.reset();

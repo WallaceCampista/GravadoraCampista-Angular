@@ -1,11 +1,10 @@
-/* src/app/components/banda/cadastro-banda/cadastro-banda.component.scss */
 .horizontal-spacing {
   display: flex;
-  gap: 10px; /* Ajuste conforme necessário */
+  gap: 10px;
 }
 .form-control:focus {
-  border-color: green; /* Cor da borda ao focar */
-  box-shadow: 0 0 0 0.2rem rgba(0, 128, 0, 0.25); /* Ajuste conforme necessário */
+  border-color: green;
+  box-shadow: 0 0 0 0.2rem rgba(0, 128, 0, 0.25);
 }
 
 .btn-loading {
@@ -13,5 +12,5 @@
 }
 .form-row {
   display: flex;
-  gap: 10px; /* Adjust as needed */
+  gap: 10px;
 }

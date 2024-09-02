@@ -7,31 +7,25 @@ import { AuthService } from 'src/app/service/servicos/usuario/auth.service';
 @Injectable({
   providedIn: 'root'
 })
-export class AlbumService {
+export class MusicaService {
   private apiUrl = environment.apiUrl;
 
   constructor(private http: HttpClient, private authService: AuthService) {}
 
-  getAllAlbum(): Observable<any> {
-    let url: string = '/album/listar-albuns-completos/';
+  getAllMusic(): Observable<any> {
+    let url: string = '/musica/listar-musicas-completas/';
     const headers = this.authService.getAuthHeaders();
     return this.http.get<any>(this.apiUrl + url, { headers });
   }
 
-  registerAlbum(album: { idBanda:number; nomeAlbum: string; resumoAlbum: string }): Observable<HttpResponse<any>> {
-    let url: string = '/album/novo-registro/';
+  registerMusic(music: { idAlbum:number; nomeMusica: string; resumoMusica: string; duracao:number }): Observable<HttpResponse<any>> {
+    let url: string = '/musica/novo-registro/';
     const headers = this.authService.getAuthHeaders();
-    return this.http.post<any>(this.apiUrl + url, album, { headers, observe: 'response', responseType: 'text' as 'json' });
+    return this.http.post<any>(this.apiUrl + url, music, { headers, observe: 'response', responseType: 'text' as 'json' });
   }
 
-  getAlbumData(albumName: string): Observable<any> {
-    const url = `/album/${albumName}/`;
-    const headers = this.authService.getAuthHeaders();
-    return this.http.get(this.apiUrl + url, { headers });
-  }
-
-  deleteAlbum(id: number): Observable<any> {
-    const url = `/album/delete/${id}/`;
+  deleteMusic(id: number): Observable<any> {
+    const url = `/musica/delete/${id}/`;
     const headers = this.authService.getAuthHeaders();
     return this.http.delete(this.apiUrl + url, { headers, responseType: 'text' }).pipe(
       catchError(this.handleError)
@@ -48,7 +42,6 @@ export class AlbumService {
       // Server-side errors
       errorMessage = `Error Code: ${error.status}\nMessage: ${error.message}`;
     }
-    console.error(errorMessage);
     return throwError(errorMessage);
   }
 }

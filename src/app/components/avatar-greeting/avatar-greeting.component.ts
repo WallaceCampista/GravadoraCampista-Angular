@@ -1,4 +1,3 @@
-// src/app/components/avatar-greeting/avatar-greeting.component.ts
 import { Component, OnInit, HostListener } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
 import { UserService } from 'src/app/service/servicos/usuario/user.service';

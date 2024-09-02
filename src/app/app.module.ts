@@ -1,15 +1,15 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule, provideClientHydration } from '@angular/platform-browser';
 import { ReactiveFormsModule } from '@angular/forms';
-import { FormsModule } from '@angular/forms'; // Import FormsModule
+import { FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { provideHttpClient, withInterceptorsFromDi, withFetch } from '@angular/common/http'; // Atualizado para provideHttpClient
+import { provideHttpClient, withInterceptorsFromDi, withFetch } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { CardModule } from 'primeng/card';
 import { LoginComponent } from './components/login/loginbox/login.component';
-import { ButtonModule } from 'primeng/button'; // Atualizado para ButtonModule
+import { ButtonModule } from 'primeng/button';
 import { DividerModule } from 'primeng/divider';
 import { InputTextModule } from 'primeng/inputtext';
 import { CabecalhoComponent } from './components/cabecalho/cabecalho.component';
@@ -94,12 +94,12 @@ import { ErrorComponent } from './components/alertas/error/error.component';
     InputTextModule,
     FormsModule,
     ReactiveFormsModule,
-    ButtonModule, // Atualizado para ButtonModule
+    ButtonModule,
     RouterModule
   ],
   providers: [
     provideClientHydration(),
-    provideHttpClient(withInterceptorsFromDi(), withFetch()) // Atualizado para provideHttpClient
+    provideHttpClient(withInterceptorsFromDi(), withFetch())
   ],
   exports: [
     CabecalhoComponent,

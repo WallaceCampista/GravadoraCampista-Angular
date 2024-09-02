@@ -1,7 +1,7 @@
 import { Component, ViewChild, ElementRef, AfterViewInit, AfterViewChecked, ChangeDetectorRef, Input } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
-import { BandaService } from 'src/app/service/servicos/banda.service';
+import { BandaService } from 'src/app/service/servicos/formularios/banda.service';
 
 @Component({
   selector: 'app-popup-avaliar',
@@ -41,20 +41,16 @@ export class PopupAvaliarComponent implements AfterViewInit, AfterViewChecked {
     if (bandId !== undefined) {
       this.bandId = bandId;
     }
-    console.log('id da banda selecionada:', this.bandId);
   }
 
   avaliar() {
     const nota = this.form.get('nota')?.value;
-    console.log('avaliar banda com id bandId:', this.bandId, 'com nota:', nota);
     if (this.bandId && nota) {
       this.bandaService.avaliarBanda(this.bandId, nota).subscribe(
         response => {
-          console.log('Avaliação enviada com sucesso', response);
           this.toggleModal();
         },
         error => {
-          console.error('Erro ao enviar avaliação', error);
         }
       );
     }

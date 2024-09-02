@@ -52,14 +52,12 @@ export class AuthService {
       // Server-side errors
       errorMessage = `Error Code: ${error.status}\nMessage: ${error.message}`;
     }
-    console.error(errorMessage);
     return throwError(errorMessage);
   }
 
   getAuthHeaders(): HttpHeaders {
     const token = typeof localStorage !== 'undefined' ? localStorage.getItem('token') : null;
     if (!token) {
-      console.error('Token not found in localStorage');
     }
     return new HttpHeaders({
       'Authorization': token ? `Bearer ${token}` : ''

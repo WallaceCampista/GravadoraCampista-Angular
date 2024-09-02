@@ -1,4 +1,3 @@
-// src/app/service/servicos/banda.service.ts
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse, HttpHeaders, HttpResponse } from '@angular/common/http';
 import { catchError, Observable, throwError } from 'rxjs';
@@ -64,7 +63,6 @@ export class BandaService {
       // Server-side errors
       errorMessage = `Error Code: ${error.status}\nMessage: ${error.message}`;
     }
-    console.error(errorMessage);
     return throwError(errorMessage);
   }
 }

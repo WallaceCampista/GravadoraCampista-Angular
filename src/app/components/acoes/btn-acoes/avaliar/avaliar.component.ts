@@ -7,6 +7,4 @@ import { Component, Input } from '@angular/core';
 })
 export class AvaliarComponent {
   @Input() bandId!: number;
-
-  // Other component logic
 }

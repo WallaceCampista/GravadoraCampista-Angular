@@ -1,5 +1,5 @@
 import { Component, AfterViewInit, Input, OnChanges, SimpleChanges } from '@angular/core';
-import { AlbumService } from 'src/app/service/servicos/album.service';
+import { AlbumService } from 'src/app/service/servicos/formularios/album.service';
 
 @Component({
   selector: 'app-acordeon-albuns-banda',
@@ -90,7 +90,6 @@ export class AcordeonAlbunsBandaComponent implements AfterViewInit, OnChanges {
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['albuns']) {
-      console.log('Álbuns recebidos no componente:', this.albuns);
     }
   }
 }

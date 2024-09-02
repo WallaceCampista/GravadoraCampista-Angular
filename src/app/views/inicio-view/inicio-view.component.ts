@@ -1,6 +1,5 @@
-// src/app/views/inicio-view/inicio-view.component.ts
 import { Component, OnInit } from '@angular/core';
-import { BandaService } from 'src/app/service/servicos/banda.service';
+import { BandaService } from 'src/app/service/servicos/formularios/banda.service';
 
 @Component({
   selector: 'app-inicio-view',
@@ -18,7 +17,6 @@ export class InicioViewComponent implements OnInit {
         this.top3Bands = bands;
       },
       error: error => {
-        console.error('Erro ao buscar as top 3 bandas:', error);
       }
     });
   }

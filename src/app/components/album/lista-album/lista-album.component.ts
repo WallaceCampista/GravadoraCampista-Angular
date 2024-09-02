@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { AlbumService } from 'src/app/service/servicos/album.service';
+import { AlbumService } from 'src/app/service/servicos/formularios/album.service';
 import { AdminService } from 'src/app/service/servicos/usuario/admin.service';
 
 interface Album {
@@ -35,7 +35,6 @@ export class ListaAlbumComponent implements OnInit {
 
   fetchAllAlbums(): void {
     this.albumService.getAllAlbum().subscribe(data => {
-      console.log('Álbuns:', data);
       this.albuns = data.map((item: any) => ({
         id: item.idAlbum,
         nome: item.nomeAlbum,
@@ -52,10 +51,8 @@ export class ListaAlbumComponent implements OnInit {
     this.albumService.deleteAlbum(id).subscribe({
       next: () => {
         this.albuns = this.albuns.filter(album => album.id !== id);
-        console.log('Álbum deletado com sucesso!');
       },
       error: error => {
-        console.error('Erro ao deletar álbum:', error);
       }
     });
   }

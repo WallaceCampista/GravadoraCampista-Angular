@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { MusicaService } from 'src/app/service/servicos/musica.service';
+import { MusicaService } from 'src/app/service/servicos/formularios/musica.service';
 import { AdminService } from 'src/app/service/servicos/usuario/admin.service';
 
 interface Musica {
@@ -35,7 +35,6 @@ export class ListarMusicaComponent implements OnInit {
 
   fetchAllMusic(): void {
     this.musicaService.getAllMusic().subscribe(data => {
-      console.log('Músicas:', data);
       this.musicas = data.map((item: any) => ({
         id: item.idMusica,
         nome: item.nomeMusica,
@@ -52,10 +51,8 @@ export class ListarMusicaComponent implements OnInit {
     this.musicaService.deleteMusic(id).subscribe({
       next: () => {
         this.musicas = this.musicas.filter(musica => musica.id !== id);
-        console.log('Música deletada com sucesso!');
       },
       error: error => {
-        console.error('Erro ao deletar música:', error);
       }
     });
   }

@@ -51,7 +51,6 @@ export class PopupEditarComponent implements OnInit {
   }
 
   saveChanges() {
-    console.log(this.editForm.value);
     this.toggleModal('');
   }
 }
