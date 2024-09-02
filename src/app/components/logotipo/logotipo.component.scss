@@ -16,3 +16,9 @@
   height: 30px; /* Ajuste o tamanho conforme necessário */
   filter: brightness(0) invert(0.5); /* Torna o ícone cinza */
 }
+
+#icon:hover {
+  cursor: pointer;
+  transition: 2s;
+  filter: brightness(0) invert(1); /* Torna o ícone branco */
+}
