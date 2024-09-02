@@ -4,6 +4,7 @@ import {HttpClient, HttpErrorResponse, HttpHeaders} from '@angular/common/http';
 import {catchError, Observable, throwError} from 'rxjs';
 import { UserService } from './user.service';
 import { environment } from 'src/environments/environment';
+import {Router} from "@angular/router";
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +12,7 @@ import { environment } from 'src/environments/environment';
 export class AuthService {
   private apiUrl = environment.apiUrl;
 
-  constructor(private http: HttpClient, private userService: UserService) {}
+  constructor(private http: HttpClient, private router: Router, private userService: UserService) {}
 
   login(username: string, password: string): Observable<any> {
     let url: string = '/usuarios/post/login/';
@@ -62,5 +63,15 @@ export class AuthService {
     return new HttpHeaders({
       'Authorization': token ? `Bearer ${token}` : ''
     });
+  }
+
+  isTokenValid(token: string): boolean {
+    try {
+      const payload = JSON.parse(atob(token.split('.')[1]));
+      const isExpired = payload.exp < Date.now() / 1000;
+      return !isExpired;
+    } catch (e) {
+      return false;
+    }
   }
 }
