@@ -11,6 +11,7 @@ interface Album {
   banda: string;
   musicas: number;
   idBanda: number;
+  capa: string; // "" = sem capa
 }
 
 @Component({
@@ -44,7 +45,8 @@ export class ListaAlbumComponent implements OnInit {
         avaliacao: item.avaliacaoMedia,
         banda: item.banda.nomeBanda,
         musicas: item.musicas.length,
-        idBanda: item.banda.bandaId
+        idBanda: item.banda.bandaId,
+        capa: item.capaArquivo ?? ''
       }));
     });
   }

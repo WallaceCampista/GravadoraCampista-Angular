@@ -11,6 +11,7 @@ export class CardBandaViewComponent implements OnInit {
   nomeBanda: string = '';
   avaliacaoMedia: number = 0;
   resumoBanda: string = '';
+  fotoArquivo: string | null = null;
   albuns: any[] = [];
 
   constructor(private route: ActivatedRoute, private router: Router, private bandaService: BandaService) {}
@@ -29,6 +30,7 @@ export class CardBandaViewComponent implements OnInit {
         this.nomeBanda = banda.nomeBanda;
         this.avaliacaoMedia = banda.avaliacaoMedia;
         this.resumoBanda = banda.resumoBanda;
+        this.fotoArquivo = banda.fotoArquivo;
         this.albuns = banda.albuns;
       });
     });

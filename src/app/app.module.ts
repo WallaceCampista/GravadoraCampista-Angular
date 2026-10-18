@@ -43,6 +43,8 @@ import { SucessoComponent } from './components/alertas/sucesso/sucesso.component
 import { ErrorComponent } from './components/alertas/error/error.component';
 import { AuthInterceptor } from './interceptors/auth.interceptor';
 import { DuracaoPipe } from './pipes/duracao.pipe';
+import { CapaComponent } from './components/imagem/capa/capa.component';
+import { EditarImagemComponent } from './components/imagem/editar-imagem/editar-imagem.component';
 
 @NgModule({
   declarations: [
@@ -82,6 +84,8 @@ import { DuracaoPipe } from './pipes/duracao.pipe';
     SucessoComponent,
     ErrorComponent,
     DuracaoPipe,
+    CapaComponent,
+    EditarImagemComponent,
   ],
   imports: [
     BrowserModule,

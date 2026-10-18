@@ -44,6 +44,19 @@ export class AlbumService {
   }
 
 
+  // A imagem vai no campo "arquivo" de um formulário multipart (o navegador define o Content-Type)
+  enviarCapa(id: number, arquivo: File): Observable<string> {
+    const url = `/album/capa/${id}/`;
+    const formulario = new FormData();
+    formulario.append('arquivo', arquivo);
+    return this.http.post(this.apiUrl + url, formulario, { responseType: 'text' });
+  }
+
+  removerCapa(id: number): Observable<string> {
+    const url = `/album/capa/${id}/`;
+    return this.http.delete(this.apiUrl + url, { responseType: 'text' });
+  }
+
   private handleError(error: HttpErrorResponse): Observable<never> {
     let errorMessage = 'Unknown error!';
     if (error.error instanceof ErrorEvent) {

@@ -51,6 +51,19 @@ export class BandaService {
     );
   }
 
+  // A imagem vai no campo "arquivo" de um formulário multipart (o navegador define o Content-Type)
+  enviarFoto(id: number, arquivo: File): Observable<string> {
+    const url = `/banda/foto/${id}/`;
+    const formulario = new FormData();
+    formulario.append('arquivo', arquivo);
+    return this.http.post(this.apiUrl + url, formulario, { responseType: 'text' });
+  }
+
+  removerFoto(id: number): Observable<string> {
+    const url = `/banda/foto/${id}/`;
+    return this.http.delete(this.apiUrl + url, { responseType: 'text' });
+  }
+
   private handleError(error: HttpErrorResponse): Observable<never> {
     let errorMessage = 'Unknown error!';
     if (error.error instanceof ErrorEvent) {

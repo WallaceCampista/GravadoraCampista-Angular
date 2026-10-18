@@ -30,6 +30,8 @@ export class PopupEditarComponent {
   editForm: FormGroup;
   isSaving = false;
   errorMessage: string | null = null;
+  // Algo foi salvo (campos ou imagem) desde que o popup abriu
+  alterado = false;
   bandas: any[] = [];
   albuns: any[] = [];
 
@@ -63,10 +65,15 @@ export class PopupEditarComponent {
     return TITULOS[this.tipo];
   }
 
+  get tipoImagem(): 'banda' | 'album' | null {
+    return this.tipo === 'banda' || this.tipo === 'album' ? this.tipo : null;
+  }
+
   // Abre o formulário já preenchido com os dados atuais do item da tabela
   abrir(tipo: TipoEdicao, item: any) {
     this.tipo = tipo;
     this.item = item;
+    this.alterado = false;
     this.errorMessage = null;
     this.editForm.reset({ isAdmin: false });
 
@@ -95,8 +102,13 @@ export class PopupEditarComponent {
     this.showModal = true;
   }
 
+  // Recarregar a lista recria as linhas da tabela (e este popup junto); por isso só avisa ao fechar
   fechar() {
     this.showModal = false;
+    if (this.alterado) {
+      this.alterado = false;
+      this.salvo.emit();
+    }
   }
 
   saveChanges() {
@@ -149,8 +161,8 @@ export class PopupEditarComponent {
     requisicao.subscribe({
       next: () => {
         this.isSaving = false;
+        this.alterado = true;
         this.fechar();
-        this.salvo.emit();
       },
       error: (error: HttpErrorResponse) => {
         this.isSaving = false;

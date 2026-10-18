@@ -9,6 +9,7 @@ interface Banda {
   resumo: string;
   avaliacao: number;
   albuns: number;
+  foto: string; // "" = sem foto
 }
 
 @Component({
@@ -40,7 +41,8 @@ export class ListaBandaComponent implements OnInit {
         nome: item.nomeBanda,
         resumo: item.resumoBanda,
         avaliacao: item.avaliacaoMedia,
-        albuns: item.albuns.length
+        albuns: item.albuns.length,
+        foto: item.fotoArquivo ?? ''
       }));
     });
   }

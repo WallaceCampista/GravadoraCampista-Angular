@@ -4,6 +4,7 @@
       <div *ngFor="let album of albuns" class="accordion-item">
         <h2 class="accordion-header">
           <button class="accordion-button" [class.collapsed]="albumAberto !== album.albumId" type="button" [attr.aria-expanded]="albumAberto === album.albumId" [attr.aria-controls]="'collapse' + album.albumId" (click)="alternarAlbum(album.albumId)">
+            <app-capa class="capa-mini" [arquivo]="album.capaArquivo" [nome]="album.nomeAlbum"></app-capa>
             <strong>{{ album.nomeAlbum }}</strong>
           </button>
         </h2>

@@ -1,0 +1,6 @@
+<img *ngIf="url; else reserva" [src]="url" [alt]="nome" (error)="falhou = true" loading="lazy">
+<ng-template #reserva>
+  <div class="reserva" [style.background]="fundo" role="img" [attr.aria-label]="nome">
+    <span>{{ iniciais }}</span>
+  </div>
+</ng-template>

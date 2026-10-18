@@ -118,6 +118,7 @@
           </div>
         </div>
         </form>
+        <app-editar-imagem *ngIf="tipoImagem as tipoImg" [tipo]="tipoImg" [id]="item.id" [arquivo]="tipoImg === 'banda' ? item.foto : item.capa" [nome]="item.nome" (alterada)="alterado = true"></app-editar-imagem>
         <app-error *ngIf="errorMessage" [message]="errorMessage"></app-error>
       </div>
       <div class="modal-footer">

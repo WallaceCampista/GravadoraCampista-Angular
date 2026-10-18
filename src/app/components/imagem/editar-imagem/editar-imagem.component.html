@@ -1,0 +1,16 @@
+<div class="editar-imagem">
+  <app-capa class="previa" [class.redonda]="tipo === 'banda'" [arquivo]="arquivo" [src]="previa" [nome]="nome"></app-capa>
+  <div class="acoes">
+    <span>{{ rotulo }}</span>
+    <input #seletor type="file" [accept]="tiposAceitos" hidden (change)="escolher(seletor)">
+    <div class="botoes">
+      <button type="button" class="btn btn-sm btn-dark" (click)="seletor.click()" [disabled]="enviando">
+        {{ enviando ? 'Enviando...' : (temImagem ? 'Trocar imagem' : 'Enviar imagem') }}
+      </button>
+      <button type="button" class="btn btn-sm btn-outline-danger" *ngIf="temImagem" (click)="remover()" [disabled]="enviando">Remover</button>
+    </div>
+    <small class="text-success" *ngIf="mensagem">{{ mensagem }}</small>
+    <small class="text-danger" *ngIf="erro">{{ erro }}</small>
+    <small class="dica">JPG, PNG ou WebP, até {{ limiteMb }} MB</small>
+  </div>
+</div>

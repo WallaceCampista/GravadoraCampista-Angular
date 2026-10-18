@@ -11,6 +11,7 @@ export class CardBandaComponent implements OnInit {
   @Input() nomeBanda: string = "";
   @Input() avaliacaoMedia: number = 0;
   @Input() resumoBanda: string = "";
+  @Input() fotoArquivo: string | null = null;
   isPageBanda = false;
 
   constructor(private router: Router) {}

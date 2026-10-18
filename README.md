@@ -33,7 +33,7 @@ Gera o site em `dist/gravadora-campista` e pré-renderiza as rotas públicas. O 
 | `/login` | todos | Login |
 | `/cadastro` | todos | Cadastro de usuário (a senha precisa de 8+ caracteres, com maiúscula, minúscula, número e símbolo) |
 | `/home` | logado | TOP 3 bandas pela média das avaliações |
-| `/banda`, `/album`, `/musica` | logado | Cadastro e lista; todos avaliam, só o admin edita e apaga |
+| `/banda`, `/album`, `/musica` | logado | Cadastro e lista; todos avaliam, só o admin edita, apaga e troca a foto da banda ou a capa do álbum |
 | `/pagebanda?idBanda=…` | logado | Página da banda com os álbuns e as faixas |
 | `/usuario` | admin | Lista, edita e apaga usuários |
 
@@ -42,3 +42,12 @@ Gera o site em `dist/gravadora-campista` e pré-renderiza as rotas públicas. O 
 - O login guarda o token JWT e o nome no `localStorage`; o status de admin é lido do próprio token. Recarregar a página (F5) mantém a sessão.
 - O `AuthInterceptor` (`src/app/interceptors`) envia o token em toda chamada à API. Se a API responder `403` (token vencido ou inválido), a sessão é encerrada e a tela volta para o login com o aviso de sessão expirada.
 - O `AuthGuard` exige login nas rotas internas e o `AdminGuard` protege `/usuario`.
+
+## Imagens
+
+- O componente `app-capa` (`src/app/components/imagem/capa`) mostra a foto da banda ou a capa do álbum.
+  - A API devolve só o nome do arquivo (`fotoArquivo`/`capaArquivo`), e a função `urlMidia` (`src/app/utils/midia.ts`) monta o endereço `/midia/<arquivo>`.
+  - Sem imagem, ou se ela não carregar, o componente mostra um quadro colorido com as iniciais. A cor sai do nome, então se repete a cada visita.
+- No popup de edição de banda e de álbum, o admin envia, troca ou remove a imagem (`app-editar-imagem`).
+  - O envio acontece na hora, separado do botão "Salvar".
+  - Tipo (JPG, PNG ou WebP) e tamanho (até 5 MB) são conferidos antes de enviar; a API confere de novo.

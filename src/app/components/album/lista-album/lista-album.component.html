@@ -32,7 +32,7 @@
   <tbody class="table-group-divider">
     <tr *ngFor="let album of albuns">
       <th scope="row">{{ album.id }}</th>
-      <td>{{ album.nome }}</td>
+      <td><span class="nome-com-imagem"><app-capa class="miniatura" [arquivo]="album.capa" [nome]="album.nome"></app-capa>{{ album.nome }}</span></td>
       <td>{{ album.resumo }}</td>
       <td>{{ album.duracao | duracao }}</td>
       <td>{{ album.avaliacao | number:'1.1-1' }} <app-star></app-star></td>
