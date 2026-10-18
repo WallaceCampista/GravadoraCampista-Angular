@@ -7,6 +7,10 @@
       </div>
       <div class="modal-body">
         <p>Que nota deseja atribuir (0 a 10)?</p>
+        <p class="sua-nota" *ngIf="minhaNota !== null">
+          Sua nota atual: {{ minhaNota | number:'1.0-1' }} <app-star></app-star><br>
+          <small>Cada pessoa tem uma nota só: avaliar de novo substitui a anterior.</small>
+        </p>
         <div class="align-self-center"></div>
         <form [formGroup]="form" (ngSubmit)="avaliar()">
           <div class="form-floating mx-auto">
@@ -19,7 +23,7 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" (click)="fechar()">Fechar</button>
-        <button type="button" class="btn btn-success" (click)="avaliar()" [disabled]="isSaving || !!successMessage">Avaliar</button>
+        <button type="button" class="btn btn-success" (click)="avaliar()" [disabled]="isSaving || !!successMessage">{{ minhaNota === null ? 'Avaliar' : 'Trocar nota' }}</button>
       </div>
     </div>
   </div>

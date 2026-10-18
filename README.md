@@ -14,7 +14,7 @@ npm ci
 npm start
 ```
 
-Abra `http://localhost:4200` e entre com o admin padrão da API: usuário `admin`, senha `Admin@123`. Com o banco vazio, a API já cria bandas, álbuns e músicas de exemplo.
+Abra `http://localhost:4200` e entre com o admin padrão da API: usuário `admin`, senha `Admin@123`. Com o banco vazio, a API já cria bandas, álbuns e músicas de exemplo, avaliados por 3 usuários comuns: `ana.lima`, `bruno.costa` e `carla.souza`, com a senha `Ouvinte@123`.
 
 O endereço da API fica em `src/environments/environment.ts` (desenvolvimento) e `src/environments/environment-prod.ts` (build de produção).
 
@@ -33,7 +33,7 @@ Gera o site em `dist/gravadora-campista` e pré-renderiza as rotas públicas. O 
 | `/login` | todos | Login |
 | `/cadastro` | todos | Cadastro de usuário (a senha precisa de 8+ caracteres, com maiúscula, minúscula, número e símbolo) |
 | `/home` | logado | TOP 3 bandas pela média das avaliações |
-| `/banda`, `/album`, `/musica` | logado | Cadastro e lista; todos avaliam, só o admin edita, apaga e troca a foto da banda ou a capa do álbum |
+| `/banda`, `/album`, `/musica` | logado | Cadastro e lista; todos avaliam (uma nota por pessoa, que pode ser trocada), só o admin edita, apaga e troca a foto da banda ou a capa do álbum |
 | `/pagebanda?idBanda=…` | logado | Página da banda com os álbuns e as faixas |
 | `/usuario` | admin | Lista, edita e apaga usuários |
 
@@ -42,6 +42,11 @@ Gera o site em `dist/gravadora-campista` e pré-renderiza as rotas públicas. O 
 - O login guarda o token JWT e o nome no `localStorage`; o status de admin é lido do próprio token. Recarregar a página (F5) mantém a sessão.
 - O `AuthInterceptor` (`src/app/interceptors`) envia o token em toda chamada à API. Se a API responder `403` (token vencido ou inválido), a sessão é encerrada e a tela volta para o login com o aviso de sessão expirada.
 - O `AuthGuard` exige login nas rotas internas e o `AdminGuard` protege `/usuario`.
+
+## Avaliações
+
+- Cada usuário tem uma nota por banda, álbum ou música, e avaliar de novo substitui a anterior.
+- Ao abrir, o popup de avaliar (`popup-avaliar`) busca a nota do usuário logado em `/<tipo>/minha-avaliacao/<id>/`. Se já existe, mostra "Sua nota atual", preenche o campo e o botão vira "Trocar nota".
 
 ## Imagens
 

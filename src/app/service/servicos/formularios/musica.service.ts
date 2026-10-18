@@ -31,6 +31,12 @@ export class MusicaService {
     return this.http.post(this.apiUrl + url, {nota}, {responseType: 'text'});
   }
 
+  // Nota que o usuário logado já deu (null se ainda não avaliou)
+  minhaAvaliacaoMusica(id: number): Observable<{ nota: number | null }> {
+    const url = `/musica/minha-avaliacao/${id}/`;
+    return this.http.get<{ nota: number | null }>(this.apiUrl + url);
+  }
+
   deleteMusic(id: number): Observable<any> {
     const url = `/musica/delete/${id}/`;
     return this.http.delete(this.apiUrl + url, { responseType: 'text' }).pipe(

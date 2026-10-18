@@ -36,6 +36,12 @@ export class AlbumService {
     return this.http.post(this.apiUrl + url, {nota}, {responseType: 'text'});
   }
 
+  // Nota que o usuário logado já deu (null se ainda não avaliou)
+  minhaAvaliacaoAlbum(id: number): Observable<{ nota: number | null }> {
+    const url = `/album/minha-avaliacao/${id}/`;
+    return this.http.get<{ nota: number | null }>(this.apiUrl + url);
+  }
+
   deleteAlbum(id: number): Observable<any> {
     const url = `/album/delete/${id}/`;
     return this.http.delete(this.apiUrl + url, { responseType: 'text' }).pipe(

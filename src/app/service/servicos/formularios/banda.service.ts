@@ -33,6 +33,12 @@ export class BandaService {
     return this.http.post(this.apiUrl + url, {nota}, {responseType: 'text'});
   }
 
+  // Nota que o usuário logado já deu (null se ainda não avaliou)
+  minhaAvaliacaoBanda(id: number): Observable<{ nota: number | null }> {
+    const url = `/banda/minha-avaliacao/${id}/`;
+    return this.http.get<{ nota: number | null }>(this.apiUrl + url);
+  }
+
   updateBand(id: number, band: { nomeBanda: string; resumoBanda: string }): Observable<string> {
     const url = `/banda/update/${id}/`;
     return this.http.put(this.apiUrl + url, band, { responseType: 'text' });

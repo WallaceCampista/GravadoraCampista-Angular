@@ -25,6 +25,8 @@ export class PopupAvaliarComponent implements AfterViewChecked {
   isSaving = false;
   errorMessage: string | null = null;
   successMessage: string | null = null;
+  // Nota que o usuário já deu a este item; avaliar de novo substitui
+  minhaNota: number | null = null;
   private focarNota = false;
 
   constructor(
@@ -44,8 +46,38 @@ export class PopupAvaliarComponent implements AfterViewChecked {
     this.form.reset();
     this.errorMessage = null;
     this.successMessage = null;
+    this.minhaNota = null;
     this.showModal = true;
     this.focarNota = true;
+    this.carregarMinhaNota(tipo, id);
+  }
+
+  private carregarMinhaNota(tipo: TipoAvaliacao, id: number) {
+    let requisicao: Observable<{ nota: number | null }>;
+    if (tipo === 'album') {
+      requisicao = this.albumService.minhaAvaliacaoAlbum(id);
+    } else if (tipo === 'musica') {
+      requisicao = this.musicaService.minhaAvaliacaoMusica(id);
+    } else {
+      requisicao = this.bandaService.minhaAvaliacaoBanda(id);
+    }
+
+    requisicao.subscribe({
+      next: ({ nota }) => {
+        // Ignora a resposta se o popup já foi aberto para outro item
+        if (this.tipo !== tipo || this.id !== id || nota === null) {
+          return;
+        }
+        this.minhaNota = nota;
+        // Já preenche com a nota atual, sem apagar o que a pessoa começou a digitar
+        const campo = this.form.get('nota');
+        if (campo && (campo.value === null || campo.value === '')) {
+          campo.setValue(nota);
+        }
+      },
+      // Sem a nota anterior o popup funciona do mesmo jeito
+      error: () => {}
+    });
   }
 
   // O campo só existe depois que o *ngIf desenha o modal
@@ -82,7 +114,7 @@ export class PopupAvaliarComponent implements AfterViewChecked {
     requisicao.subscribe({
       next: () => {
         this.isSaving = false;
-        this.successMessage = 'Avaliação registrada!';
+        this.successMessage = this.minhaNota === null ? 'Avaliação registrada!' : 'Sua nota foi atualizada!';
         // Só avisa a tabela depois de fechar: recarregar a lista recria esta linha
         setTimeout(() => {
           this.fechar();

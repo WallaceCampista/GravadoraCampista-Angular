@@ -54,6 +54,11 @@
   outline: none; /* Remove default outline */
 }
 
+.sua-nota {
+  color: rgb(25, 134, 83);
+  small { color: #404040; font-weight: normal; }
+}
+
 .label-large {
   font-size: 1.5rem; /* Ajuste o valor conforme necessário */
 }
