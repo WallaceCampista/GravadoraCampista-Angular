@@ -19,10 +19,10 @@
                 </tr>
               </thead>
               <tbody class="table-group-divider">
-                <tr *ngFor="let musica of albumData[album.nomeAlbum]">
-                  <td>{{ musica.musicaId }}</td>
+                <tr *ngFor="let musica of albumData[album.nomeAlbum]; let i = index">
+                  <td>{{ i + 1 }}</td>
                   <td>{{ musica.nomeMusica }}</td>
-                  <td>{{ (musica.duracao / 60) | number:'1.2-2' }} <strong>mim</strong></td>
+                  <td>{{ (musica.duracao / 60) | number:'1.2-2' }} <strong>min</strong></td>
                   <td>{{ musica.avaliacaoMedia }} <app-star></app-star></td>
                 </tr>
               </tbody>

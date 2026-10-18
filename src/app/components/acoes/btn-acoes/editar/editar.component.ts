@@ -1,28 +1,18 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { PopupEditarComponent } from '../../popup/popup-editar/popup-editar.component'; // Corrigir o caminho do módulo
+import { Component, EventEmitter, Input, Output, ViewChild } from '@angular/core';
+import { PopupEditarComponent, TipoEdicao } from '../../popup/popup-editar/popup-editar.component';
 
 @Component({
   selector: 'app-editar',
   templateUrl: './editar.component.html',
   styleUrls: ['./editar.component.scss']
 })
-export class EditarComponent implements OnInit {
+export class EditarComponent {
   @ViewChild('popupEditar') popupEditar!: PopupEditarComponent;
-  tipo: string = '';
-
-  constructor(private route: ActivatedRoute) {}
-
-  ngOnInit() {
-    this.route.url.subscribe(url => {
-      const path = url[0].path;
-      if (path === 'banda' || path === 'album' || path === 'musica') {
-        this.tipo = path;
-      }
-    });
-  }
+  @Input() tipo: TipoEdicao = 'banda';
+  @Input() item: any;
+  @Output() salvo = new EventEmitter<void>();
 
   openPopup() {
-    this.popupEditar.toggleModal(this.tipo);
+    this.popupEditar.abrir(this.tipo, this.item);
   }
 }

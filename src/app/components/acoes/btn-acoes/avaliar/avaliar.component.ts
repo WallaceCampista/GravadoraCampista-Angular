@@ -1,4 +1,5 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { TipoAvaliacao } from '../../popup/popup-avaliar/popup-avaliar.component';
 
 @Component({
   selector: 'app-avaliar',
@@ -6,5 +7,7 @@ import { Component, Input } from '@angular/core';
   styleUrls: ['./avaliar.component.scss']
 })
 export class AvaliarComponent {
-  @Input() bandId!: number;
+  @Input() id!: number;
+  @Input() tipo: TipoAvaliacao = 'banda';
+  @Output() avaliado = new EventEmitter<void>();
 }

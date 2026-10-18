@@ -30,9 +30,12 @@ export class BandaService {
 
   avaliarBanda(id: number, nota: number): Observable<any> {
     const url = `/banda/avaliar-banda/${id}/`;
-    return this.http.post(this.apiUrl + url, {nota}, {responseType: 'text'}).pipe(
-      catchError(this.handleError)
-    );
+    return this.http.post(this.apiUrl + url, {nota}, {responseType: 'text'});
+  }
+
+  updateBand(id: number, band: { nomeBanda: string; resumoBanda: string }): Observable<string> {
+    const url = `/banda/update/${id}/`;
+    return this.http.put(this.apiUrl + url, band, { responseType: 'text' });
   }
 
   getBandaData(nomeBanda: string): Observable<any> {

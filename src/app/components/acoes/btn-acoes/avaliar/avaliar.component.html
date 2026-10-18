@@ -1,6 +1,6 @@
-<button class="avaliar-button" (click)="popupAvaliar.toggleModal(bandId)">
+<button class="avaliar-button" (click)="popupAvaliar.abrir(tipo, id)">
   <i class="fa fa-star"></i>
   <span class="avaliar-label">Avaliar</span>
 </button>
 
-<app-popup-avaliar #popupAvaliar></app-popup-avaliar>
+<app-popup-avaliar #popupAvaliar (avaliado)="avaliado.emit()"></app-popup-avaliar>

@@ -21,6 +21,16 @@ export class MusicaService {
     return this.http.post<any>(this.apiUrl + url, music, { observe: 'response', responseType: 'text' as 'json' });
   }
 
+  updateMusic(id: number, music: { idAlbum: number; nomeMusica: string; resumoMusica: string; duracao: number }): Observable<string> {
+    const url = `/musica/update/${id}/`;
+    return this.http.put(this.apiUrl + url, music, { responseType: 'text' });
+  }
+
+  avaliarMusica(id: number, nota: number): Observable<string> {
+    const url = `/musica/avaliar-musica/${id}/`;
+    return this.http.post(this.apiUrl + url, {nota}, {responseType: 'text'});
+  }
+
   deleteMusic(id: number): Observable<any> {
     const url = `/musica/delete/${id}/`;
     return this.http.delete(this.apiUrl + url, { responseType: 'text' }).pipe(

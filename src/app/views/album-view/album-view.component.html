@@ -5,11 +5,11 @@
 
   <div class="centered-div">
     <div>
-      <app-cadastro-album></app-cadastro-album>
+      <app-cadastro-album (albumRegistered)="lista.fetchAllAlbums()"></app-cadastro-album>
     </div>
     <br>
     <div class="table">
-      <app-lista-album></app-lista-album>
+      <app-lista-album #lista></app-lista-album>
     </div>
   </div>
 </div>

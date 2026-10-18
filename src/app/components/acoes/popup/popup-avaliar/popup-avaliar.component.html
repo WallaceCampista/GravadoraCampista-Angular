@@ -3,21 +3,23 @@
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title">Avaliação</h5>
-        <button type="button" class="btn-close" (click)="toggleModal()" aria-label="Close"></button>
+        <button type="button" class="btn-close" (click)="fechar()" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <p>Que nota deseja atribuir ?</p>
+        <p>Que nota deseja atribuir (0 a 10)?</p>
         <div class="align-self-center"></div>
-        <form [formGroup]="form">
+        <form [formGroup]="form" (ngSubmit)="avaliar()">
           <div class="form-floating mx-auto">
-            <input #notaInput class="form-control" formControlName="nota" id="nota" placeholder="Nota:" type="text"/>
+            <input #notaInput class="form-control" formControlName="nota" id="nota" placeholder="Nota:" type="number" min="0" max="10" step="0.5"/>
             <label for="nota" class="label-large">Nota: </label> <app-star></app-star>
           </div>
         </form>
+        <app-error *ngIf="errorMessage" [message]="errorMessage"></app-error>
+        <app-sucesso *ngIf="successMessage" [message]="successMessage"></app-sucesso>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" (click)="toggleModal()">Fechar</button>
-        <button type="button" class="btn btn-success" (click)="avaliar()">Avaliar</button>
+        <button type="button" class="btn btn-secondary" (click)="fechar()">Fechar</button>
+        <button type="button" class="btn btn-success" (click)="avaliar()" [disabled]="isSaving || !!successMessage">Avaliar</button>
       </div>
     </div>
   </div>

@@ -2,6 +2,7 @@ import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { BandaService } from 'src/app/service/servicos/formularios/banda.service';
+import { extrairMensagemErro } from 'src/app/utils/mensagem-erro';
 
 @Component({
   selector: 'app-cadastro-banda',
@@ -29,6 +30,14 @@ export class CadastroBandaComponent implements OnInit {
   }
 
   onRegister() {
+    if (!this.form.value.nomeBanda || !this.form.value.resumoBanda) {
+      this.alertMessage = 'Preencha todos os campos.';
+      this.showErrorAlert = true;
+      this.showSuccessAlert = false;
+      this.hideAlertsAfterDelay();
+      return;
+    }
+
     this.isLoading = true;
     setTimeout(() => {
       const band = this.form.value;
@@ -51,7 +60,7 @@ export class CadastroBandaComponent implements OnInit {
         }
       }, error => {
         this.isLoading = false;
-        this.alertMessage = 'Erro ao cadastrar!';
+        this.alertMessage = extrairMensagemErro(error, 'Erro ao cadastrar!');
         this.showErrorAlert = true;
         this.showSuccessAlert = false;
         this.hideAlertsAfterDelay();

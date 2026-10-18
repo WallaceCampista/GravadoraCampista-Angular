@@ -26,6 +26,16 @@ export class AlbumService {
     return this.http.get(this.apiUrl + url);
   }
 
+  updateAlbum(id: number, album: { idBanda: number; nomeAlbum: string; resumoAlbum: string }): Observable<string> {
+    const url = `/album/update/${id}/`;
+    return this.http.put(this.apiUrl + url, album, { responseType: 'text' });
+  }
+
+  avaliarAlbum(id: number, nota: number): Observable<string> {
+    const url = `/album/avaliar-album/${id}/`;
+    return this.http.post(this.apiUrl + url, {nota}, {responseType: 'text'});
+  }
+
   deleteAlbum(id: number): Observable<any> {
     const url = `/album/delete/${id}/`;
     return this.http.delete(this.apiUrl + url, { responseType: 'text' }).pipe(

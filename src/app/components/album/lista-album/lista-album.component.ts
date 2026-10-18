@@ -10,6 +10,7 @@ interface Album {
   avaliacao: number;
   banda: string;
   musicas: number;
+  idBanda: number;
 }
 
 @Component({
@@ -42,7 +43,8 @@ export class ListaAlbumComponent implements OnInit {
         duracao: item.duracaoTotal,
         avaliacao: item.avaliacaoMedia,
         banda: item.banda.nomeBanda,
-        musicas: item.musicas.length
+        musicas: item.musicas.length,
+        idBanda: item.banda.bandaId
       }));
     });
   }

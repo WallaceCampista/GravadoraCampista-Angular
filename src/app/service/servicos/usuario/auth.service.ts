@@ -24,7 +24,7 @@ export class AuthService {
 
   register(user: any): Observable<any> {
     let url: string = '/usuarios/post/registro/';
-    return this.http.post(this.apiUrl + url, user);
+    return this.http.post(this.apiUrl + url, user, { responseType: 'text' });
   }
 
   deleteUser(id: number): Observable<any> {
@@ -32,6 +32,11 @@ export class AuthService {
     return this.http.delete(this.apiUrl + url, { responseType: 'text' }).pipe(
       catchError(this.handleError)
     );
+  }
+
+  updateUser(id: number, user: { username?: string; password?: string; email?: string; primeiroNome?: string; sobrenome?: string; isAdmin?: boolean }): Observable<string> {
+    const url = `/usuarios/update/${id}/`;
+    return this.http.put(this.apiUrl + url, user, { responseType: 'text' });
   }
 
   getAllUsers(): Observable<any> {

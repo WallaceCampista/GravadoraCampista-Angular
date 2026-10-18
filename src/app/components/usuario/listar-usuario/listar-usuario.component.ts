@@ -26,6 +26,10 @@ export class ListarUsuarioComponent implements OnInit {
   constructor(private authService: AuthService) {}
 
   ngOnInit(): void {
+    this.fetchAllUsers();
+  }
+
+  fetchAllUsers(): void {
     this.authService.getAllUsers().subscribe({
       next: response => {
         this.usuarios = response.map((user: any) => ({

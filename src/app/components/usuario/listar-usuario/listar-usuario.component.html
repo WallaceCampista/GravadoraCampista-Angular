@@ -39,7 +39,7 @@
       <td>{{ formatDate(usuario.ultimoLogin) }}</td>
 <td>
   <div style="display: flex; justify-content: space-around;">
-    <app-editar></app-editar>
+    <app-editar tipo="usuario" [item]="usuario" (salvo)="fetchAllUsers()"></app-editar>
     <app-lixeira (delete)="deleteUser(usuario.id)"></app-lixeira>
   </div>
 </td>

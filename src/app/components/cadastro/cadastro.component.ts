@@ -4,6 +4,7 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/service/servicos/usuario/auth.service';
 import { ErrorComponent } from '../alertas/error/error.component';
+import { extrairMensagemErro } from 'src/app/utils/mensagem-erro';
 
 @Component({
   selector: 'app-cadastro',
@@ -39,15 +40,10 @@ export class CadastroComponent {
         this.router.navigate(['/login']);
       },
       error: (error: HttpErrorResponse) => {
-        if (error.status === 201) {
-          this.router.navigate(['/login']);
-        } else {
-          // this.errorMessage = this.formatErrorMessage(error.error) || 'Erro desconhecido';
-          this.errorMessage = 'Erro desconhecido';
-          setTimeout(() => {
-            this.errorMessage = null;
-          }, 3000);
-        }
+        this.errorMessage = extrairMensagemErro(error, 'Erro ao cadastrar.');
+        setTimeout(() => {
+          this.errorMessage = null;
+        }, 6000);
       }
     });
   }

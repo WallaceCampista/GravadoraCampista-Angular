@@ -5,11 +5,11 @@
 
   <div class="centered-div">
     <div>
-      <app-cadastro-musica></app-cadastro-musica>
+      <app-cadastro-musica (musicRegistered)="lista.fetchAllMusic()"></app-cadastro-musica>
     </div>
     <br>
     <div class="table">
-      <app-listar-musica></app-listar-musica>
+      <app-listar-musica #lista></app-listar-musica>
     </div>
   </div>
 </div>

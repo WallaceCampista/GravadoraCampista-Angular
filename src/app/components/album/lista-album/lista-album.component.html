@@ -34,14 +34,14 @@
       <th scope="row">{{ album.id }}</th>
       <td>{{ album.nome }}</td>
       <td>{{ album.resumo }}</td>
-      <td>{{ (album.duracao / 60) | number:'1.2-2' }} <strong>mim</strong></td>
+      <td>{{ (album.duracao / 60) | number:'1.2-2' }} <strong>min</strong></td>
       <td>{{ album.avaliacao | number:'1.1-1' }} <app-star></app-star></td>
       <td>{{ album.banda }}</td>
       <td>{{ album.musicas }}</td>
       <td>
-        <app-editar *ngIf="isAdmin"></app-editar>
+        <app-editar *ngIf="isAdmin" tipo="album" [item]="album" (salvo)="fetchAllAlbums()"></app-editar>
         <app-lixeira *ngIf="isAdmin" (delete)="deleteAlbum(album.id)"></app-lixeira>
-        <app-avaliar></app-avaliar>
+        <app-avaliar tipo="album" [id]="album.id" (avaliado)="fetchAllAlbums()"></app-avaliar>
       </td>
     </tr>
   </tbody>
