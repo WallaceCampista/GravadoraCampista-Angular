@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { AuthService } from 'src/app/service/servicos/usuario/auth.service';
 import { AdminService } from 'src/app/service/servicos/usuario/admin.service';
 
 @Component({
@@ -11,8 +10,9 @@ import { AdminService } from 'src/app/service/servicos/usuario/admin.service';
 export class NavbarComponent implements OnInit {
   showNavbar: boolean = true;
   isAdmin: boolean = false;
+  menuAberto: boolean = false;
 
-  constructor(private router: Router, private authService: AuthService, private adminService: AdminService) {}
+  constructor(private router: Router, private adminService: AdminService) {}
 
   ngOnInit(): void {
     this.router.events.subscribe(() => {
@@ -29,15 +29,6 @@ export class NavbarComponent implements OnInit {
     const links = document.querySelectorAll('.nav-link');
     links.forEach(link => link.classList.remove('focused'));
     (event.target as HTMLElement).classList.add('focused');
-  }
-
-  fetchAllUsers(event: Event) {
-    event.preventDefault();
-    this.authService.getAllUsers().subscribe({
-      next: response => {
-      },
-      error: error => {
-      }
-    });
+    this.menuAberto = false;
   }
 }

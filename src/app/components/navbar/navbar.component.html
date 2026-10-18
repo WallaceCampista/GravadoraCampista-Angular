@@ -1,10 +1,11 @@
 <nav *ngIf="showNavbar" class="navbar navbar-expand-lg bg-body-tertiary">
   <div class="container-fluid">
     <a class="navbar-brand">Menu Principal</a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <!-- O Bootstrap JS não é carregado: o menu de telas pequenas abre pelo próprio Angular -->
+    <button class="navbar-toggler" type="button" (click)="menuAberto = !menuAberto" aria-controls="navbarSupportedContent" [attr.aria-expanded]="menuAberto" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <div class="collapse navbar-collapse" [class.show]="menuAberto" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
           <a class="nav-link active" aria-current="page" routerLink="/home" (click)="setFocus($event)">Inicio</a>
@@ -19,19 +20,17 @@
           <a class="nav-link" routerLink="/musica" (click)="setFocus($event)">Musica</a>
         </li>
         <li class="nav-item" [ngClass]="{'disabled': !isAdmin}">
-          <a class="nav-link" [ngClass]="{'disabled': !isAdmin}" [attr.aria-disabled]="!isAdmin" routerLink="/usuario" (click)="setFocus($event); fetchAllUsers($event)">Usuario</a>
+          <a class="nav-link" [ngClass]="{'disabled': !isAdmin}" [attr.aria-disabled]="!isAdmin" routerLink="/usuario" (click)="setFocus($event)">Usuario</a>
         </li>
       </ul>
-      <form class="d-flex" role="search">
+      <div class="d-flex">
         <div class="social-icons">
           <a href="https://www.youtube.com" target="_blank" class="icons"><i class="fab fa-youtube"></i></a>
           <a href="https://www.google.com" target="_blank" class="icons"><i class="fab fa-google"></i></a>
           <a href="https://www.instagram.com" target="_blank" class="icons"><i class="fab fa-instagram"></i></a>
           <a href="https://www.facebook.com" target="_blank" class="icons"><i class="fab fa-facebook"></i></a>
         </div>
-        <input class="form-control me-2" type="search" placeholder="Dúvidas??" aria-label="Search">
-        <button class="btn btn-outline-success" type="submit">Procurar</button>
-      </form>
+      </div>
     </div>
   </div>
 </nav>

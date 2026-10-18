@@ -1,27 +1,44 @@
-# GravadoraCampista
+# Gravadora Campista — Frontend
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 18.2.0.
+Frontend em Angular 18 de uma gravadora de música fictícia: cadastro de bandas, álbuns e músicas, avaliações de 0 a 10, página de cada banda com a discografia e administração de usuários. Consome a API [GravadoraCampista-SpringBoot](https://github.com/WallaceCampista/GravadoraCampista-SpringBoot).
 
-## Development server
+## Requisitos
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+- Node 18, 20 ou 22 (testado também com o Node 24)
+- A API rodando em `http://localhost:8080` (veja o README do backend: MySQL no Docker + `./mvnw spring-boot:run` com JDK 21)
 
-## Code scaffolding
+## Como rodar
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+```bash
+npm ci
+npm start
+```
 
-## Build
+Abra `http://localhost:4200` e entre com o admin padrão da API: usuário `admin`, senha `Admin@123`. Com o banco vazio, a API já cria bandas, álbuns e músicas de exemplo.
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+O endereço da API fica em `src/environments/environment.ts` (desenvolvimento) e `src/environments/environment-prod.ts` (build de produção).
 
-## Running unit tests
+## Build de produção
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+```bash
+npx ng build
+```
 
-## Running end-to-end tests
+Gera o site em `dist/gravadora-campista` e pré-renderiza as rotas públicas. O build avisa que o pacote inicial passa de 500 kB (é o CSS completo do Bootstrap e do Font Awesome), mas o limite de erro é 1 MB.
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+## Telas
 
-## Further help
+| Rota | Quem acessa | O que faz |
+| --- | --- | --- |
+| `/login` | todos | Login |
+| `/cadastro` | todos | Cadastro de usuário (a senha precisa de 8+ caracteres, com maiúscula, minúscula, número e símbolo) |
+| `/home` | logado | TOP 3 bandas pela média das avaliações |
+| `/banda`, `/album`, `/musica` | logado | Cadastro e lista; todos avaliam, só o admin edita e apaga |
+| `/pagebanda?idBanda=…` | logado | Página da banda com os álbuns e as faixas |
+| `/usuario` | admin | Lista, edita e apaga usuários |
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+## Como a sessão funciona
+
+- O login guarda o token JWT e o nome no `localStorage`; o status de admin é lido do próprio token. Recarregar a página (F5) mantém a sessão.
+- O `AuthInterceptor` (`src/app/interceptors`) envia o token em toda chamada à API. Se a API responder `403` (token vencido ou inválido), a sessão é encerrada e a tela volta para o login com o aviso de sessão expirada.
+- O `AuthGuard` exige login nas rotas internas e o `AdminGuard` protege `/usuario`.

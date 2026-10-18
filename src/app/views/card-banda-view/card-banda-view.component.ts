@@ -17,18 +17,20 @@ export class CardBandaViewComponent implements OnInit {
 
   ngOnInit(): void {
     this.route.queryParams.subscribe(params => {
-      this.nomeBanda = params['nomeBanda'] || '';
-      this.avaliacaoMedia = +params['avaliacaoMedia'] || 0;
-      this.resumoBanda = params['resumoBanda'] || '';
+      const idBanda = Number(params['idBanda']);
 
-      if (this.router.url.includes('/pageband')) {
-        this.bandaService.getBandaData(this.nomeBanda).subscribe(data => {
-          if (data && data.content && data.content.length > 0) {
-            this.albuns = data.content[0].albuns;
-          } else {
-          }
-        });
-      }
+      // Pelo ID: a busca por nome usa "contém" e podia abrir outra banda ("Queen" x "Queens of the Stone Age")
+      this.bandaService.getAllBand().subscribe(bandas => {
+        const banda = bandas.find((item: any) => item.idBanda === idBanda);
+        if (!banda) {
+          this.router.navigate(['/banda']);
+          return;
+        }
+        this.nomeBanda = banda.nomeBanda;
+        this.avaliacaoMedia = banda.avaliacaoMedia;
+        this.resumoBanda = banda.resumoBanda;
+        this.albuns = banda.albuns;
+      });
     });
   }
 }

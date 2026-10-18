@@ -67,8 +67,11 @@
           <div class="row" *ngSwitchCase="'album'">
             <div class="col-md-4">
               <div class="form-floating mb-3">
-                <input class="form-control" formControlName="idBanda" id="idBanda" placeholder="ID da Banda" type="text"/>
-                <label for="idBanda" class="label-large">ID da Banda: </label>
+                <select class="form-select" formControlName="idBanda" id="idBanda">
+                  <option [ngValue]="null" disabled>Selecione</option>
+                  <option *ngFor="let item of bandas" [ngValue]="item.idBanda">{{ item.nomeBanda }}</option>
+                </select>
+                <label for="idBanda" class="label-large">Banda: </label>
               </div>
             </div>
             <div class="col-md-4">
@@ -87,8 +90,11 @@
           <div class="row" *ngSwitchCase="'musica'">
             <div class="col-md-6">
               <div class="form-floating mb-3">
-                <input class="form-control" formControlName="idAlbum" id="idAlbum" placeholder="ID do Album" type="text"/>
-                <label for="idAlbum" class="label-large">ID do Album: </label>
+                <select class="form-select" formControlName="idAlbum" id="idAlbum">
+                  <option [ngValue]="null" disabled>Selecione</option>
+                  <option *ngFor="let item of albuns" [ngValue]="item.idAlbum">{{ item.nomeAlbum }} — {{ item.banda.nomeBanda }}</option>
+                </select>
+                <label for="idAlbum" class="label-large">Álbum: </label>
               </div>
             </div>
             <div class="col-md-6">

@@ -30,6 +30,8 @@ export class PopupEditarComponent {
   editForm: FormGroup;
   isSaving = false;
   errorMessage: string | null = null;
+  bandas: any[] = [];
+  albuns: any[] = [];
 
   constructor(
     private fb: FormBuilder,
@@ -73,9 +75,11 @@ export class PopupEditarComponent {
         this.editForm.patchValue({ nomeBanda: item.nome, resumoBanda: item.resumo });
         break;
       case 'album':
+        this.bandaService.getAllBand().subscribe(bandas => this.bandas = bandas);
         this.editForm.patchValue({ idBanda: item.idBanda, nomeAlbum: item.nome, resumoAlbum: item.resumo });
         break;
       case 'musica':
+        this.albumService.getAllAlbum().subscribe(albuns => this.albuns = albuns);
         this.editForm.patchValue({ idAlbum: item.idAlbum, nomeMusica: item.nome, resumoMusica: item.resumo, duracaoMusica: item.duracao });
         break;
       case 'usuario':

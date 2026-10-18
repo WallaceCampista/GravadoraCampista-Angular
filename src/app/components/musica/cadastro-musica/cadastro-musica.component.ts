@@ -2,6 +2,7 @@ import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MusicaService } from 'src/app/service/servicos/formularios/musica.service';
+import { AlbumService } from 'src/app/service/servicos/formularios/album.service';
 import { extrairMensagemErro } from 'src/app/utils/mensagem-erro';
 
 @Component({
@@ -13,12 +14,13 @@ export class CadastroMusicaComponent implements OnInit {
   isLoading = false;
   form: FormGroup;
   @Output() musicRegistered = new EventEmitter<void>();
+  albuns: any[] = [];
 
   showSuccessAlert = false;
   showErrorAlert = false;
   alertMessage = '';
 
-  constructor(private router: Router, private fb: FormBuilder, private musicaService: MusicaService) {
+  constructor(private router: Router, private fb: FormBuilder, private musicaService: MusicaService, private albumService: AlbumService) {
     this.form = this.fb.group({
       idAlbum: ['', Validators.required],
       nomeMusica: ['', Validators.required],
@@ -29,6 +31,7 @@ export class CadastroMusicaComponent implements OnInit {
 
   ngOnInit() {
     this.resetForm();
+    this.albumService.getAllAlbum().subscribe(albuns => this.albuns = albuns);
   }
 
   onRegister() {

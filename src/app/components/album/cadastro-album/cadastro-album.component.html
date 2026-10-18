@@ -3,14 +3,11 @@
   <form [formGroup]="form">
     <div class="form-row">
       <div class="form-floating mx-auto">
-        <input
-          class="form-control"
-          formControlName="idBanda"
-          id="idBanda"
-          placeholder="ID da banda:"
-          type="text"
-        />
-        <label for="idBanda">ID da banda: </label>
+        <select class="form-select" formControlName="idBanda" id="idBanda">
+          <option [ngValue]="null" disabled>Selecione</option>
+          <option *ngFor="let item of bandas" [ngValue]="item.idBanda">{{ item.nomeBanda }}</option>
+        </select>
+        <label for="idBanda">Banda: </label>
       </div>
       <div class="form-floating mx-auto">
         <input

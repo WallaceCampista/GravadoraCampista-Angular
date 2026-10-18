@@ -2,6 +2,7 @@ import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { AlbumService } from 'src/app/service/servicos/formularios/album.service';
+import { BandaService } from 'src/app/service/servicos/formularios/banda.service';
 import { extrairMensagemErro } from 'src/app/utils/mensagem-erro';
 
 @Component({
@@ -13,12 +14,13 @@ export class CadastroAlbumComponent implements OnInit {
   isLoading = false;
   form: FormGroup;
   @Output() albumRegistered = new EventEmitter<void>();
+  bandas: { idBanda: number; nomeBanda: string }[] = [];
 
   showSuccessAlert = false;
   showErrorAlert = false;
   alertMessage = '';
 
-  constructor(private router: Router, private fb: FormBuilder, private albumService: AlbumService) {
+  constructor(private router: Router, private fb: FormBuilder, private albumService: AlbumService, private bandaService: BandaService) {
     this.form = this.fb.group({
       idBanda: [''],
       nomeAlbum: [''],
@@ -28,6 +30,7 @@ export class CadastroAlbumComponent implements OnInit {
 
   ngOnInit() {
     this.resetForm();
+    this.bandaService.getAllBand().subscribe(bandas => this.bandas = bandas);
   }
 
   onRegister() {

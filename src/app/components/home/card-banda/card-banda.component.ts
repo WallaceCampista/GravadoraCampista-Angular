@@ -7,6 +7,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./card-banda.component.scss']
 })
 export class CardBandaComponent implements OnInit {
+  @Input() idBanda!: number;
   @Input() nomeBanda: string = "";
   @Input() avaliacaoMedia: number = 0;
   @Input() resumoBanda: string = "";
@@ -24,11 +25,7 @@ export class CardBandaComponent implements OnInit {
 
   navigateToPageBanda(): void {
     this.router.navigate(['/pagebanda'], {
-      queryParams: {
-        nomeBanda: this.nomeBanda,
-        avaliacaoMedia: this.avaliacaoMedia,
-        resumoBanda: this.resumoBanda
-      }
+      queryParams: { idBanda: this.idBanda }
     });
   }
 }

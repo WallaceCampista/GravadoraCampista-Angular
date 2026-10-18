@@ -3,13 +3,13 @@
     <div class="accordion limited-width-accordion" id="accordionExample">
       <div *ngFor="let album of albuns" class="accordion-item">
         <h2 class="accordion-header">
-          <button class="accordion-button" type="button" data-bs-toggle="collapse" [attr.data-bs-target]="'#collapse' + generateValidId(album.nomeAlbum)" aria-expanded="true" [attr.aria-controls]="'collapse' + generateValidId(album.nomeAlbum)" (click)="toggleAccordion($event)">
+          <button class="accordion-button" type="button" data-bs-toggle="collapse" [attr.data-bs-target]="'#collapse' + album.albumId" [attr.data-album-id]="album.albumId" aria-expanded="true" [attr.aria-controls]="'collapse' + album.albumId" (click)="toggleAccordion($event)">
             <strong>{{ album.nomeAlbum }}</strong>
           </button>
         </h2>
-        <div [id]="'collapse' + generateValidId(album.nomeAlbum)" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+        <div [id]="'collapse' + album.albumId" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
           <div class="accordion-body">
-            <table class="table center-text" *ngIf="albumData[album.nomeAlbum]">
+            <table class="table center-text" *ngIf="albumData[album.albumId]">
               <thead>
                 <tr>
                   <th scope="col">Faixa</th>
@@ -19,11 +19,11 @@
                 </tr>
               </thead>
               <tbody class="table-group-divider">
-                <tr *ngFor="let musica of albumData[album.nomeAlbum]; let i = index">
+                <tr *ngFor="let musica of albumData[album.albumId]; let i = index">
                   <td>{{ i + 1 }}</td>
                   <td>{{ musica.nomeMusica }}</td>
                   <td>{{ (musica.duracao / 60) | number:'1.2-2' }} <strong>min</strong></td>
-                  <td>{{ musica.avaliacaoMedia }} <app-star></app-star></td>
+                  <td>{{ musica.avaliacaoMedia | number:'1.1-1' }} <app-star></app-star></td>
                 </tr>
               </tbody>
             </table>

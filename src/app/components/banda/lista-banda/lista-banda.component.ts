@@ -76,11 +76,7 @@ export class ListaBandaComponent implements OnInit {
 
   navigateToPageBanda(banda: any): void {
     this.router.navigate(['/pagebanda'], {
-      queryParams: {
-        nomeBanda: banda.nome,
-        avaliacaoMedia: banda.avaliacao,
-        resumoBanda: banda.resumo
-      }
+      queryParams: { idBanda: banda.id }
     });
   }
 

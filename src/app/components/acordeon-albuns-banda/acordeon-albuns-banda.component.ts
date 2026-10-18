@@ -33,10 +33,6 @@ export class AcordeonAlbunsBandaComponent implements AfterViewInit, OnChanges {
     }
   }
 
-  generateValidId(albumName: string): string {
-    return albumName.replace(/[^a-zA-Z0-9-_]/g, '-').toLowerCase();
-  }
-
   toggleAccordion(event: Event) {
     const button = (event.target as HTMLElement).closest('.accordion-button') as HTMLElement;
     const targetId = button.getAttribute('data-bs-target');
@@ -60,9 +56,9 @@ export class AcordeonAlbunsBandaComponent implements AfterViewInit, OnChanges {
           targetElement.classList.remove('collapse');
           targetElement.classList.add('show');
           targetElement.style.maxHeight = targetElement.scrollHeight + 'px';
-          const albumName = button.querySelector('strong')?.textContent;
-          if (albumName) {
-            this.fetchAlbumData(albumName);
+          const albumId = Number(button.getAttribute('data-album-id'));
+          if (albumId) {
+            this.fetchAlbumData(albumId);
           }
         } else {
           targetElement.style.maxHeight = targetElement.scrollHeight + 'px';
@@ -76,11 +72,13 @@ export class AcordeonAlbunsBandaComponent implements AfterViewInit, OnChanges {
     }
   }
 
-  fetchAlbumData(albumName: string) {
-    this.albumService.getAlbumData(albumName).subscribe(data => {
-      this.albumData[albumName] = data.content[0].musicas;
+  // Pelo ID: a busca por nome usa "contém" e podia trazer as músicas de outro álbum
+  fetchAlbumData(albumId: number) {
+    this.albumService.getAllAlbum().subscribe(albuns => {
+      const album = albuns.find((item: any) => item.idAlbum === albumId);
+      this.albumData[albumId] = album ? album.musicas : [];
       setTimeout(() => {
-        const targetElement = document.querySelector(`#collapse${this.generateValidId(albumName)}`) as HTMLElement;
+        const targetElement = document.querySelector(`#collapse${albumId}`) as HTMLElement;
         if (targetElement) {
           targetElement.style.maxHeight = targetElement.scrollHeight + 'px';
         }
