@@ -1,8 +1,7 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { AuthService } from 'src/app/service/servicos/usuario/auth.service';
-import { UserService } from 'src/app/service/servicos/usuario/user.service';
 
 @Component({
   selector: 'app-login',
@@ -18,12 +17,15 @@ export class LoginComponent {
     private router: Router,
     private fb: FormBuilder,
     private authService: AuthService,
-    private userService: UserService
+    private route: ActivatedRoute
   ) {
     this.form = this.fb.group({
       username: [''],
       password: ['']
     });
+    if (this.route.snapshot.queryParamMap.has('sessaoExpirada')) {
+      this.errorMessage = 'Sua sessão expirou. Faça login novamente.';
+    }
   }
 
   onSubmit(event: Event) {
@@ -39,9 +41,7 @@ export class LoginComponent {
       this.authService.login(username, password).subscribe({
         next: (response) => {
           this.isLoading = false;
-          localStorage.setItem('token', response.token);
-          this.userService.nomeUser = response.primeiroNome;
-          this.userService.isAdmin = response.isAdmin;
+          this.authService.iniciarSessao(response);
           this.router.navigate(['/home']);
         },
         error: (error) => {

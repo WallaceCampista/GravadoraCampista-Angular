@@ -2,16 +2,11 @@ import { NgModule } from '@angular/core';
 import { BrowserModule, provideClientHydration } from '@angular/platform-browser';
 import { ReactiveFormsModule } from '@angular/forms';
 import { FormsModule } from '@angular/forms';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { provideHttpClient, withInterceptorsFromDi, withFetch } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, provideHttpClient, withInterceptorsFromDi, withFetch } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { CardModule } from 'primeng/card';
 import { LoginComponent } from './components/login/loginbox/login.component';
-import { ButtonModule } from 'primeng/button';
-import { DividerModule } from 'primeng/divider';
-import { InputTextModule } from 'primeng/inputtext';
 import { CabecalhoComponent } from './components/cabecalho/cabecalho.component';
 import { RodapeComponent } from './components/rodape/rodape.component';
 import { InicioViewComponent } from './views/inicio-view/inicio-view.component';
@@ -46,6 +41,7 @@ import { UsuarioViewComponent } from './views/usuario-view/usuario-view.componen
 import { ListarUsuarioComponent } from './components/usuario/listar-usuario/listar-usuario.component';
 import { SucessoComponent } from './components/alertas/sucesso/sucesso.component';
 import { ErrorComponent } from './components/alertas/error/error.component';
+import { AuthInterceptor } from './interceptors/auth.interceptor';
 
 @NgModule({
   declarations: [
@@ -87,19 +83,15 @@ import { ErrorComponent } from './components/alertas/error/error.component';
   ],
   imports: [
     BrowserModule,
-    BrowserAnimationsModule,
     AppRoutingModule,
-    CardModule,
-    DividerModule,
-    InputTextModule,
     FormsModule,
     ReactiveFormsModule,
-    ButtonModule,
     RouterModule
   ],
   providers: [
     provideClientHydration(),
-    provideHttpClient(withInterceptorsFromDi(), withFetch())
+    provideHttpClient(withInterceptorsFromDi(), withFetch()),
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }
   ],
   exports: [
     CabecalhoComponent,

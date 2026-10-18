@@ -29,7 +29,8 @@ export class AvatarGreetingComponent implements OnInit {
 
     this.router.events.subscribe(event => {
       if (event instanceof NavigationEnd) {
-        this.showAvatarGreeting = event.urlAfterRedirects !== '/login' && event.urlAfterRedirects !== '/cadastro';
+        const rota = event.urlAfterRedirects.split('?')[0];
+        this.showAvatarGreeting = rota !== '/login' && rota !== '/cadastro';
       }
     });
   }

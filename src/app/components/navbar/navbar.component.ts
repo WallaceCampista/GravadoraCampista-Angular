@@ -16,7 +16,8 @@ export class NavbarComponent implements OnInit {
 
   ngOnInit(): void {
     this.router.events.subscribe(() => {
-      this.showNavbar = this.router.url !== '/login' && this.router.url !== '/cadastro';
+      const rota = this.router.url.split('?')[0];
+      this.showNavbar = rota !== '/login' && rota !== '/cadastro';
     });
 
     this.adminService.isAdmin$.subscribe(isAdmin => {

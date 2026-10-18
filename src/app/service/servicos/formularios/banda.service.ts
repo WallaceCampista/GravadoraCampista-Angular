@@ -1,9 +1,8 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpErrorResponse, HttpHeaders, HttpResponse } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpResponse } from '@angular/common/http';
 import { catchError, Observable, throwError } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
-import { AuthService } from 'src/app/service/servicos/usuario/auth.service';
 
 @Injectable({
   providedIn: 'root'
@@ -11,18 +10,16 @@ import { AuthService } from 'src/app/service/servicos/usuario/auth.service';
 export class BandaService {
   private apiUrl = environment.apiUrl;
 
-  constructor(private http: HttpClient, private authService: AuthService) {}
+  constructor(private http: HttpClient) {}
 
   registerBand(band: { nomeBanda: string; resumoBanda: string }): Observable<HttpResponse<any>> {
     let url: string = '/banda/novo-registro/';
-    const headers = this.authService.getAuthHeaders();
-    return this.http.post<any>(this.apiUrl + url, band, { headers, observe: 'response', responseType: 'text' as 'json' });
+    return this.http.post<any>(this.apiUrl + url, band, { observe: 'response', responseType: 'text' as 'json' });
   }
 
   getAllBand(): Observable<any> {
     let url: string = '/banda/listar-bandas-completos/';
-    const headers = this.authService.getAuthHeaders();
-    return this.http.get<any>(this.apiUrl + url, { headers });
+    return this.http.get<any>(this.apiUrl + url);
   }
 
   getTop3Bands(): Observable<any[]> {
@@ -33,23 +30,20 @@ export class BandaService {
 
   avaliarBanda(id: number, nota: number): Observable<any> {
     const url = `/banda/avaliar-banda/${id}/`;
-    const headers = this.authService.getAuthHeaders();
-    return this.http.post(this.apiUrl + url, {nota}, {headers, responseType: 'text'}).pipe(
+    return this.http.post(this.apiUrl + url, {nota}, {responseType: 'text'}).pipe(
       catchError(this.handleError)
     );
   }
 
   getBandaData(nomeBanda: string): Observable<any> {
     const url = `/banda/${nomeBanda}/`;
-    const headers = this.authService.getAuthHeaders();
-    return this.http.get(this.apiUrl + url, { headers });
+    return this.http.get(this.apiUrl + url);
   }
 
 
   deleteBand(id: number): Observable<any> {
     const url = `/banda/delete/${id}/`;
-    const headers = this.authService.getAuthHeaders();
-    return this.http.delete(this.apiUrl + url, { headers, responseType: 'text' }).pipe(
+    return this.http.delete(this.apiUrl + url, { responseType: 'text' }).pipe(
       catchError(this.handleError)
     );
   }

@@ -9,6 +9,7 @@ import { CadastroViewComponent } from './views/cadastro-view/cadastro-view.compo
 import { CardBandaViewComponent } from './views/card-banda-view/card-banda-view.component';
 import { UsuarioViewComponent } from './views/usuario-view/usuario-view.component';
 import { AuthGuard } from './guards/auth.guard';
+import { AdminGuard } from './guards/admin.guard';
 
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
@@ -19,7 +20,7 @@ const routes: Routes = [
   { path: 'album', component: AlbumViewComponent, canActivate: [AuthGuard] },
   { path: 'musica', component: MusicaViewComponent, canActivate: [AuthGuard] },
   { path: 'pagebanda', component: CardBandaViewComponent, canActivate: [AuthGuard] },
-  { path: 'usuario', component: UsuarioViewComponent, canActivate: [AuthGuard] }
+  { path: 'usuario', component: UsuarioViewComponent, canActivate: [AuthGuard, AdminGuard] }
 ];
 
 @NgModule({

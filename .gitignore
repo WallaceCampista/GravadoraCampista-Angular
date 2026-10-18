@@ -40,3 +40,10 @@ testem.log
 # System files
 .DS_Store
 Thumbs.db
+
+### Claude ###
+.claude/
+CLAUDE.md
+CLAUDE.local.md
+.claude.json
+.mcp.json

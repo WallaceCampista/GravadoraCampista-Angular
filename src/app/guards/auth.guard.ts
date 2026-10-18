@@ -1,25 +1,21 @@
 import { Injectable } from '@angular/core';
-import { CanActivate, Router } from '@angular/router';
+import { CanActivate, Router, UrlTree } from '@angular/router';
+import { AuthService } from '../service/servicos/usuario/auth.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthGuard implements CanActivate {
 
-  constructor(private router: Router) {}
+  constructor(private router: Router, private authService: AuthService) {}
 
-  canActivate(): boolean {
-    if (typeof localStorage !== 'undefined') {
-      const token = localStorage.getItem('token');
-      if (token) {
-        return true;
-      } else {
-        this.router.navigate(['/login']);
-        return false;
-      }
-    } else {
-      this.router.navigate(['/login']);
-      return false;
+  canActivate(): boolean | UrlTree {
+    if (this.authService.isLoggedIn()) {
+      return true;
     }
+    // Havia token, mas venceu: avisa na tela de login
+    const sessaoExpirada = this.authService.getToken() !== null;
+    this.authService.logout();
+    return this.router.createUrlTree(['/login'], sessaoExpirada ? { queryParams: { sessaoExpirada: true } } : {});
   }
 }
