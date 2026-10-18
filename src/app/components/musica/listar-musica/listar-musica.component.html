@@ -32,7 +32,15 @@
   <tbody class="table-group-divider">
   <tr *ngFor="let musica of musicas">
     <th scope="row">{{ musica.id }}</th>
-    <td>{{ musica.nome }}</td>
+    <td>
+      <span class="nome-com-audio">
+        <button *ngIf="musica.audio" type="button" class="botao-tocar" [class.atual]="ehAtual(musica)" (click)="tocar(musica)"
+                [title]="tocandoAgora(musica) ? 'Pausar' : 'Tocar'" [attr.aria-label]="(tocandoAgora(musica) ? 'Pausar ' : 'Tocar ') + musica.nome">
+          <i class="fa-solid" [class.fa-pause]="tocandoAgora(musica)" [class.fa-play]="!tocandoAgora(musica)"></i>
+        </button>
+        {{ musica.nome }}
+      </span>
+    </td>
     <td>{{ musica.resumo }}</td>
     <td>{{ musica.avaliacao | number:'1.1-1' }} <app-star></app-star></td>
     <td>{{ musica.duracao | duracao }}</td>

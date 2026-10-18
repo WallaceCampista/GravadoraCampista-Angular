@@ -14,9 +14,13 @@
             <div class="accordion-body">
               <p *ngIf="!musicasPorAlbum[album.albumId]" class="mb-0 center-text">Carregando...</p>
               <p *ngIf="musicasPorAlbum[album.albumId]?.length === 0" class="mb-0 center-text">Nenhuma música cadastrada.</p>
+              <button type="button" class="btn btn-sm btn-success mb-2" *ngIf="faixasDoAlbum(album).length" (click)="tocarAlbum(album)">
+                <i class="fa-solid fa-play"></i> Tocar álbum
+              </button>
               <table class="table center-text" *ngIf="musicasPorAlbum[album.albumId]?.length">
                 <thead>
                   <tr>
+                    <th scope="col"><span class="visually-hidden">Tocar</span></th>
                     <th scope="col">Faixa</th>
                     <th scope="col">Nome</th>
                     <th scope="col">Duração</th>
@@ -24,7 +28,13 @@
                   </tr>
                 </thead>
                 <tbody class="table-group-divider">
-                  <tr *ngFor="let musica of musicasPorAlbum[album.albumId]; let i = index">
+                  <tr *ngFor="let musica of musicasPorAlbum[album.albumId]; let i = index" [class.tocando]="ehAtual(musica)">
+                    <td>
+                      <button *ngIf="musica.audioArquivo" type="button" class="botao-tocar" [class.atual]="ehAtual(musica)" (click)="tocarFaixa(album, musica)"
+                              [title]="tocandoAgora(musica) ? 'Pausar' : 'Tocar'" [attr.aria-label]="(tocandoAgora(musica) ? 'Pausar ' : 'Tocar ') + musica.nomeMusica">
+                        <i class="fa-solid" [class.fa-pause]="tocandoAgora(musica)" [class.fa-play]="!tocandoAgora(musica)"></i>
+                      </button>
+                    </td>
                     <td>{{ i + 1 }}</td>
                     <td>{{ musica.nomeMusica }}</td>
                     <td>{{ musica.duracao | duracao }}</td>

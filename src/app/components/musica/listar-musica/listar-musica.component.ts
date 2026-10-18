@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { MusicaService } from 'src/app/service/servicos/formularios/musica.service';
 import { AdminService } from 'src/app/service/servicos/usuario/admin.service';
+import { Faixa, PlayerService } from 'src/app/service/servicos/player/player.service';
 
 interface Musica {
   id: number;
@@ -11,6 +12,8 @@ interface Musica {
   album: string;
   banda: string;
   idAlbum: number;
+  audio: string; // "" = sem áudio
+  capa: string; // "" = sem capa
 }
 
 @Component({
@@ -24,7 +27,7 @@ export class ListarMusicaComponent implements OnInit {
   currentSortColumn: string = '';
   isAscending: boolean = true;
 
-  constructor(private musicaService: MusicaService, private adminService: AdminService) {}
+  constructor(private musicaService: MusicaService, private adminService: AdminService, private player: PlayerService) {}
 
   ngOnInit(): void {
     this.adminService.isAdmin$.subscribe(isAdmin => {
@@ -44,9 +47,31 @@ export class ListarMusicaComponent implements OnInit {
         duracao: item.duracao,
         album: item.albumID.nomeAlbum,
         banda: item.bandaID.nomeBanda,
-        idAlbum: item.albumID.albumId
+        idAlbum: item.albumID.albumId,
+        audio: item.audioArquivo ?? '',
+        capa: item.albumID.capaArquivo ?? ''
       }));
     });
+  }
+
+  ehAtual(musica: Musica): boolean {
+    return this.player.faixaAtual?.id === musica.id;
+  }
+
+  tocandoAgora(musica: Musica): boolean {
+    return this.ehAtual(musica) && this.player.tocando;
+  }
+
+  // Toca a partir desta música, seguindo a ordem da tabela (só as que têm MP3)
+  tocar(musica: Musica) {
+    if (this.ehAtual(musica)) {
+      this.player.alternar();
+      return;
+    }
+    const fila: Faixa[] = this.musicas
+      .filter(item => item.audio)
+      .map(item => ({ id: item.id, nome: item.nome, banda: item.banda, album: item.album, capaArquivo: item.capa || null, audioArquivo: item.audio }));
+    this.player.tocarFila(fila, fila.findIndex(faixa => faixa.id === musica.id));
   }
 
   deleteMusic(id: number): void {

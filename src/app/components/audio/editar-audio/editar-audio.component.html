@@ -1,0 +1,17 @@
+<div class="editar-audio">
+  <div class="icone" [class.com-audio]="arquivo"><i class="fa-solid fa-music"></i></div>
+  <div class="acoes">
+    <span>Áudio da música</span>
+    <small class="situacao">{{ arquivo ? 'MP3 enviado · ' + (duracao | duracao) : 'Sem áudio' }}</small>
+    <input #seletor type="file" accept=".mp3,audio/mpeg" hidden (change)="escolher(seletor)">
+    <div class="botoes">
+      <button type="button" class="btn btn-sm btn-dark" (click)="seletor.click()" [disabled]="enviando">
+        {{ enviando ? 'Enviando...' : (arquivo ? 'Trocar MP3' : 'Enviar MP3') }}
+      </button>
+      <button type="button" class="btn btn-sm btn-outline-danger" *ngIf="arquivo" (click)="remover()" [disabled]="enviando">Remover</button>
+    </div>
+    <small class="text-success" *ngIf="mensagem">{{ mensagem }}</small>
+    <small class="text-danger" *ngIf="erro">{{ erro }}</small>
+    <small class="dica">MP3 até {{ limiteMb }} MB. A duração é lida do arquivo.</small>
+  </div>
+</div>

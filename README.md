@@ -33,7 +33,7 @@ Gera o site em `dist/gravadora-campista` e pré-renderiza as rotas públicas. O 
 | `/login` | todos | Login |
 | `/cadastro` | todos | Cadastro de usuário (a senha precisa de 8+ caracteres, com maiúscula, minúscula, número e símbolo) |
 | `/home` | logado | TOP 3 bandas pela média das avaliações |
-| `/banda`, `/album`, `/musica` | logado | Cadastro e lista; todos avaliam (uma nota por pessoa, que pode ser trocada), só o admin edita, apaga e troca a foto da banda ou a capa do álbum |
+| `/banda`, `/album`, `/musica` | logado | Cadastro e lista; todos avaliam (uma nota por pessoa, que pode ser trocada) e tocam as músicas com MP3; só o admin edita, apaga e troca a foto da banda, a capa do álbum ou o MP3 da música |
 | `/pagebanda?idBanda=…` | logado | Página da banda com os álbuns e as faixas |
 | `/usuario` | admin | Lista, edita e apaga usuários |
 
@@ -47,6 +47,23 @@ Gera o site em `dist/gravadora-campista` e pré-renderiza as rotas públicas. O 
 
 - Cada usuário tem uma nota por banda, álbum ou música, e avaliar de novo substitui a anterior.
 - Ao abrir, o popup de avaliar (`popup-avaliar`) busca a nota do usuário logado em `/<tipo>/minha-avaliacao/<id>/`. Se já existe, mostra "Sua nota atual", preenche o campo e o botão vira "Trocar nota".
+
+## Reprodutor
+
+- O `PlayerService` (`src/app/service/servicos/player`) tem um único elemento de áudio para o site inteiro.
+  - Ele é criado só no navegador, porque a pré-renderização (SSR) roda no servidor, onde não existe áudio.
+  - Como o serviço não é recriado ao trocar de tela, a música continua tocando enquanto a pessoa navega.
+- O reprodutor (`app-player`, em `src/app/components/audio/player`) fica fixo no pé da página. Ele mostra capa, nome, banda e álbum, e tem anterior, tocar/pausar, próxima, barra de progresso, volume e fechar.
+  - "Anterior" depois de 3 segundos volta ao começo da faixa, como nos players.
+  - No fim de uma faixa ele passa para a próxima da fila.
+- De onde se toca:
+  - página da banda: "Tocar álbum" e o ▶ de cada faixa, que toca o álbum a partir dela;
+  - lista de músicas: o ▶ toca a partir da música, na ordem da tabela.
+  - Na faixa que está tocando, o mesmo botão pausa e continua. Só entram na fila as músicas com MP3.
+- Media Session API: as teclas de mídia do teclado funcionam, e o controle de mídia do sistema mostra o nome, a banda, o álbum e a capa.
+- No popup de edição da música, o admin envia, troca ou remove o MP3 (`app-editar-audio`).
+  - O envio acontece na hora, e a duração lida do arquivo aparece no campo, que fica só para leitura.
+  - No cadastro, a duração é opcional.
 
 ## Imagens
 

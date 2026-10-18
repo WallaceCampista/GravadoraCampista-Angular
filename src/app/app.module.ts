@@ -45,6 +45,8 @@ import { AuthInterceptor } from './interceptors/auth.interceptor';
 import { DuracaoPipe } from './pipes/duracao.pipe';
 import { CapaComponent } from './components/imagem/capa/capa.component';
 import { EditarImagemComponent } from './components/imagem/editar-imagem/editar-imagem.component';
+import { PlayerComponent } from './components/audio/player/player.component';
+import { EditarAudioComponent } from './components/audio/editar-audio/editar-audio.component';
 
 @NgModule({
   declarations: [
@@ -86,6 +88,8 @@ import { EditarImagemComponent } from './components/imagem/editar-imagem/editar-
     DuracaoPipe,
     CapaComponent,
     EditarImagemComponent,
+    PlayerComponent,
+    EditarAudioComponent,
   ],
   imports: [
     BrowserModule,

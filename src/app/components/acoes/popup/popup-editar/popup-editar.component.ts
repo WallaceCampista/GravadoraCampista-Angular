@@ -7,6 +7,7 @@ import { AlbumService } from 'src/app/service/servicos/formularios/album.service
 import { MusicaService } from 'src/app/service/servicos/formularios/musica.service';
 import { AuthService } from 'src/app/service/servicos/usuario/auth.service';
 import { extrairMensagemErro } from 'src/app/utils/mensagem-erro';
+import { AudioMusica } from 'src/app/components/audio/editar-audio/editar-audio.component';
 
 export type TipoEdicao = 'banda' | 'album' | 'musica' | 'usuario';
 
@@ -32,6 +33,8 @@ export class PopupEditarComponent {
   errorMessage: string | null = null;
   // Algo foi salvo (campos ou imagem) desde que o popup abriu
   alterado = false;
+  // MP3 da música ("" = sem áudio); com MP3, a duração vem do arquivo e o campo fica só para leitura
+  audioMusica = '';
   bandas: any[] = [];
   albuns: any[] = [];
 
@@ -74,6 +77,7 @@ export class PopupEditarComponent {
     this.tipo = tipo;
     this.item = item;
     this.alterado = false;
+    this.audioMusica = item.audio ?? '';
     this.errorMessage = null;
     this.editForm.reset({ isAdmin: false });
 
@@ -131,15 +135,18 @@ export class PopupEditarComponent {
           resumoAlbum: valores.resumoAlbum
         });
         break;
-      case 'musica':
-        if (!this.preenchidos(valores.idAlbum, valores.nomeMusica, valores.resumoMusica, valores.duracaoMusica)) return;
+      case 'musica': {
+        if (!this.preenchidos(valores.idAlbum, valores.nomeMusica, valores.resumoMusica)) return;
+        // A duração é opcional: sem valor a API mantém a atual. Com MP3 vale sempre a do arquivo
+        const duracao = `${valores.duracaoMusica ?? ''}`.trim();
         requisicao = this.musicaService.updateMusic(this.item.id, {
           idAlbum: Number(valores.idAlbum),
           nomeMusica: valores.nomeMusica,
           resumoMusica: valores.resumoMusica,
-          duracao: Number(valores.duracaoMusica)
+          duracao: (this.audioMusica || duracao === '') ? null : Number(duracao)
         });
         break;
+      }
       case 'usuario': {
         // O backend grava qualquer campo enviado, então só manda o que foi preenchido (senha vazia = manter)
         const usuario: any = { isAdmin: valores.isAdmin };
@@ -169,6 +176,12 @@ export class PopupEditarComponent {
         this.errorMessage = extrairMensagemErro(error, 'Erro ao salvar as alterações.');
       }
     });
+  }
+
+  audioAlterado(audio: AudioMusica) {
+    this.alterado = true;
+    this.audioMusica = audio.audioArquivo;
+    this.editForm.patchValue({ duracaoMusica: audio.duracao });
   }
 
   private preenchidos(...valores: any[]): boolean {

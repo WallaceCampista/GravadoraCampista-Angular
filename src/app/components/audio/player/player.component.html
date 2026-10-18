@@ -1,0 +1,37 @@
+<ng-container *ngIf="player.estado$ | async as estado">
+  <ng-container *ngIf="estado.fila[estado.indice] as faixa">
+    <!-- Ocupa no fim da página a altura da barra fixa, para ela não cobrir o rodapé -->
+    <div class="espaco"></div>
+    <div class="player" role="region" aria-label="Reprodutor de música">
+      <app-capa class="capa" [arquivo]="faixa.capaArquivo" [nome]="faixa.album"></app-capa>
+      <div class="faixa">
+        <strong [title]="faixa.nome">{{ faixa.nome }}</strong>
+        <small *ngIf="!estado.erro">{{ faixa.banda }} · {{ faixa.album }}</small>
+        <small class="erro" *ngIf="estado.erro">{{ estado.erro }}</small>
+      </div>
+      <div class="controles">
+        <button type="button" (click)="player.anterior()" title="Anterior" aria-label="Anterior">
+          <i class="fa-solid fa-backward-step"></i>
+        </button>
+        <button type="button" class="principal" (click)="player.alternar()" [title]="estado.tocando ? 'Pausar' : 'Tocar'" [attr.aria-label]="estado.tocando ? 'Pausar' : 'Tocar'">
+          <i class="fa-solid" [class.fa-pause]="estado.tocando" [class.fa-play]="!estado.tocando"></i>
+        </button>
+        <button type="button" (click)="player.proxima()" [disabled]="estado.indice >= estado.fila.length - 1" title="Próxima" aria-label="Próxima">
+          <i class="fa-solid fa-forward-step"></i>
+        </button>
+      </div>
+      <div class="progresso">
+        <span>{{ estado.tempo | duracao }}</span>
+        <input type="range" min="0" [max]="estado.duracao" step="0.1" [value]="estado.tempo" (input)="buscar($event)" aria-label="Posição na faixa">
+        <span>{{ estado.duracao | duracao }}</span>
+      </div>
+      <div class="volume">
+        <i class="fa-solid" [class.fa-volume-high]="estado.volume > 0.5" [class.fa-volume-low]="estado.volume > 0 && estado.volume <= 0.5" [class.fa-volume-xmark]="estado.volume === 0"></i>
+        <input type="range" min="0" max="1" step="0.05" [value]="estado.volume" (input)="mudarVolume($event)" aria-label="Volume">
+      </div>
+      <button type="button" (click)="player.fechar()" title="Fechar o reprodutor" aria-label="Fechar o reprodutor">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+    </div>
+  </ng-container>
+</ng-container>

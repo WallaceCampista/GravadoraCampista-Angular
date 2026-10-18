@@ -1,0 +1,108 @@
+.espaco {
+  height: 72px;
+}
+
+/* Abaixo dos popups (z-index 1050), que precisam ficar por cima */
+.player {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1040;
+  height: 72px;
+  padding: 0 1rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  background-color: #353535;
+  border-top: 2px solid #00f601;
+  box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.4);
+  color: #fff;
+}
+
+.capa {
+  width: 48px;
+  height: 48px;
+  flex-shrink: 0;
+  border-radius: 4px;
+}
+
+.faixa {
+  display: flex;
+  flex-direction: column;
+  width: 14rem;
+  min-width: 0;
+
+  strong, small {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  small {
+    color: #a2a2a2;
+  }
+
+  .erro {
+    color: #ff8a80;
+  }
+}
+
+.controles, .progresso, .volume {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+button {
+  width: 2rem;
+  height: 2rem;
+  flex-shrink: 0;
+  border: 0;
+  border-radius: 50%;
+  background: none;
+  color: inherit;
+
+  &:hover:not(:disabled) {
+    color: #00f601;
+  }
+
+  &:disabled {
+    opacity: 0.4;
+  }
+}
+
+.principal {
+  width: 2.5rem;
+  height: 2.5rem;
+  background-color: #fff;
+  color: #353535;
+}
+
+.progresso {
+  flex: 1;
+  font-size: 0.8rem;
+  color: #a2a2a2;
+
+  input {
+    flex: 1;
+  }
+}
+
+.volume input {
+  width: 6rem;
+}
+
+input[type="range"] {
+  accent-color: #00f601;
+}
+
+@media (max-width: 768px) {
+  .volume, .faixa small {
+    display: none;
+  }
+
+  .faixa {
+    width: 7rem;
+  }
+}

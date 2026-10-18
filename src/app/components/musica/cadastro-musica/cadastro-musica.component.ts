@@ -25,7 +25,8 @@ export class CadastroMusicaComponent implements OnInit {
       idAlbum: ['', Validators.required],
       nomeMusica: ['', Validators.required],
       resumoMusica: ['', Validators.required],
-      duracao: ['', Validators.required]
+      // Opcional: quem envia o MP3 depois (no editar da música) tem a duração lida do arquivo
+      duracao: ['']
     });
   }
 
@@ -43,7 +44,7 @@ export class CadastroMusicaComponent implements OnInit {
     this.isLoading = true;
     setTimeout(() => {
       const { idAlbum, nomeMusica, resumoMusica, duracao } = this.form.value;
-      const music = { idAlbum: Number(idAlbum), nomeMusica, resumoMusica, duracao: Number(duracao) };
+      const music = { idAlbum: Number(idAlbum), nomeMusica, resumoMusica, duracao: `${duracao ?? ''}`.trim() === '' ? null : Number(duracao) };
       this.musicaService.registerMusic(music).subscribe(response => {
         this.isLoading = false;
         if (response.status === 201) {

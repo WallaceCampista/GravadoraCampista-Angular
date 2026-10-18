@@ -111,14 +111,15 @@
             </div>
             <div class="col-md-6">
               <div class="form-floating mb-3">
-                <input class="form-control" formControlName="duracaoMusica" id="duracaoMusica" placeholder="Duração da Música (Seg)" type="text"/>
-                <label for="duracaoMusica" class="label-large">Duração da Música (Seg): </label>
+                <input class="form-control" formControlName="duracaoMusica" id="duracaoMusica" placeholder="Duração da Música (Seg)" type="text" [readonly]="!!audioMusica"/>
+                <label for="duracaoMusica" class="label-large">{{ audioMusica ? 'Duração (lida do MP3, seg):' : 'Duração da Música (Seg):' }} </label>
               </div>
             </div>
           </div>
         </div>
         </form>
         <app-editar-imagem *ngIf="tipoImagem as tipoImg" [tipo]="tipoImg" [id]="item.id" [arquivo]="tipoImg === 'banda' ? item.foto : item.capa" [nome]="item.nome" (alterada)="alterado = true"></app-editar-imagem>
+        <app-editar-audio *ngIf="tipo === 'musica'" [id]="item.id" [arquivo]="audioMusica" [duracao]="item.duracao" (alterado)="audioAlterado($event)"></app-editar-audio>
         <app-error *ngIf="errorMessage" [message]="errorMessage"></app-error>
       </div>
       <div class="modal-footer">
