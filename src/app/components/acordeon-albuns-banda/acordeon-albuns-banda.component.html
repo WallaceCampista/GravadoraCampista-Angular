@@ -1,32 +1,37 @@
 <div class="centered-div">
   <div>
-    <div class="accordion limited-width-accordion" id="accordionExample">
+    <div class="accordion limited-width-accordion">
       <div *ngFor="let album of albuns" class="accordion-item">
         <h2 class="accordion-header">
-          <button class="accordion-button" type="button" data-bs-toggle="collapse" [attr.data-bs-target]="'#collapse' + album.albumId" [attr.data-album-id]="album.albumId" aria-expanded="true" [attr.aria-controls]="'collapse' + album.albumId" (click)="toggleAccordion($event)">
+          <button class="accordion-button" [class.collapsed]="albumAberto !== album.albumId" type="button" [attr.aria-expanded]="albumAberto === album.albumId" [attr.aria-controls]="'collapse' + album.albumId" (click)="alternarAlbum(album.albumId)">
             <strong>{{ album.nomeAlbum }}</strong>
           </button>
         </h2>
-        <div [id]="'collapse' + album.albumId" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
-          <div class="accordion-body">
-            <table class="table center-text" *ngIf="albumData[album.albumId]">
-              <thead>
-                <tr>
-                  <th scope="col">Faixa</th>
-                  <th scope="col">Nome</th>
-                  <th scope="col">Duração (Minutos)</th>
-                  <th scope="col">Avaliação</th>
-                </tr>
-              </thead>
-              <tbody class="table-group-divider">
-                <tr *ngFor="let musica of albumData[album.albumId]; let i = index">
-                  <td>{{ i + 1 }}</td>
-                  <td>{{ musica.nomeMusica }}</td>
-                  <td>{{ (musica.duracao / 60) | number:'1.2-2' }} <strong>min</strong></td>
-                  <td>{{ musica.avaliacaoMedia | number:'1.1-1' }} <app-star></app-star></td>
-                </tr>
-              </tbody>
-            </table>
+        <!-- Abre e fecha pelo Angular: a altura acompanha a tabela mesmo quando as músicas chegam depois -->
+        <div [id]="'collapse' + album.albumId" class="painel-album" [class.aberto]="albumAberto === album.albumId">
+          <div class="painel-conteudo">
+            <div class="accordion-body">
+              <p *ngIf="!musicasPorAlbum[album.albumId]" class="mb-0 center-text">Carregando...</p>
+              <p *ngIf="musicasPorAlbum[album.albumId]?.length === 0" class="mb-0 center-text">Nenhuma música cadastrada.</p>
+              <table class="table center-text" *ngIf="musicasPorAlbum[album.albumId]?.length">
+                <thead>
+                  <tr>
+                    <th scope="col">Faixa</th>
+                    <th scope="col">Nome</th>
+                    <th scope="col">Duração</th>
+                    <th scope="col">Avaliação</th>
+                  </tr>
+                </thead>
+                <tbody class="table-group-divider">
+                  <tr *ngFor="let musica of musicasPorAlbum[album.albumId]; let i = index">
+                    <td>{{ i + 1 }}</td>
+                    <td>{{ musica.nomeMusica }}</td>
+                    <td>{{ musica.duracao | duracao }}</td>
+                    <td>{{ musica.avaliacaoMedia | number:'1.1-1' }} <app-star></app-star></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
           </div>
         </div>
       </div>

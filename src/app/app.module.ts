@@ -42,6 +42,7 @@ import { ListarUsuarioComponent } from './components/usuario/listar-usuario/list
 import { SucessoComponent } from './components/alertas/sucesso/sucesso.component';
 import { ErrorComponent } from './components/alertas/error/error.component';
 import { AuthInterceptor } from './interceptors/auth.interceptor';
+import { DuracaoPipe } from './pipes/duracao.pipe';
 
 @NgModule({
   declarations: [
@@ -80,6 +81,7 @@ import { AuthInterceptor } from './interceptors/auth.interceptor';
     ListarUsuarioComponent,
     SucessoComponent,
     ErrorComponent,
+    DuracaoPipe,
   ],
   imports: [
     BrowserModule,

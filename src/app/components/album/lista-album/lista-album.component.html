@@ -34,7 +34,7 @@
       <th scope="row">{{ album.id }}</th>
       <td>{{ album.nome }}</td>
       <td>{{ album.resumo }}</td>
-      <td>{{ (album.duracao / 60) | number:'1.2-2' }} <strong>min</strong></td>
+      <td>{{ album.duracao | duracao }}</td>
       <td>{{ album.avaliacao | number:'1.1-1' }} <app-star></app-star></td>
       <td>{{ album.banda }}</td>
       <td>{{ album.musicas }}</td>

@@ -35,7 +35,7 @@
     <td>{{ musica.nome }}</td>
     <td>{{ musica.resumo }}</td>
     <td>{{ musica.avaliacao | number:'1.1-1' }} <app-star></app-star></td>
-    <td>{{ (musica.duracao / 60) | number:'1.2-2' }} <strong>min</strong></td>
+    <td>{{ musica.duracao | duracao }}</td>
     <td>{{ musica.album }}</td>
     <td>{{ musica.banda }}</td>
     <td>

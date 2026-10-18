@@ -2,7 +2,7 @@
   max-width: 100%;
 }
 .accordion-body {
-  max-height: 200px; /* Adjust as needed */
+  max-height: 22rem; /* cabem umas 7 faixas; discos maiores ganham barra de rolagem */
   overflow-y: auto;
 }
 .accordion-button {
@@ -31,14 +31,20 @@
   box-shadow: 0 2px 2px -1px rgba(0, 0, 0, 0.4); /* Add shadow to distinguish header */
 }
 
-.accordion-collapse {
-  transition: max-height 0.5s ease-in-out;
-  overflow: hidden;
-  max-height: 0; /* Altura inicial */
+/* Anima de 0 até a altura real do conteúdo, sem precisar medir nada no código */
+.painel-album {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.4s ease-in-out;
 }
 
-.accordion-collapse.show {
-  max-height: 500px; /* Ajuste conforme necessário */
+.painel-album.aberto {
+  grid-template-rows: 1fr;
+}
+
+.painel-conteudo {
+  min-height: 0;
+  overflow: hidden;
 }
 
 
